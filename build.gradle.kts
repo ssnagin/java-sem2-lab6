@@ -6,6 +6,10 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2";
 }
 
+dependencies {
+    implementation(project(":commons"))
+}
+
 repositories {
     gradlePluginPortal()
     mavenCentral()
@@ -25,7 +29,6 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 
     testImplementation("org.mockito:mockito-core:5.3.1")
-
 } 
 
 java {
@@ -35,7 +38,7 @@ java {
 }
 
 application {
-    mainClass = "com.ssnagin.lab5java.sem2.lab5.App"
+    mainClass = "com.ssnagin.collectionmanager.App"
 }
 
 tasks.named<Test>("test") {
@@ -43,11 +46,11 @@ tasks.named<Test>("test") {
 }
 
 tasks.withType<ShadowJar> {
-    archiveBaseName.set("java-sem2-lab5")
+    archiveBaseName.set("collectionmanager")
     archiveVersion.set("1.0.0")
     archiveClassifier.set("")
     manifest {
-        attributes["Main-Class"] = "com.ssnagin.lab5java.sem2.lab5.App"
+        attributes["Main-Class"] = "com.ssnagin.collectionmanager.App"
     }
     mergeServiceFiles()
 }
@@ -57,7 +60,8 @@ tasks.assemble {
 }
 
 tasks.jar {
+    enabled = false
     manifest {
-        attributes["Main-Class"] = "com.ssnagin.lab5java.sem2.lab5.App"
+        attributes["Main-Class"] = "com.ssnagin.collectionmanager.App"
     }
 }

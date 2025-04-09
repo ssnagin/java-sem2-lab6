@@ -5,11 +5,103 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/commons/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ttt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/myDocument.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/ApplicationStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/ApplicationStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/generators/RandomEnumGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/generators/RandomEnumGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/generators/RandomLocalDateGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/generators/RandomLocalDateGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/interfaces/Describable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/interfaces/Describable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/interfaces/Randomize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/interfaces/Randomize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/model/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/model/Album.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/model/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/model/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/model/MusicBand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/model/MusicBand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/model/MusicGenre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/model/MusicGenre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/collection/wrappers/LocalDateWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/collection/wrappers/LocalDateWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandAddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAddIfMin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandClear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandCountByNumberOfParticipants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandCountByNumberOfParticipants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandExecuteScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandExecuteScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandExit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandExit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandGroupCountingByCreationDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandGroupCountingByCreationDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandHelp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandPrintDescending.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandPrintDescending.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRandom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandRemoveById.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveById.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandRemoveLower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveLower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandSave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandShow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/commands/interfaces/Manageable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/commands/interfaces/Manageable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/console/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/console/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/console/InputParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/console/InputParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/console/ParseMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/console/ParseMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/console/ParsedString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/console/ParsedString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/description/DescriptionParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/description/DescriptionParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/description/annotations/Description.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/description/annotations/Description.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/files/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/files/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/files/adapters/LocalDateAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/files/adapters/LocalDateAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/Reflections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/Reflections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/CombiningValueAccessorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/accessors/CombiningValueAccessorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/FieldValueAccessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/accessors/FieldValueAccessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/GetterValueAccessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/accessors/GetterValueAccessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/ValueAccessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/accessors/ValueAccessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/ValueAccessorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/accessors/ValueAccessorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/mutators/CombiningValueMutatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/mutators/CombiningValueMutatorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/mutators/FieldValueMutator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/mutators/FieldValueMutator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/mutators/SetterValueMutator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/mutators/SetterValueMutator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/mutators/ValueMutator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/mutators/ValueMutator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/reflection/mutators/ValueMutatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/reflection/mutators/ValueMutatorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/scripts/exceptions/ScriptRecursionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/scripts/exceptions/ScriptRecursionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/TempValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/TempValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/ValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/ValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/ValidationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/ValidationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/annotations/MaxValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/annotations/MaxValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/annotations/MinValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/annotations/MinValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/annotations/NegativeNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/annotations/NegativeNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/annotations/NotEmpty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/annotations/NotEmpty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/annotations/NotNull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/annotations/NotNull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/annotations/PositiveNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/annotations/PositiveNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/MaxValueValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/MaxValueValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/MinValueValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/MinValueValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/NegativeNumberValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/NegativeNumberValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/NotEmptyCharSequenceValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/NotEmptyCharSequenceValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/NotNullValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/NotNullValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/PositiveNumberValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/PositiveNumberValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/factories/ValidatorFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/factories/ValidatorFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/MaxValueValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/MaxValueValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/MinValueValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/MinValueValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/NegativeNumberValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/NegativeNumberValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/NotEmptyCharSequenceValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/NotEmptyCharSequenceValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/NotNullValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/NotNullValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/PositiveNumberValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/PositiveNumberValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssnagin/collectionmanager/validation/validators/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/collection/CollectionManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/collection/CollectionManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/commands/CommandManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/commands/CommandManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/commands/commands/CommandDefaultTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/commands/commands/CommandDefaultTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/CombiningValueAccessorManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/reflection/accessors/CombiningValueAccessorManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/FieldValueAccessorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/reflection/accessors/FieldValueAccessorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/reflection/accessors/GetterValueAccessorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/reflection/accessors/GetterValueAccessorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/MaxValueValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/validation/validators/MaxValueValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/MinValueValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/validation/validators/MinValueValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/NegativeNumberValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/validation/validators/NegativeNumberValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/NotEmptyCharSequenceValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/validation/validators/NotEmptyCharSequenceValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/NotNullValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/validation/validators/NotNullValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/lab5java/sem2/lab5/validation/validators/PositiveNumberValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/validation/validators/PositiveNumberValidatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,27 +113,142 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-sem2-lab5" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-sem2-lab5" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-sem2-lab5" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-sem2-lab5" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-sem2-lab5" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KotlinScriptingSettings" supportWarning="false" />
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 2
 }]]></component>
   <component name="ProjectId" id="2vUdU7nMi2KbYZsVGoZY3ZL0U8z" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.java-sem2-lab6 [:com.ssnagin.collectionmanager.App.main()].executor": "Run",
+    "Gradle.java-sem2-lab6 [:com.ssnagin.lab5java.sem2.lab5.App.main()].executor": "Run",
+    "Gradle.java-sem2-lab6 [build].executor": "Run",
+    "Gradle.java-sem2-lab6 [run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/developer/Projects/github/ssnagin/java-sem2-lab6"
+    "last_opened_file_path": "/home/developer/Projects/github/ssnagin/java-sem2-lab6",
+    "settings.editor.selected.configurable": "preferences.language.Kotlin.scripting"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/commons/src/main/java" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.java-sem2-lab6 [build]">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
+      <module name="java-sem2-lab5.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ssnagin.collectionmanager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java-sem2-lab6 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="java-sem2-lab6 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -51,6 +258,13 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.java-sem2-lab6 [build]" />
+        <item itemvalue="Gradle.java-sem2-lab6 [run]" />
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

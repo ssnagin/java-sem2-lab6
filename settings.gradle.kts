@@ -1,1 +1,5 @@
-rootProject.name = "java-sem2-lab5"
+rootProject.name = "collectionManager"
+
+include("commons")
+include("server")
+include("client")
