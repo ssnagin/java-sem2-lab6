@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.collection;
 
+import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.Album;
 import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
