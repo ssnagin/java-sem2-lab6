@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     java
     application
@@ -26,9 +28,17 @@ java {
 }
 
 application {
-    mainClass.set("com.ssnagin.collectionmanager.client.App")
+    mainClass.set("com.ssnagin.collectionmanager.App")
+}
+
+tasks.jar {
+    enabled = false;
 }
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.named<ShadowJar>("shadowJar") {
+    archiveFileName.set("collectionManager.jar")
 }
