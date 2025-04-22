@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/java-sem2-lab6.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/Networking.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/ResponseStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/ServerResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/client/collectionManager.client.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/client/collectionManager.client.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/client/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/client/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/MusicBand.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/MusicBand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +71,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -103,11 +112,17 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/developer/Projects/github/ssnagin/java-sem2-lab6/common/src/main/java/com/ssnagin/collectionmanager",
+    "last_opened_file_path": "P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab6",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.language"
+    "settings.editor.selected.configurable": "consents",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -117,11 +132,11 @@
       <recent name="$PROJECT_DIR$/commons/main/java/com/ssnagin/collectionmanager" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="P:\DEVELOPER\Data\projects\Java\Github\java-sem2-lab6\server\src\main\resources" />
       <recent name="$PROJECT_DIR$/server/src/main/java" />
       <recent name="$PROJECT_DIR$/client/src/main/java" />
       <recent name="$PROJECT_DIR$/commons/src" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/commons/src/main/java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.ssnagin.collectionmanager.scripts" />
@@ -248,6 +263,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -256,7 +279,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744203600050</updated>
+      <workItem from="1745361478247" duration="4454000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
