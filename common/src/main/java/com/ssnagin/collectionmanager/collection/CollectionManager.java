@@ -28,14 +28,6 @@ public class CollectionManager {
     public void addElement(MusicBand element) {
         this.collection.add(element);
     }
-    
-    public MusicBand getElementById(long otherId) {
-
-        return this.collection.stream()
-                .filter(row -> row.getId().equals(otherId))
-                .findFirst()
-                .orElse(null);
-    }
 
     public MusicBand getLowestElement() {
         if (this.collection.isEmpty()) {
@@ -52,19 +44,15 @@ public class CollectionManager {
 
     public MusicBand getElementById(Long id) {
 
-        for (MusicBand element : this.getCollection()) {
-            if (Objects.equals(element.getId(), id)) return element;
-        }
-        return null;
+        return this.collection.stream()
+                .filter(row -> row.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
     
     public void removeElementById(Long id) {
-        
-        MusicBand toRemove = getElementById(id);
-        
-        if (toRemove == null) throw new NoSuchElementException("No such element with id");
-        
-        this.removeElement(toRemove);
+        if (!collection.removeIf(musicBand -> musicBand.getId().equals(id)))
+            throw new NoSuchElementException("No such element with id");
     }
     
     public int getSize() {
