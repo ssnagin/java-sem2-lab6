@@ -30,15 +30,11 @@ public class CollectionManager {
     }
     
     public MusicBand getElementById(long otherId) {
-        MusicBand result = null;
-        
-        for (MusicBand row : this.collection) {
-            if ((row.getId()).equals(otherId)) {
-                result = row;
-                break;
-            }
-        }
-        return result;
+
+        return this.collection.stream()
+                .filter(row -> row.getId().equals(otherId))
+                .findFirst()
+                .orElse(null);
     }
 
     public MusicBand getLowestElement() {
