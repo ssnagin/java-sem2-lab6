@@ -9,9 +9,9 @@ import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.console.InputParser;
-import com.ssnagin.collectionmanager.console.ParseMode;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.InputParser;
+import com.ssnagin.collectionmanager.inputparser.ParseMode;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import com.ssnagin.collectionmanager.scripts.exceptions.ScriptRecursionException;
 

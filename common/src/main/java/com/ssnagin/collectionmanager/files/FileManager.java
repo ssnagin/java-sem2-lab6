@@ -11,7 +11,7 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.files.adapters.LocalDateAdapter;
 import lombok.Getter;
 

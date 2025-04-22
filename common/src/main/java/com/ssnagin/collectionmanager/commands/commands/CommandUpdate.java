@@ -10,11 +10,10 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  *

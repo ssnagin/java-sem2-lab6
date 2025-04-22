@@ -6,7 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.Command;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
 /**
  * Shows brief description about available commands

@@ -6,7 +6,7 @@ package com.ssnagin.collectionmanager.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

@@ -11,7 +11,7 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import com.ssnagin.collectionmanager.validation.TempValidator;
@@ -23,15 +23,15 @@ import java.util.Scanner;
 
 /**
  * Shows brief description about available commands
- * 
+ *
  * @author developer
  */
 public class CommandAdd extends Command {
-    
+
     private CollectionManager collectionManager;
     private Scanner scanner;
     private ScriptManager scriptManager;
-    
+
     public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner, ScriptManager scriptManager) {
         super(name, description);
 
@@ -62,11 +62,11 @@ public class CommandAdd extends Command {
             if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
-        
+
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
-        
+
         try {
-            
+
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
 
             if (musicBand == null) return ApplicationStatus.RUNNING;
@@ -74,7 +74,7 @@ public class CommandAdd extends Command {
             var result = new LocalDateWrapper(
                     musicBand
             );
-            
+
             // Final validation here;
             List<String> errors = TempValidator.validateMusicBand(musicBand);
 
@@ -84,18 +84,18 @@ public class CommandAdd extends Command {
                 }
                 return ApplicationStatus.RUNNING;
             }
-            
+
             // Adding into CollectionManager with Creation Date:
             this.collectionManager.addElement(result);
-            
+
             Console.separatePrint("Successfully added!", "SUCCESS");
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Console.error(ex.toString());
         }
-        
+
         return ApplicationStatus.RUNNING;
     }
-    
+
     @Override
     public ApplicationStatus showUsage(ParsedString parsedString) {
         Console.println("Usage: add\nСписок того, что надо ввести:");

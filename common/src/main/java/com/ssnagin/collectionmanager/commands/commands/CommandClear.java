@@ -8,7 +8,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.console.ParsedString;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
