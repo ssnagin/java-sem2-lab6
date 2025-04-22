@@ -69,14 +69,15 @@ public class CollectionManager {
         }
 
         // Получаем подмножество элементов, которые меньше заданного
-        TreeSet<MusicBand> lowerElements = new TreeSet<>(collection.tailSet(element, false));
+        List<MusicBand> lowerElements = collection.stream()
+                .filter(musicBand -> musicBand.compareTo(element) < 0)
+                .toList();
 
         // Запоминаем количество элементов для удаления
         int count = lowerElements.size();
 
         // Удаляем все элементы из основной коллекции
         collection.removeAll(lowerElements);
-
         return count;
     }
 

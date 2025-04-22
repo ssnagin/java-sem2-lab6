@@ -117,7 +117,7 @@ public class Core {
                 TreeSet<MusicBand> elements = fileManager.readCollection(path);
                 this.collectionManager.setCollection(elements);
             } catch (Exception e) {
-                Console.error("Error while reading file, skip adding into collection");
+                Console.error("Error while reading file, skip adding into collection / " + e);
             }
         }
 
