@@ -1,5 +1,7 @@
 package com.ssnagin.collectionmanager.networking;
 
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlializer.DataStream;
 import lombok.Getter;
 

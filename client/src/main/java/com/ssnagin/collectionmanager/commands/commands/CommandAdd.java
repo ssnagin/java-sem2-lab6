@@ -7,9 +7,9 @@ import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
-import com.ssnagin.collectionmanager.networking.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.Networking;
-import com.ssnagin.collectionmanager.networking.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 

@@ -1,5 +1,6 @@
-package com.ssnagin.collectionmanager.networking;
+package com.ssnagin.collectionmanager.networking.data;
 
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,21 +8,13 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @ToString
+@Getter
+@Setter
 public class ServerResponse implements Serializable {
 
-    private Integer id;
-    @Getter
-    public StringBuilder message;
-    @Getter
-    @Setter
+    public String message;
     public ResponseStatus responseStatus;
-    @Getter
-    @Setter
     public Serializable data;
-
-    public void setMessage(String message) {
-        this.message.append(message);
-    }
 
     public ServerResponse(ResponseStatus type, String message, Serializable data) {
         setMessage(message);

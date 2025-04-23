@@ -46,7 +46,7 @@ public class ClientCore extends Core {
             "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
             "                          ▐▌                                      ▐▌ ▐▌          \n" +
             "                                                                   ▝▀▜▌          \n" +
-            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.VERSION);
+            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.General.VERSION);
 
     public ClientCore() {
         super();

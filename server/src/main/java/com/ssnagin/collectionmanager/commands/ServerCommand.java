@@ -1,7 +1,7 @@
 package com.ssnagin.collectionmanager.commands;
 
-import com.ssnagin.collectionmanager.networking.ClientRequest;
-import com.ssnagin.collectionmanager.networking.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
 public abstract class ServerCommand extends Command {
     public ServerCommand(String name, String description) {

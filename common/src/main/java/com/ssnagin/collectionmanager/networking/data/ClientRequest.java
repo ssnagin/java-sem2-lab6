@@ -1,6 +1,7 @@
-package com.ssnagin.collectionmanager.networking;
+package com.ssnagin.collectionmanager.networking.data;
 
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,10 +11,10 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
-public class ClientRequest implements Serializable {
+public class ClientRequest extends TransferData {
 
-    public ParsedString parsedString;
-    public Serializable data;
+    private ParsedString parsedString;
+    private Serializable data;
 
 
     public ClientRequest(ParsedString parsedString, Serializable data) {

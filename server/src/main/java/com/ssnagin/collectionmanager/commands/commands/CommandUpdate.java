@@ -7,8 +7,8 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
-import com.ssnagin.collectionmanager.networking.ClientRequest;
-import com.ssnagin.collectionmanager.networking.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
 /**
  * @author developer
