@@ -10,17 +10,25 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
-public class ServerResponse implements Serializable {
+public class ServerResponse extends TransferData {
 
-    public String message;
+    public StringBuilder message = new StringBuilder();
     public ResponseStatus responseStatus;
     public Serializable data;
 
     public ServerResponse(ResponseStatus type, String message, Serializable data) {
-        setMessage(message);
+        appendMessage(message);
         setResponseStatus(type);
         this.responseStatus = type;
         this.setData(data);
+    }
+
+    public ServerResponse(ResponseStatus responseStatus) {
+        this(responseStatus, null, null);
+    }
+
+    public void appendMessage(String message) {
+        this.message.append(message);
     }
 
     public ServerResponse() {

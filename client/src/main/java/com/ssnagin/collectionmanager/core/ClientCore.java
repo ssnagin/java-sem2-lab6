@@ -1,10 +1,9 @@
-package com.ssnagin.collectionmanager.client;
+package com.ssnagin.collectionmanager.core;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-import com.ssnagin.collectionmanager.Core;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
@@ -151,8 +150,7 @@ public class ClientCore extends Core {
         Console.print(ClientCore.ASCII_LOGO);
     }
 
-    private void runCommand(ParsedString parsedString) {
-
+    protected void runCommand(ParsedString parsedString) {
         UserCommand command = (UserCommand) this.commandManager.get(parsedString.getCommand());
         this.setApplicationStatus(command.executeCommand(parsedString));
     }

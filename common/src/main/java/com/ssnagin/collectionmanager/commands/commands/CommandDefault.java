@@ -13,7 +13,7 @@ import com.ssnagin.collectionmanager.commands.Command;
  */
 public class CommandDefault extends Command {
 
-    private String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
+    private static final String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
             + "(or it was given incorecctly)\n\n"
             + "Please, make another try :) or type help to see available commands";
 

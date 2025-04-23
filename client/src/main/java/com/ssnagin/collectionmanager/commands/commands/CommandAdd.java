@@ -65,7 +65,7 @@ public class CommandAdd extends UserCommand {
                     musicBand
             );
 
-            ServerResponse response = this.networking.send(new ClientRequest(parsedString, result));
+            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
 
             // Validation here;
 //            List<String> errors = TempValidator.validateMusicBand(musicBand);

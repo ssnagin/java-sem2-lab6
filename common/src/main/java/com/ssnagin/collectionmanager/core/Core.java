@@ -1,8 +1,9 @@
-package com.ssnagin.collectionmanager;
+package com.ssnagin.collectionmanager.core;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.files.FileManager;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.ToString;

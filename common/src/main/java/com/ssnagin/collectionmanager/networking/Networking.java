@@ -24,14 +24,18 @@ public class Networking {
     }
 
     public Networking(String host, int port, int connectionTimeout) throws UnknownHostException, SocketException {
-        this.inetAddress = InetAddress.getByName(host);
+        this(InetAddress.getByName(host), port, connectionTimeout);
+    }
+
+    public Networking(InetAddress address, int port, int connectionTimeout) throws SocketException  {
+        this.inetAddress = address;
         this.port = port;
 
         this.datagramSocket = new DatagramSocket();
         this.setConnectionTimeout(connectionTimeout);
     }
 
-    public ServerResponse send(ClientRequest request) throws IOException, ClassNotFoundException, SocketTimeoutException {
+    public ServerResponse sendClientRequest(ClientRequest request) throws IOException, ClassNotFoundException, SocketTimeoutException {
         byte[] requestData = DataStream.serialize(request);
         byte[] responseBuffer = new byte[BUFFER_SIZE];
 
@@ -50,7 +54,20 @@ public class Networking {
         );
         this.datagramSocket.receive(receivePacket);
 
-        return DataStream.deserialize(requestPacket.getData());
+        return DataStream.deserialize(receivePacket.getData());
+    }
+
+    public void sendServerResponse(ServerResponse serverResponse) throws IOException {
+        byte[] responseData = DataStream.serialize(serverResponse);
+
+        DatagramPacket responsePacket = new DatagramPacket(
+                responseData,
+                responseData.length,
+                inetAddress,
+                port
+        );
+
+        this.datagramSocket.send(responsePacket);
     }
 
     public void close() {

@@ -5,10 +5,14 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
-import com.ssnagin.collectionmanager.scripts.ScriptManager;
+import com.ssnagin.collectionmanager.validation.TempValidator;
+
+import java.util.List;
 
 /**
  * Shows brief description about available commands
@@ -18,17 +22,31 @@ import com.ssnagin.collectionmanager.scripts.ScriptManager;
 public class CommandAdd extends ServerCommand {
 
     private CollectionManager collectionManager;
-    private ScriptManager scriptManager;
 
-    public CommandAdd(String name, String description, CollectionManager collectionManager, ScriptManager scriptManager) {
+    public CommandAdd(String name, String description, CollectionManager collectionManager) {
         super(name, description);
 
         this.collectionManager = collectionManager;
-        this.scriptManager = scriptManager;
     }
 
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
-        return new ServerResponse();
+
+        ServerResponse response = new ServerResponse(ResponseStatus.OK);
+
+        LocalDateWrapper musicBand = (LocalDateWrapper) clientRequest.getData();
+        //List<String> errors = TempValidator.validateMusicBand(musicBand);
+
+//        if (!errors.isEmpty()) {
+//            response.setResponseStatus(ResponseStatus.ERROR);
+//            for (String error : errors) {
+//                response.appendMessage(error + "\n");
+//            }
+//            return response;
+//        }
+
+        this.collectionManager.addElement(musicBand);
+
+        return response;
     }
 }
