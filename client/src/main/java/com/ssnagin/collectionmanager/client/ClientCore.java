@@ -4,9 +4,11 @@ package com.ssnagin.collectionmanager.client;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import com.ssnagin.collectionmanager.Core;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.commands.*;
+import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
@@ -19,7 +21,6 @@ import java.util.*;
 
 import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import sun.misc.Signal;
@@ -30,41 +31,29 @@ import sun.misc.SignalHandler;
  * @author developer
  */
 @ToString
-@EqualsAndHashCode
-public class Core {
+public class ClientCore extends Core {
 
     @Getter
-    private static Core instance = new Core();
-    
-    private CollectionManager collectionManager;
-    private ScriptManager scriptManager;
-    private CommandManager commandManager;
-    private InputParser inputParser;
+    private static ClientCore instance = new ClientCore();
 
-    private FileManager fileManager;
-
-    private Scanner scanner;
-    
     @Getter
-    ApplicationStatus applicationStatus;
+    protected ApplicationStatus applicationStatus;
 
-    public static final String ASCII_LOGO = " ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
+    public static final String ASCII_LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
                                             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
                                             "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
                                             "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
                                             "                          ▐▌                                      ▐▌ ▐▌          \n" +
                                             "                                                                   ▝▀▜▌          \n" +
-                                            "  ver. 1.0 | github.com/ssnagin/java-sem2-lab5.git                ▐▙▄▞▘        \n\n";
+                                            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.VERSION);
     
-    public Core() {
+    public ClientCore() {
+        super();
 
         // Singletone pattern
         this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
         this.scriptManager = ScriptManager.getInstance();
-
-        this.inputParser = new InputParser();
-        this.scanner = new Scanner(System.in);
 
         this.fileManager = FileManager.getInstance();
 
@@ -77,7 +66,7 @@ public class Core {
         this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
         this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
         this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, collectionManager, scriptManager));
-        this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager, scanner, scriptManager));
+        this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager, scriptManager));
         this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", collectionManager));
         this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, commandManager));
@@ -86,12 +75,13 @@ public class Core {
         this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
         this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
         this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
-        this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scanner, scriptManager));
+        this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
         this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }
 
+    @Override
     public void start(String[] args) {
         
         // Step-by-step description of the algorithm.
@@ -151,7 +141,7 @@ public class Core {
     }
     
     public void printLogo() {
-        Console.print(Core.ASCII_LOGO);
+        Console.print(ClientCore.ASCII_LOGO);
     }
     
     private void runCommand(ParsedString parsedString) {

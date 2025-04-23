@@ -40,5 +40,6 @@ tasks.named<Test>("test") {
 }
 
 tasks.named<ShadowJar>("shadowJar") {
+
     archiveFileName.set("server.jar")
 }

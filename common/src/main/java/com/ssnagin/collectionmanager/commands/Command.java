@@ -8,6 +8,8 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -17,8 +19,11 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public abstract class Command implements Comparable<Command> {
-    
+    @Getter
+    @Setter
     private String name;
+    @Getter
+    @Setter
     public String description;
     
     /**
@@ -31,39 +36,7 @@ public abstract class Command implements Comparable<Command> {
         this.setName(name);
         this.setDescription(description);
     }
-    
-     /**
-     * Set the name of a command
-     *
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-     /**
-     * Set the description of a command
-     *
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-     /**
-     * Get the name of a command
-     *
-     */
-    public String getName() {
-        return this.name;
-    }
-    
-    /**
-     * Get the description of a command
-     *
-     */
-    public String getDescription() {
-        return this.description;
-    }
-    
+
      /**
      * Executes the given command and returns status code
      * 

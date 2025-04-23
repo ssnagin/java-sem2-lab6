@@ -29,10 +29,9 @@ import java.util.Scanner;
 public class CommandAdd extends Command {
 
     private CollectionManager collectionManager;
-    private Scanner scanner;
     private ScriptManager scriptManager;
 
-    public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner, ScriptManager scriptManager) {
+    public CommandAdd(String name, String description, CollectionManager collectionManager, ScriptManager scriptManager) {
         super(name, description);
 
         this.collectionManager = collectionManager;
@@ -41,7 +40,7 @@ public class CommandAdd extends Command {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        this.scanner = this.scriptManager.getCurrentScanner();
+        Scanner scanner = this.scriptManager.getCurrentScanner();
 
         /*
             Пример создания коллекции

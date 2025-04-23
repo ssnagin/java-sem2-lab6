@@ -29,11 +29,10 @@ import java.util.Scanner;
 public class CommandRemoveLower extends Command {
 
     private CollectionManager collectionManager;
-    private Scanner scanner;
     private ScriptManager scriptManager;
 
 
-    public CommandRemoveLower(String name, String description, CollectionManager collectionManager, Scanner scanner, ScriptManager scriptManager) {
+    public CommandRemoveLower(String name, String description, CollectionManager collectionManager, ScriptManager scriptManager) {
         super(name, description);
 
         this.collectionManager = collectionManager;
@@ -43,7 +42,7 @@ public class CommandRemoveLower extends Command {
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
 
-        this.scanner = this.scriptManager.getCurrentScanner();
+        Scanner scanner = this.scriptManager.getCurrentScanner();
 
         if (!parsedString.getArguments().isEmpty()) {
             if (" h".equals(parsedString.getArguments().get(0)))

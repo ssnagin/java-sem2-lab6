@@ -5,18 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/java-sem2-lab6.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/Networking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/ResponseStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/ServerResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/client/collectionManager.client.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/client/collectionManager.client.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/Core.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/comparators/CoordinatesComparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/config/Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/ClientRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/serlializer/DataStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/server/ServerCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/MusicBand.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/model/MusicBand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/client/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/client/ClientCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveLower.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveLower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/inputparser/ParsedString.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/inputparser/ParsedString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/Networking.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/Networking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/server/Core.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +286,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744203600050</updated>
-      <workItem from="1745361478247" duration="4454000" />
+      <workItem from="1745361478247" duration="10454000" />
     </task>
     <servers />
   </component>

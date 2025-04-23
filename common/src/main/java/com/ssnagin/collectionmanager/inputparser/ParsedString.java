@@ -4,6 +4,7 @@
  */
 package com.ssnagin.collectionmanager.inputparser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class ParsedString {
+public class ParsedString implements Serializable {
     
     @Getter
     @Setter
