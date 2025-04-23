@@ -7,34 +7,33 @@ package com.ssnagin.collectionmanager.collection.model;
 import com.ssnagin.collectionmanager.description.annotations.Description;
 
 /**
- *
  * @author DEVELOPER
  */
 public enum MusicGenre {
 
     @Description(
-        name="психоделический рок", 
-        description="Ну только самые отбитые шизофреники под такое танцуют"
+            name = "психоделический рок",
+            description = "Ну только самые отбитые шизофреники под такое танцуют"
     )
     PSYCHEDELIC_ROCK,
     @Description(
-        name="психоделический облачный рэп", 
-        description="Ну только самые отбитые шизофреники под такое танцуют"
+            name = "психоделический облачный рэп",
+            description = "Ну только самые отбитые шизофреники под такое танцуют"
     )
     PSYCHEDELIC_CLOUD_RAP,
     @Description(
-        name="душа", 
-        description="Ну только самые отбитые шизофреники под такое танцуют"
+            name = "душа",
+            description = "Ну только самые отбитые шизофреники под такое танцуют"
     )
     SOUL,
     @Description(
-        name="математический рок", 
-        description="Ну только самые отбитые шизофреники под такое танцуют"
+            name = "математический рок",
+            description = "Ну только самые отбитые шизофреники под такое танцуют"
     )
     MATH_ROCK,
     @Description(
-        name="после панк", 
-        description="Ну только самые отбитые шизофреники под такое танцуют"
+            name = "после панк",
+            description = "Ну только самые отбитые шизофреники под такое танцуют"
     )
     POST_PUNK;
 }

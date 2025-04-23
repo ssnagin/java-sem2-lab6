@@ -9,12 +9,13 @@ import com.ssnagin.collectionmanager.description.annotations.Description;
 import com.ssnagin.collectionmanager.validation.annotations.NotEmpty;
 import com.ssnagin.collectionmanager.validation.annotations.NotNull;
 import com.ssnagin.collectionmanager.validation.annotations.PositiveNumber;
-import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
+
+import java.util.UUID;
 
 /**
  * Represents a music band with its properties and characteristics.
@@ -108,13 +109,13 @@ public class MusicBand extends Entity<MusicBand> {
     /**
      * Constructs a MusicBand with specified parameters.
      *
-     * @param id the unique identifier for the band
-     * @param name the name of the band
-     * @param coordinates the coordinates associated with the band
+     * @param id                   the unique identifier for the band
+     * @param name                 the name of the band
+     * @param coordinates          the coordinates associated with the band
      * @param numberOfParticipants the number of band members
-     * @param singlesCount the number of singles released
-     * @param genre the music genre of the band
-     * @param bestAlbum the best album of the band
+     * @param singlesCount         the number of singles released
+     * @param genre                the music genre of the band
+     * @param bestAlbum            the best album of the band
      * @throws IllegalArgumentException if any parameter violates validation constraints
      */
     public MusicBand(long id, String name, Coordinates coordinates, Long numberOfParticipants,
@@ -131,12 +132,12 @@ public class MusicBand extends Entity<MusicBand> {
     /**
      * Constructs a MusicBand with auto-generated ID.
      *
-     * @param name the name of the band
-     * @param coordinates the coordinates associated with the band
+     * @param name                 the name of the band
+     * @param coordinates          the coordinates associated with the band
      * @param numberOfParticipants the number of band members
-     * @param singlesCount the number of singles released
-     * @param genre the music genre of the band
-     * @param bestAlbum the best album of the band
+     * @param singlesCount         the number of singles released
+     * @param genre                the music genre of the band
+     * @param bestAlbum            the best album of the band
      */
     public MusicBand(String name, Coordinates coordinates, Long numberOfParticipants,
                      Integer singlesCount, MusicGenre genre, Album bestAlbum) {
@@ -210,7 +211,7 @@ public class MusicBand extends Entity<MusicBand> {
      *
      * @param otherMusicBand the MusicBand to be compared
      * @return a negative integer, zero, or a positive integer as this MusicBand
-     *         is less than, equal to, or greater than the specified MusicBand
+     * is less than, equal to, or greater than the specified MusicBand
      */
     @Override
     public int compareTo(MusicBand otherMusicBand) {

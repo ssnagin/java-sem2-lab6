@@ -46,7 +46,8 @@ public class CommandManagerTest {
         File file = new File("test" + Integer.toString(12345));
         try {
             core.pushFileScanner(file);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
 
 //        try {
 //            File test = new File("12345");

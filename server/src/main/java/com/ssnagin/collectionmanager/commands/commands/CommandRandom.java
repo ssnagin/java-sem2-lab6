@@ -4,20 +4,14 @@
  */
 package com.ssnagin.collectionmanager.commands.commands;
 
-import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
-import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.ClientRequest;
 import com.ssnagin.collectionmanager.networking.ServerResponse;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
- * 
+ *
  * @author developer
  */
 public class CommandRandom extends ServerCommand {

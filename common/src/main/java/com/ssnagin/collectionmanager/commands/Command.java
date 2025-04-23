@@ -4,9 +4,6 @@
  */
 package com.ssnagin.collectionmanager.commands;
 
-import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +11,7 @@ import lombok.ToString;
 
 /**
  * A basic class that defines all commands
+ *
  * @author developer
  */
 @EqualsAndHashCode
@@ -25,12 +23,12 @@ public abstract class Command implements Comparable<Command> {
     @Getter
     @Setter
     private String description;
-    
+
     /**
      * Parent constructor of a command
-     * 
+     *
      * @param name
-     * @param description 
+     * @param description
      */
     public Command(String name, String description) {
         this.setName(name);
@@ -38,11 +36,11 @@ public abstract class Command implements Comparable<Command> {
     }
 
     public int compareTo(Command otherCommand) {
-        
+
         int result = this.getName().compareTo(otherCommand.getName());
-        
+
         if (result == 0) this.getDescription().compareTo(otherCommand.getDescription());
-        
+
         return result;
     }
 }

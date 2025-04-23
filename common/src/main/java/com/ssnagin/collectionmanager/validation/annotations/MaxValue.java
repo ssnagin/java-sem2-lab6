@@ -11,11 +11,10 @@ import java.lang.annotation.Target;
 
 
 /**
- *
  * @author developer
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MaxValue {
-     long value();
+    long value();
 }

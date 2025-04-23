@@ -8,19 +8,20 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.TreeSet;
 
 /**
- * 
  * @author developer
  */
 public class CollectionManager {
-    
+
     // Using singleton
-    
+
     @Getter
     private static CollectionManager instance = new CollectionManager();
-    
+
     @Getter
     @Setter
     private TreeSet<MusicBand> collection = new TreeSet<>();
@@ -35,12 +36,14 @@ public class CollectionManager {
         }
         return this.collection.first();
     }
-    
+
     public void removeElement(MusicBand musicBand) {
         this.collection.remove(musicBand);
     }
-    
-    public void removeAllElements() {this.collection.clear();}
+
+    public void removeAllElements() {
+        this.collection.clear();
+    }
 
     public MusicBand getElementById(Long id) {
 
@@ -49,16 +52,16 @@ public class CollectionManager {
                 .findFirst()
                 .orElse(null);
     }
-    
+
     public void removeElementById(Long id) {
         if (!collection.removeIf(musicBand -> musicBand.getId().equals(id)))
             throw new NoSuchElementException("No such element with id");
     }
-    
+
     public int getSize() {
         return this.collection.size();
     }
-    
+
     public boolean isEmpty() {
         return this.collection.isEmpty();
     }
@@ -84,20 +87,20 @@ public class CollectionManager {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        
+
         if (this.collection.isEmpty()) {
             result.append("My stomach is as empty as this Collection...");
             return result.toString();
         }
-        
+
         result.append("CollectionManager={\n");
-        
+
         for (MusicBand musicBand : this.collection) {
             result.append(musicBand.toString()).append("\n");
         }
-        
+
         result.append("}\n");
-        
+
         return result.toString();
     }
 }

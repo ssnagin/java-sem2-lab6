@@ -4,20 +4,19 @@ package com.ssnagin.collectionmanager.applicationstatus;/*
  */
 
 /**
- *
  * @author developer
  */
 public enum ApplicationStatus {
     RUNNING(-1),
     EXIT(0),
     ERROR(1);
-    
+
     private final int code;
-    
+
     ApplicationStatus(int code) {
         this.code = code;
     }
-    
+
     public int getCode() {
         return this.code;
     }

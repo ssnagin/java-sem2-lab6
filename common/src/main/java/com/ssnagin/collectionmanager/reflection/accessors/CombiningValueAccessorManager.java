@@ -3,10 +3,11 @@ package com.ssnagin.collectionmanager.reflection.accessors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InaccessibleObjectException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class CombiningValueAccessorManager implements ValueAccessorManager {

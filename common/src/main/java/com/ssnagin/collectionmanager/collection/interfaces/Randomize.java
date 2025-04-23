@@ -7,6 +7,7 @@ import java.util.Random;
  */
 public interface Randomize<T> {
     T random();
+
     int RANDOM_STRING_LENGTH = 8;
     Random random = new Random();
 }

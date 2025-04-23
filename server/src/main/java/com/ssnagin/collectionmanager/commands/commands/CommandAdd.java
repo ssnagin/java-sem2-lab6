@@ -4,11 +4,10 @@
  */
 package com.ssnagin.collectionmanager.commands.commands;
 
+import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ClientRequest;
 import com.ssnagin.collectionmanager.networking.ServerResponse;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 
 /**

@@ -21,8 +21,6 @@ public class MaxValueValidatorFactory<T extends Comparable<T>> implements Valida
             T maxValue = (T) Long.valueOf(maxValueAnnotation.value());
 
             return new MaxValueValidator<>(maxValue);
-        }
-
-        else throw new IllegalArgumentException("Incompatible annotation");
+        } else throw new IllegalArgumentException("Incompatible annotation");
     }
 }

@@ -4,35 +4,26 @@
  */
 package com.ssnagin.collectionmanager.commands.commands;
 
-import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
-import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
-import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.networking.ClientRequest;
 import com.ssnagin.collectionmanager.networking.ServerResponse;
-import com.ssnagin.collectionmanager.reflection.Reflections;
-import java.util.HashMap;
 
 /**
- *
  * @author developer
  */
 public class CommandUpdate extends ServerCommand {
 
     private CollectionManager collectionManager;
     private CommandManager commandManager;
-    
-    public CommandUpdate(String name, 
-            String description, 
-            CollectionManager collectionManager,
-            CommandManager commandManager) {
+
+    public CommandUpdate(String name,
+                         String description,
+                         CollectionManager collectionManager,
+                         CommandManager commandManager) {
         super(name, description);
-        
+
         this.collectionManager = collectionManager;
         this.commandManager = commandManager;
     }

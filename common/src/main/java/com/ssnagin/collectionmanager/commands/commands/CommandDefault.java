@@ -4,22 +4,19 @@
  */
 package com.ssnagin.collectionmanager.commands.commands;
 
-import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.Command;
-import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
- * 
+ *
  * @author developer
  */
 public class CommandDefault extends Command {
-    
+
     private String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
             + "(or it was given incorecctly)\n\n"
             + "Please, make another try :) or type help to see available commands";
-    
+
     public CommandDefault(String name, String description) {
         super(name, description);
     }

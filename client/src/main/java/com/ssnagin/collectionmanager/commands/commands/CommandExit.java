@@ -5,17 +5,16 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
 /**
  * Shows brief description about available commands
- * 
+ *
  * @author developer
  */
 public class CommandExit extends UserCommand {
-    
+
     public CommandExit(String name, String description) {
         super(name, description);
     }

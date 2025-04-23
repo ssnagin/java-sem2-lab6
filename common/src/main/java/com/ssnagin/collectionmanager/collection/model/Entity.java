@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.collection.model;
 import com.ssnagin.collectionmanager.collection.interfaces.Describable;
 import com.ssnagin.collectionmanager.collection.interfaces.Randomize;
 import com.ssnagin.collectionmanager.console.Console;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -14,8 +15,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.EqualsAndHashCode;
 
 /**
  * Abstract base class representing an entity in the collection management system.
@@ -34,7 +33,7 @@ public abstract class Entity<T> implements Describable, Comparable<T>, Randomize
      *
      * @param object the entity to be compared
      * @return a negative integer, zero, or a positive integer as this entity
-     *         is less than, equal to, or greater than the specified entity
+     * is less than, equal to, or greater than the specified entity
      */
     @Override
     public abstract int compareTo(T object);

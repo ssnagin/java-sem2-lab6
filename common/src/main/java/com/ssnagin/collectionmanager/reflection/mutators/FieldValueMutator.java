@@ -18,7 +18,7 @@ public class FieldValueMutator<T> implements ValueMutator<T> {
     @SneakyThrows
     public <P extends T> void mutateValue(@NonNull Object object, P value) {
         assert ClassUtils.isAssignable(value.getClass(), field.getType());
-        if(!field.trySetAccessible()) throw new IllegalAccessException(field.getName());
+        if (!field.trySetAccessible()) throw new IllegalAccessException(field.getName());
         field.set(object, value);
     }
 

@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.collection.interfaces;
 
 /**
  * Something, that can have a description.
+ *
  * @author developer
  */
 public interface Describable {

@@ -11,8 +11,8 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.files.adapters.LocalDateAdapter;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import lombok.Getter;
 
 import java.io.*;
@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.TreeSet;
 
 /**
- *
  * @author developer
  */
 public class FileManager {
@@ -34,7 +33,6 @@ public class FileManager {
             .setPrettyPrinting()
             .serializeNulls()
             .registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-
 
 
     public void write(MusicBand musicBand, String path) {
@@ -60,13 +58,14 @@ public class FileManager {
 
         if (buffResult.isEmpty()) buffResult = "[]";
 
-        return gson.fromJson(buffResult, new TypeToken<TreeSet<LocalDateWrapper>>() {}.getType());
+        return gson.fromJson(buffResult, new TypeToken<TreeSet<LocalDateWrapper>>() {
+        }.getType());
     }
 
     public List<ParsedString> readCommands(String path, CommandManager commandManager) throws IOException {
         String buffResult = read(path);
 
-        if (buffResult.isEmpty()) return  null;
+        if (buffResult.isEmpty()) return null;
 
         String[] lines = buffResult.split(System.lineSeparator());
 

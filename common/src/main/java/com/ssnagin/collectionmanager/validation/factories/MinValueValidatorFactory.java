@@ -21,8 +21,6 @@ public class MinValueValidatorFactory<T extends Comparable<T>> implements Valida
             T minValue = (T) Long.valueOf(minValueAnnotation.value());
 
             return new MinValueValidator<>(minValue);
-        }
-
-        else throw new IllegalArgumentException("Incompatible annotation");
+        } else throw new IllegalArgumentException("Incompatible annotation");
     }
 }

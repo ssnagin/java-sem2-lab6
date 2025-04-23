@@ -5,10 +5,10 @@
 package com.ssnagin.collectionmanager.commands.interfaces;
 
 /**
- *
  * @author developer
  */
 public interface Manageable<T> {
     void register(T object);
+
     T get(String string);
 }

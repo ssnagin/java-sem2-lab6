@@ -6,5 +6,6 @@ import java.lang.annotation.Annotation;
 
 public interface ValidatorFactory<T> {
     boolean isCompatibleWith(Class<? extends Annotation> annotationClass);
+
     <A extends Annotation> Validator<T> create(A annotation);
 }

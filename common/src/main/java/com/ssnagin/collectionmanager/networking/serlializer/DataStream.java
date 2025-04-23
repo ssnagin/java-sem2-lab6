@@ -16,7 +16,7 @@ public class DataStream {
 
     public static ServerResponse deserialize(byte[] data) throws IOException, ClassNotFoundException {
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
-        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream)) {
+             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream)) {
             return (ServerResponse) objectInputStream.readObject();
         } catch (IOException e) {
             throw new IOException(e);

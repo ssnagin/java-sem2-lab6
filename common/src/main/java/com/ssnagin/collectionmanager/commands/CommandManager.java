@@ -6,24 +6,22 @@ package com.ssnagin.collectionmanager.commands;
 
 import com.ssnagin.collectionmanager.commands.commands.CommandDefault;
 import com.ssnagin.collectionmanager.commands.interfaces.Manageable;
-
-import java.util.*;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.*;
+
 /**
- * 
  * @author developer
  */
 @EqualsAndHashCode
 @ToString
 public class CommandManager implements Manageable<Command> {
-    
+
     @Getter
     private static final CommandManager instance = new CommandManager();
-    
+
     @Getter
     private Map<String, Command> commands = new HashMap<>();
 
@@ -46,12 +44,12 @@ public class CommandManager implements Manageable<Command> {
 
         return new CommandDefault("", "");
     }
-    
-    public List<Command> getCommandsList() {  
+
+    public List<Command> getCommandsList() {
         return new ArrayList<>(this.commands.values());
     }
 
-    private void setCommands(Map<String, Command>  commands) {
+    private void setCommands(Map<String, Command> commands) {
         this.commands = commands;
     }
 

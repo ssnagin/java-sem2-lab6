@@ -11,11 +11,13 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation class for proper namings
+ *
  * @author developer
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Description {
     String name();
+
     String description();
 }

@@ -5,20 +5,19 @@
 package com.ssnagin.collectionmanager.inputparser;
 
 /**
- *
  * @author developer
  */
 public enum ParseMode {
     DEFAULT("(?:[/-]+(?<val1>\\S+?))|(?:\\\"[/-]+(?<val2>.+?)\\\")|(?:'[/-]+(?<val3>.+?)')|(?:\\\"(?<val4>.+?)\\\")|(?:'(?<val5>.+?)')|(?<val6>\\S+)"),
     COMMAND_ONLY("(?<script>^\\S+)|\\s*(?<singleArgument>.+\\S)"),
     UNKNOWN("");
-    
+
     private final String regex;
-    
+
     ParseMode(String regex) {
         this.regex = regex;
     }
-    
+
     public String getRegex() {
         return this.regex;
     }

@@ -6,23 +6,17 @@ package com.ssnagin.collectionmanager.client;
 
 import com.ssnagin.collectionmanager.Core;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
+import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
-import com.ssnagin.collectionmanager.inputparser.InputParser;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.Command;
-import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.files.FileManager;
+import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
-
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.*;
-
-import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.Getter;
@@ -30,8 +24,11 @@ import lombok.ToString;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.TreeSet;
+
 /**
- * 
  * @author developer
  */
 @ToString
@@ -44,13 +41,13 @@ public class ClientCore extends Core {
     protected ApplicationStatus applicationStatus;
 
     public static final String ASCII_LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
-                                            "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
-                                            "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
-                                            "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
-                                            "                          ▐▌                                      ▐▌ ▐▌          \n" +
-                                            "                                                                   ▝▀▜▌          \n" +
-                                            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.VERSION);
-    
+            "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
+            "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
+            "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
+            "                          ▐▌                                      ▐▌ ▐▌          \n" +
+            "                                                                   ▝▀▜▌          \n" +
+            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.VERSION);
+
     public ClientCore() {
         super();
 
@@ -71,7 +68,7 @@ public class ClientCore extends Core {
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
-    
+
     private void registerCommands() {
         this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
         this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
@@ -93,7 +90,7 @@ public class ClientCore extends Core {
 
     @Override
     public void start(String[] args) {
-        
+
         // Step-by-step description of the algorithm.
 
         // 0. First, print logo
@@ -149,31 +146,31 @@ public class ClientCore extends Core {
             this.runCommand(parsedString);
         }
     }
-    
+
     public void printLogo() {
         Console.print(ClientCore.ASCII_LOGO);
     }
-    
+
     private void runCommand(ParsedString parsedString) {
 
         UserCommand command = (UserCommand) this.commandManager.get(parsedString.getCommand());
         this.setApplicationStatus(command.executeCommand(parsedString));
     }
-    
+
     private void setApplicationStatus(ApplicationStatus applicationStatus) {
 
         this.applicationStatus = applicationStatus;
-        
+
         if (applicationStatus != ApplicationStatus.RUNNING) {
             this.onExit();
         }
     }
 
     // === EVENTS ==== //
-    
+
     public void onExit() {
         // Some code here, for example saving json.
-        
+
         Console.separatePrint("Bye, have a great time!", this.getApplicationStatus().toString());
         System.exit(this.getApplicationStatus().getCode());
     }

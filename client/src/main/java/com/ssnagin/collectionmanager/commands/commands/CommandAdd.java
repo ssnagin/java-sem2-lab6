@@ -1,10 +1,8 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
@@ -14,12 +12,10 @@ import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.ServerResponse;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
-import com.ssnagin.collectionmanager.validation.TempValidator;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class CommandAdd extends UserCommand {
@@ -85,7 +81,8 @@ public class CommandAdd extends UserCommand {
 //            this.collectionManager.addElement(result);
             Console.separatePrint(response.getResponseStatus(), "SERVER");
             Console.separatePrint("Successfully added!", "SUCCESS");
-        } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
+                 IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
             Console.error(ex.toString());
         }

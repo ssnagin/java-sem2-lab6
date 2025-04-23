@@ -1,6 +1,7 @@
 package com.ssnagin.collectionmanager.validation.validators;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MaxValueValidatorTest {
@@ -9,5 +10,5 @@ public class MaxValueValidatorTest {
         MaxValueValidator<Integer> validator = new MaxValueValidator<>(100);
         assertDoesNotThrow(() -> validator.validate(50));
         assertThrows(IllegalArgumentException.class, () -> validator.validate(150));
-    }  
+    }
 }

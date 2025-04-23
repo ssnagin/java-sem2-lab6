@@ -8,6 +8,7 @@ import lombok.ToString;
 
 /**
  * Entry script for running Application
+ *
  * @author developer
  */
 @EqualsAndHashCode

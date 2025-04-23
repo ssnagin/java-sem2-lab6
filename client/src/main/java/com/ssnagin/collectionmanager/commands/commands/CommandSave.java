@@ -6,15 +6,14 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.files.FileManager;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
- * 
+ *
  * @author developer
  */
 public class CommandSave extends UserCommand {

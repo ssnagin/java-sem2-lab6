@@ -2,7 +2,6 @@ package com.ssnagin.collectionmanager.server;
 
 
 import com.ssnagin.collectionmanager.Core;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 

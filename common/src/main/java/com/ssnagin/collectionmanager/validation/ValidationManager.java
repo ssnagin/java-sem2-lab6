@@ -15,6 +15,7 @@ public class ValidationManager {
     private static final ValidationManager instance = new ValidationManager();
 
     private final List<ValidatorFactory> validatorFactories = new ArrayList<>();
+
     public void validate(Object object) {
         // Посмотреть все declaredFields
         // getterAccessor

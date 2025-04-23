@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class CombiningValueMutatorManager implements ValueMutatorManager{
+public class CombiningValueMutatorManager implements ValueMutatorManager {
     private final List<ValueMutator.Factory> valueMutatorFactories;
 
     ///  TODO: Constructors Here

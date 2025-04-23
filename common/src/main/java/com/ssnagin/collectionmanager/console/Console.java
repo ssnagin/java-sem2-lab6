@@ -9,30 +9,31 @@ import lombok.ToString;
 
 /**
  * Main class that responsible for console interactions
+ *
  * @author developer
  */
 @EqualsAndHashCode
 @ToString
 public class Console {
-    
+
     private static final String SHELL_ARROW = " @ _ @ > ";
-    
+
     public static String getShellArrow() {
         return SHELL_ARROW;
     }
-    
+
     public static void log(Object text) {
         Console.separatePrint(text.toString(), "  LOG  ");
     }
-    
+
     public static void error(Object text) {
         Console.separatePrint(text, " ERROR ");
     }
-    
+
     public static void error(Exception exception) {
         Console.separatePrint(exception.getMessage(), " ERROR ");
     }
-    
+
     public static void separatePrint(Object text, String leftSide) {
 
         if (leftSide.length() > 7) {
@@ -50,7 +51,7 @@ public class Console {
     public static void print(Object text) {
         System.out.print(text.toString());
     }
-    
+
     public static void println(Object text) {
         System.out.println(text.toString());
     }

@@ -19,11 +19,11 @@ public class CollectionManagerTest {
         collectionManager.addElement(
                 new MusicBand(
                         "test",
-                        new Coordinates(1L,2),
+                        new Coordinates(1L, 2),
                         2L,
                         3,
                         MusicGenre.PSYCHEDELIC_ROCK,
-                        new Album("Test",2L)
+                        new Album("Test", 2L)
                 )
         );
 
@@ -39,11 +39,11 @@ public class CollectionManagerTest {
         MusicBand musicBand = new MusicBand(
                 123,
                 "test",
-                new Coordinates(1L,2),
+                new Coordinates(1L, 2),
                 2L,
                 3,
                 MusicGenre.PSYCHEDELIC_ROCK,
-                new Album("Tewst",2L)
+                new Album("Tewst", 2L)
         );
 
         collectionManager.addElement(

@@ -7,33 +7,32 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
 /**
  * Shows brief description about available commands
- * 
+ *
  * @author developer
  */
 public class CommandShow extends UserCommand {
-    
+
     private CollectionManager collectionManager;
-    
+
     public CommandShow(String name, String description, CollectionManager collectionManager) {
         super(name, description);
-        
+
         this.collectionManager = collectionManager;
     }
-    
+
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        
+
         if (this.collectionManager.isEmpty()) {
             Console.log("Collection is empty!");
             return ApplicationStatus.RUNNING;
-        } 
+        }
 
         Long counter = 0L;
 
@@ -41,7 +40,7 @@ public class CommandShow extends UserCommand {
             counter += 1;
             Console.println(Long.toString(counter) + " | ========\n" + musicBand.getDescription());
         }
-        
+
         return ApplicationStatus.RUNNING;
     }
 }
