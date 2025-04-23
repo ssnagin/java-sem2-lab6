@@ -45,7 +45,7 @@ public class ClientCore extends Core {
             "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
             "                          ▐▌                                      ▐▌ ▐▌          \n" +
             "                                                                   ▝▀▜▌          \n" +
-            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.General.VERSION);
+            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
     public ClientCore() {
         super();
@@ -83,7 +83,6 @@ public class ClientCore extends Core {
         // this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
-        this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
         // this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }
 
@@ -104,18 +103,6 @@ public class ClientCore extends Core {
                 onExit();
             }
         });
-
-        // 1. Load file if given here:
-
-        if (args.length > 0) {
-            String path = String.join("", args);
-            try {
-                TreeSet<MusicBand> elements = fileManager.readCollection(path);
-                this.collectionManager.setCollection(elements);
-            } catch (Exception e) {
-                Console.error("Error while reading file, skip adding into collection / " + e);
-            }
-        }
 
         // 2. Wait for the user input.
         // After it, parse given arguments with ArgumentParser

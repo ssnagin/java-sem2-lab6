@@ -1,14 +1,17 @@
 package com.ssnagin.collectionmanager.core;
 
 
+import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
+import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlializer.DataStream;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.TreeSet;
 
 @ToString
 public class ServerCore extends Core {
@@ -25,7 +29,11 @@ public class ServerCore extends Core {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerCore.class);
 
-    private static final String LOGO = "CollectionManager SERVER ver. " + Config.General.VERSION;
+    private static final String LOGO = "CollectionManager SERVER ver. " + Config.Core.VERSION;
+
+    @Getter
+    @Setter
+    protected String collectionPath = "collection.json";
 
     private DatagramSocket datagramSocket;
 
@@ -38,6 +46,18 @@ public class ServerCore extends Core {
     @Override
     public void start(String[] args) {
         logger.info(LOGO);
+
+        // 1. Load file if given here:
+
+        if (args.length > 0) {
+            String path = String.join("", args);
+            try {
+                TreeSet<MusicBand> elements = fileManager.readCollection(path);
+                this.collectionManager.setCollection(elements);
+            } catch (Exception e) {
+                logger.warn("Error while reading file, skip adding into collection / {}", String.valueOf(e));
+            }
+        }
 
         listening();
     }
@@ -95,10 +115,15 @@ public class ServerCore extends Core {
     }
 
     protected ServerResponse runCommand(ClientRequest clientRequest) {
-        logger.info(clientRequest.toString());
+        logger.debug(clientRequest.toString());
         ServerCommand command = (ServerCommand) this.commandManager.get(clientRequest.getParsedString().getCommand());
 
-        return command.executeCommand(clientRequest);
+        ServerResponse result = command.executeCommand(clientRequest);
+
+        ((ServerCommand) this.commandManager.get("save"))
+                .executeCommand(new ClientRequest());
+
+        return result;
     }
 
     private void registerCommands() {
@@ -116,7 +141,7 @@ public class ServerCore extends Core {
         // this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
-        // this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
+        this.commandManager.register(new CommandSave("save", "save | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager, this.getCollectionPath()));
         // this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }
 }
