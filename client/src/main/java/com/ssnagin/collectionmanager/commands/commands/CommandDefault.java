@@ -5,8 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
@@ -15,28 +14,19 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
  * 
  * @author developer
  */
-public class CommandClear extends Command {
+public class CommandDefault extends UserCommand {
     
-    CollectionManager collectionManager;
+    private String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
+            + "(or it was given incorecctly)\n\n"
+            + "Please, make another try :) or type help to see available commands";
     
-    
-    public CommandClear(String name, String description, CollectionManager collectionManager) {
+    public CommandDefault(String name, String description) {
         super(name, description);
-
-        this.collectionManager = collectionManager;
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        
-        if (collectionManager.isEmpty()) {
-            Console.separatePrint("Collection is already empty!", "CLEAR");
-            return ApplicationStatus.RUNNING;
-        }
-        
-        collectionManager.removeAllElements();
-        Console.separatePrint("Done!", "CLEAR");
-        
+        Console.println(temporaryCreatedHeadMessage);
         return ApplicationStatus.RUNNING;
     }
 }

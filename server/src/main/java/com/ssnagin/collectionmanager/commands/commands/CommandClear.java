@@ -7,40 +7,30 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
-import com.ssnagin.collectionmanager.files.FileManager;
+import com.ssnagin.collectionmanager.networking.ClientRequest;
+import com.ssnagin.collectionmanager.networking.ServerResponse;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  * 
  * @author developer
  */
-public class CommandSave extends Command {
-
-    private CollectionManager collectionManager;
-    private FileManager fileManager;
-
-    public CommandSave(String name, String description, CollectionManager collectionManager, FileManager fileManager) {
+public class CommandClear extends ServerCommand {
+    
+    CollectionManager collectionManager;
+    
+    
+    public CommandClear(String name, String description, CollectionManager collectionManager) {
         super(name, description);
 
         this.collectionManager = collectionManager;
-        this.fileManager = fileManager;
     }
 
     @Override
-    public ApplicationStatus executeCommand(ParsedString parsedString) {
-
-        Console.println(parsedString);
-
-        String path = parsedString.getArguments().get(0);
-
-        try {
-            fileManager.write(this.collectionManager.getCollection(), path);
-        } catch (Exception ex) {
-            Console.error(ex);
-        }
-
-        return ApplicationStatus.RUNNING;
+    public ServerResponse executeCommand(ClientRequest clientRequest) {
+        return new ServerResponse();
     }
 }

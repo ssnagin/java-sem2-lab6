@@ -9,17 +9,27 @@ import java.net.*;
 public class Networking {
 
     private static final int BUFFER_SIZE = 65536;
+
+    @Getter
+    private int connectionTimeout;
+
     private DatagramSocket datagramSocket;
     private InetAddress inetAddress;
     private int port;
 
     public Networking(String host, int port) throws UnknownHostException, SocketException {
-        this.inetAddress = InetAddress.getByName(host);
-        this.port = port;
-        this.datagramSocket = new DatagramSocket();
+        this(host, port, 3000);
     }
 
-    public ServerResponse send(ClientRequest request) throws IOException, ClassNotFoundException {
+    public Networking(String host, int port, int connectionTimeout) throws UnknownHostException, SocketException {
+        this.inetAddress = InetAddress.getByName(host);
+        this.port = port;
+
+        this.datagramSocket = new DatagramSocket();
+        this.setConnectionTimeout(connectionTimeout);
+    }
+
+    public ServerResponse send(ClientRequest request) throws IOException, ClassNotFoundException, SocketTimeoutException {
         byte[] requestData = DataStream.serialize(request);
         byte[] responseBuffer = new byte[BUFFER_SIZE];
 
@@ -44,5 +54,10 @@ public class Networking {
     public void close() {
         if (datagramSocket != null && !datagramSocket.isClosed())
             datagramSocket.close();
+    }
+
+    public void setConnectionTimeout(int connectionTimeout) throws SocketException {
+        this.connectionTimeout = connectionTimeout;
+        this.datagramSocket.setSoTimeout(connectionTimeout);
     }
 }

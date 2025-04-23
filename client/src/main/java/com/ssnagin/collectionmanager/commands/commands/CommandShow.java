@@ -8,6 +8,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
@@ -16,7 +17,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
  * 
  * @author developer
  */
-public class CommandShow extends Command {
+public class CommandShow extends UserCommand {
     
     private CollectionManager collectionManager;
     

@@ -24,7 +24,7 @@ public abstract class Command implements Comparable<Command> {
     private String name;
     @Getter
     @Setter
-    public String description;
+    private String description;
     
     /**
      * Parent constructor of a command
@@ -35,27 +35,6 @@ public abstract class Command implements Comparable<Command> {
     public Command(String name, String description) {
         this.setName(name);
         this.setDescription(description);
-    }
-
-     /**
-     * Executes the given command and returns status code
-     * 
-     * @param parsedString
-     * @return
-     */
-    public abstract ApplicationStatus executeCommand(ParsedString parsedString);
-    
-     /**
-     * basic usage of a command
-     * 
-     * @param parsedString
-     * @return
-     */
-    public ApplicationStatus showUsage(ParsedString parsedString) {
-        
-        Console.log("Usage is still not implemented: " + parsedString.toString());
-        
-        return ApplicationStatus.RUNNING;
     }
 
     public int compareTo(Command otherCommand) {

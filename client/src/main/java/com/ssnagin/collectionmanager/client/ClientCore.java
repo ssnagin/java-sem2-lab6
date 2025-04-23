@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.client;
 import com.ssnagin.collectionmanager.Core;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
@@ -17,9 +18,12 @@ import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.*;
 
 import com.ssnagin.collectionmanager.files.FileManager;
+import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.Getter;
 import lombok.ToString;
@@ -57,6 +61,12 @@ public class ClientCore extends Core {
 
         this.fileManager = FileManager.getInstance();
 
+        try {
+            this.networking = new Networking("localhost", 22813);
+        } catch (UnknownHostException | SocketException e) {
+            throw new RuntimeException(e);
+        }
+
         registerCommands();
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
@@ -66,19 +76,19 @@ public class ClientCore extends Core {
         this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
         this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
         this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, collectionManager, scriptManager));
-        this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager, scriptManager));
+        this.commandManager.register(new CommandAdd("add", "add an object to collection", networking, scriptManager));
         this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
-        this.commandManager.register(new CommandClear("clear", "clear collection elements", collectionManager));
-        this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, commandManager));
-        this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
-        this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scriptManager));
+        // this.commandManager.register(new CommandClear("clear", "clear collection elements", collectionManager));
+        // this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, commandManager));
+        // this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
+        // this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scriptManager));
         this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
-        this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
-        this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
-        this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
-        this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
+        // this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
+        // this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
+        // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
+        // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
-        this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
+        // this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }
 
     @Override
@@ -146,7 +156,7 @@ public class ClientCore extends Core {
     
     private void runCommand(ParsedString parsedString) {
 
-        Command command = this.commandManager.get(parsedString.getCommand());
+        UserCommand command = (UserCommand) this.commandManager.get(parsedString.getCommand());
         this.setApplicationStatus(command.executeCommand(parsedString));
     }
     

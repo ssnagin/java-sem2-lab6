@@ -8,8 +8,11 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.ClientRequest;
+import com.ssnagin.collectionmanager.networking.ServerResponse;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 
 import java.util.NoSuchElementException;
@@ -19,7 +22,7 @@ import java.util.NoSuchElementException;
  * 
  * @author developer
  */
-public class CommandCountByNumberOfParticipants extends Command {
+public class CommandCountByNumberOfParticipants extends ServerCommand {
 
     private CollectionManager collectionManager;
 
@@ -30,29 +33,7 @@ public class CommandCountByNumberOfParticipants extends Command {
     }
 
     @Override
-    public ApplicationStatus executeCommand(ParsedString parsedString) {
-
-        long counter = 0;
-        long numberOfParticipants;
-
-        try {
-            numberOfParticipants = (Long) Reflections.parsePrimitiveInput(
-                    Long.class,
-                    parsedString.getArguments().get(0)
-            );
-        } catch (NumberFormatException ex) {
-            Console.log("Неверный формат числа");
-            return ApplicationStatus.RUNNING;
-        } catch (IndexOutOfBoundsException | NoSuchElementException ex) {
-            return this.showUsage(parsedString);
-        }
-
-        for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            if (numberOfParticipants == musicBand.getNumberOfParticipants()) counter += 1;
-        }
-
-        Console.separatePrint(counter, "AMOUNT");
-
-        return ApplicationStatus.RUNNING;
+    public ServerResponse executeCommand(ClientRequest clientRequest) {
+        return new ServerResponse();
     }
 }

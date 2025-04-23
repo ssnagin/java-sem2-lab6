@@ -7,37 +7,34 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.ClientRequest;
+import com.ssnagin.collectionmanager.networking.ServerResponse;
 
 /**
- * Shows brief description about available commands
- *
+ * Throws when other commands does not exist. The only one unregistered command!
+ * 
  * @author developer
  */
-public class CommandPrintDescending extends Command {
+public class CommandRandom extends ServerCommand {
 
     private CollectionManager collectionManager;
 
-    public CommandPrintDescending(String name, String description, CollectionManager collectionManager) {
+    private static final int MAX_RANDOM_AMOUNT = 5000;
+
+
+    public CommandRandom(String name, String description, CollectionManager collectionManager) {
         super(name, description);
 
         this.collectionManager = collectionManager;
     }
 
     @Override
-    public ApplicationStatus executeCommand(ParsedString parsedString) {
-
-        if (this.collectionManager.isEmpty()) {
-            Console.log("Collection is empty!");
-            return ApplicationStatus.RUNNING;
-        }
-
-        for (MusicBand musicBand : this.collectionManager.getCollection().descendingSet()) {
-            Console.println("========\n" + musicBand.getDescription());
-        }
-
-        return ApplicationStatus.RUNNING;
+    public ServerResponse executeCommand(ClientRequest clientRequest) {
+        return new ServerResponse();
     }
 }

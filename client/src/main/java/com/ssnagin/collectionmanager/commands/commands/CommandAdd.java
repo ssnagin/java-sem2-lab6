@@ -1,40 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.ssnagin.collectionmanager.commands.commands;
 
-import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.ClientRequest;
+import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.ServerResponse;
+import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import com.ssnagin.collectionmanager.validation.TempValidator;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Shows brief description about available commands
- *
- * @author developer
- */
-public class CommandAdd extends Command {
+public class CommandAdd extends UserCommand {
 
-    private CollectionManager collectionManager;
+    private Networking networking;
     private ScriptManager scriptManager;
 
-    public CommandAdd(String name, String description, CollectionManager collectionManager, ScriptManager scriptManager) {
+    public CommandAdd(String name, String description, Networking networking, ScriptManager scriptManager) {
         super(name, description);
 
-        this.collectionManager = collectionManager;
+        this.networking = networking;
+
         this.scriptManager = scriptManager;
     }
 
@@ -68,27 +65,28 @@ public class CommandAdd extends Command {
 
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
 
-            if (musicBand == null) return ApplicationStatus.RUNNING;
-
             var result = new LocalDateWrapper(
                     musicBand
             );
 
-            // Final validation here;
-            List<String> errors = TempValidator.validateMusicBand(musicBand);
+            ServerResponse response = this.networking.send(new ClientRequest(parsedString, result));
 
-            if (!errors.isEmpty()) {
-                for (String error : errors) {
-                    Console.error(error);
-                }
-                return ApplicationStatus.RUNNING;
-            }
+            // Validation here;
+//            List<String> errors = TempValidator.validateMusicBand(musicBand);
+//
+//            if (!errors.isEmpty()) {
+//                for (String error : errors) {
+//                    Console.error(error);
+//                }
+//                return ApplicationStatus.RUNNING;
+//            }
 
             // Adding into CollectionManager with Creation Date:
-            this.collectionManager.addElement(result);
-
+//            this.collectionManager.addElement(result);
+            Console.separatePrint(response.getResponseStatus(), "SERVER");
             Console.separatePrint("Successfully added!", "SUCCESS");
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException ex) {
             Console.error(ex.toString());
         }
 
@@ -99,7 +97,7 @@ public class CommandAdd extends Command {
     public ApplicationStatus showUsage(ParsedString parsedString) {
         Console.println("Usage: add\nСписок того, что надо ввести:");
         Console.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
-        
+
         return ApplicationStatus.RUNNING;
     }
 }

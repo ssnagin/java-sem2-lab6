@@ -24,9 +24,9 @@ public class CommandDefault extends Command {
         super(name, description);
     }
 
-    @Override
-    public ApplicationStatus executeCommand(ParsedString parsedString) {
-        Console.println(temporaryCreatedHeadMessage);
-        return ApplicationStatus.RUNNING;
-    }
+//    @Override
+//    public ApplicationStatus executeCommand(ParsedString parsedString) {
+//        Console.println(temporaryCreatedHeadMessage);
+//        return ApplicationStatus.RUNNING;
+//    }
 }

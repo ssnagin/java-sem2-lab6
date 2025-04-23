@@ -8,17 +8,28 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @ToString
+@Getter
+@Setter
 public class ClientRequest implements Serializable {
 
-    @Getter
-    @Setter
     public ParsedString parsedString;
+    public Serializable data;
 
-    public ClientRequest(ParsedString parsedString) {
+
+    public ClientRequest(ParsedString parsedString, Serializable data) {
         setParsedString(parsedString);
+        setData(data);
     }
 
     public ClientRequest() {
-        this(null);
+        this(null, null);
+    }
+
+    public ClientRequest(Serializable data) {
+        this(null, data);
+    }
+
+    public ClientRequest(ParsedString parsedString) {
+        this(parsedString, null);
     }
 }

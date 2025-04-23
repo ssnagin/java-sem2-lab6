@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Collections;
  * 
  * @author developer
  */
-public class CommandHelp extends Command {
+public class CommandHelp extends UserCommand {
     
     private CommandManager commandManager;
     

@@ -9,8 +9,11 @@ import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.ClientRequest;
+import com.ssnagin.collectionmanager.networking.ServerResponse;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -21,7 +24,7 @@ import java.util.Map;
  * 
  * @author developer
  */
-public class CommandGroupCountingByCreationDate extends Command {
+public class CommandGroupCountingByCreationDate extends ServerCommand {
 
     private CollectionManager collectionManager;
 
@@ -33,33 +36,7 @@ public class CommandGroupCountingByCreationDate extends Command {
     }
 
     @Override
-    public ApplicationStatus executeCommand(ParsedString parsedString) {
-
-        if (collectionManager.isEmpty()) {
-            Console.log("The collection is empty!");
-            return ApplicationStatus.RUNNING;
-        }
-
-        Map<LocalDate, Integer> groups = new HashMap<>();
-
-        for (MusicBand musicBand : collectionManager.getCollection()) {
-            if (!(musicBand instanceof LocalDateWrapper localDateWrapper)) continue;
-
-            LocalDate localDate = localDateWrapper.getCreationDate();
-            groups.put(localDate, groups.getOrDefault(localDate, 0) + 1);
-        }
-
-        if (groups.isEmpty()) {
-            Console.separatePrint("No groups were found", "WHOOPS");
-            return ApplicationStatus.RUNNING;
-        }
-
-        Console.log("Groups by LocalDate:");
-
-        for (Map.Entry<LocalDate, Integer> entry : groups.entrySet()) {
-            Console.separatePrint(entry.getKey() + " : " + entry.getValue(), "      ");
-        }
-
-        return ApplicationStatus.RUNNING;
+    public ServerResponse executeCommand(ClientRequest clientRequest) {
+        return new ServerResponse();
     }
 }

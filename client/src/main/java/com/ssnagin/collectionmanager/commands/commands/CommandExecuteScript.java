@@ -8,6 +8,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
@@ -23,7 +24,7 @@ import java.io.IOException;
  * 
  * @author developer
  */
-public class CommandExecuteScript extends Command {
+public class CommandExecuteScript extends UserCommand {
     
     private final CommandManager commandManager;
     private final CollectionManager collectionManager;
@@ -53,7 +54,7 @@ public class CommandExecuteScript extends Command {
                 if (line.isEmpty()) continue;
 
                 ParsedString scriptCommand = InputParser.parse(line, ParseMode.COMMAND_ONLY);
-                Command command = commandManager.get(scriptCommand.getCommand());
+                UserCommand command = (UserCommand) commandManager.get(scriptCommand.getCommand());
 
                 ApplicationStatus status = command.executeCommand(scriptCommand);
 

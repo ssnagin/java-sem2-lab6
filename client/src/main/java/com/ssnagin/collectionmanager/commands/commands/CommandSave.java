@@ -5,35 +5,41 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
+import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
-import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.files.FileManager;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
- *
+ * 
  * @author developer
  */
-public class CommandHistory extends Command {
+public class CommandSave extends UserCommand {
 
-    private CommandManager commandManager;
+    private CollectionManager collectionManager;
+    private FileManager fileManager;
 
-    public CommandHistory(String name, String description, CommandManager commandManager) {
+    public CommandSave(String name, String description, CollectionManager collectionManager, FileManager fileManager) {
         super(name, description);
-        this.commandManager = commandManager;
+
+        this.collectionManager = collectionManager;
+        this.fileManager = fileManager;
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
 
-        if (this.commandManager.getCommandHistory().isEmpty()) {
-            Console.log("There were no commands!");
-            return ApplicationStatus.RUNNING;
-        }
+        Console.println(parsedString);
 
-        for (Command command : this.commandManager.getCommandHistory()) {
-            Console.log(command.getName());
+        String path = parsedString.getArguments().get(0);
+
+        try {
+            fileManager.write(this.collectionManager.getCollection(), path);
+        } catch (Exception ex) {
+            Console.error(ex);
         }
 
         return ApplicationStatus.RUNNING;
