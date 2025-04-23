@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAddIfMin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRandom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/core/ClientCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/core/ClientCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAddIfMin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRandom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/core/ServerCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/core/ServerCore.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -141,6 +141,6 @@ public class ServerCore extends Core {
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandSave("save", "save | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager, this.getCollectionPath()));
-        // this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
+        this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }
 }
