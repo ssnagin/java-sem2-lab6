@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
@@ -27,6 +28,13 @@ public class CommandClear extends ServerCommand {
 
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
+
+        ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
+
+        this.collectionManager.removeAllElements();
+
+        serverResponse.appendMessage("Collection was erased!");
+
         return new ServerResponse();
     }
 }
