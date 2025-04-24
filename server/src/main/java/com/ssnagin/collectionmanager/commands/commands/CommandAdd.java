@@ -5,6 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
@@ -34,16 +35,17 @@ public class CommandAdd extends ServerCommand {
 
         ServerResponse response = new ServerResponse(ResponseStatus.OK);
 
-        LocalDateWrapper musicBand = (LocalDateWrapper) clientRequest.getData();
-        //List<String> errors = TempValidator.validateMusicBand(musicBand);
+        MusicBand musicBand = (MusicBand) clientRequest.getData();
+        List<String> errors = TempValidator.validateMusicBand(musicBand);
 
-//        if (!errors.isEmpty()) {
-//            response.setResponseStatus(ResponseStatus.ERROR);
-//            for (String error : errors) {
-//                response.appendMessage(error + "\n");
-//            }
-//            return response;
-//        }
+        if (!errors.isEmpty()) {
+            response.setResponseStatus(ResponseStatus.ERROR);
+            for (String error : errors) {
+                System.out.println(error);
+                response.appendMessage(error + "\n");
+            }
+            return response;
+        }
 
         this.collectionManager.addElement(musicBand);
 

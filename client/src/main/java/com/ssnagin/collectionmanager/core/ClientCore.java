@@ -6,13 +6,11 @@ package com.ssnagin.collectionmanager.core;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -25,7 +23,6 @@ import sun.misc.SignalHandler;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.TreeSet;
 
 /**
  * @author developer
@@ -54,8 +51,6 @@ public class ClientCore extends Core {
         this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
         this.scriptManager = ScriptManager.getInstance();
-
-        this.fileManager = FileManager.getInstance();
 
         try {
             this.networking = new Networking("localhost", 22813);

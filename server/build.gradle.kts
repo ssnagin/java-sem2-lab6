@@ -20,9 +20,15 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:1.18.36")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
     // SLF4J + Logback
     implementation("org.slf4j:slf4j-api:2.0.12")
     implementation("ch.qos.logback:logback-classic:1.5.13")
+
+    implementation("com.google.code.gson:gson:2.12.1")
+    implementation("org.apache.commons:commons-lang3:3.17.0")
 }
 
 application {

@@ -1,6 +1,5 @@
 package com.ssnagin.collectionmanager.collection;
 
-import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.Album;
 import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
@@ -34,7 +33,7 @@ public class CollectionManagerTest {
 
     @Test
     public void getElementByIdTest() {
-        this.collectionManager.getElementById(1);
+        this.collectionManager.getElementById(1L);
 
         MusicBand musicBand = new MusicBand(
                 123,
@@ -50,7 +49,7 @@ public class CollectionManagerTest {
                 musicBand
         );
 
-        var element = this.collectionManager.getElementById(123);
+        var element = this.collectionManager.getElementById(123L);
 
         assertEquals(element, musicBand);
     }

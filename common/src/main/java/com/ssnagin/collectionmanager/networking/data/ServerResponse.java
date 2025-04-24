@@ -17,6 +17,9 @@ public class ServerResponse extends TransferData {
     public Serializable data;
 
     public ServerResponse(ResponseStatus type, String message, Serializable data) {
+
+        if (message == null) message = "";
+
         appendMessage(message);
         setResponseStatus(type);
         this.responseStatus = type;

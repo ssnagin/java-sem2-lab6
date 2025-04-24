@@ -2,8 +2,6 @@ package com.ssnagin.collectionmanager.core;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.CommandManager;
-import com.ssnagin.collectionmanager.files.FileManager;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.ToString;
@@ -14,7 +12,7 @@ public abstract class Core {
     protected CollectionManager collectionManager;
     protected ScriptManager scriptManager;
     protected CommandManager commandManager;
-    protected FileManager fileManager;
+
 
     protected Networking networking;
 
@@ -22,8 +20,6 @@ public abstract class Core {
         collectionManager = CollectionManager.getInstance();
         commandManager = CommandManager.getInstance();
         scriptManager = ScriptManager.getInstance();
-
-        this.fileManager = FileManager.getInstance();
     }
 
     public abstract void start(String[] args);

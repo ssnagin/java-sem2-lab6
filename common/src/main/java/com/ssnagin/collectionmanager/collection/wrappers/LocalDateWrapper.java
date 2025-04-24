@@ -45,11 +45,9 @@ public class LocalDateWrapper extends MusicBand {
 
     @Override
     public LocalDateWrapper random() {
-
-        return new LocalDateWrapper(
-                new MusicBand().random(),
-                new RandomLocalDateGenerator<>().random()
-        );
+        super.random();
+        this.setCreationDate(new RandomLocalDateGenerator<>().random());
+        return this;
     }
 
 

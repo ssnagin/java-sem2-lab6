@@ -5,6 +5,7 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
+import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
@@ -27,8 +28,10 @@ public class ServerCore extends Core {
     private static ServerCore instance = new ServerCore();
 
     private static final Logger logger = LoggerFactory.getLogger(ServerCore.class);
+    protected FileManager fileManager;
 
     private static final String LOGO = "CollectionManager SERVER ver. " + Config.Core.VERSION;
+
 
     @Getter
     @Setter
@@ -38,6 +41,8 @@ public class ServerCore extends Core {
 
     public ServerCore() {
         super();
+
+        this.fileManager = FileManager.getInstance();
 
         registerCommands();
     }

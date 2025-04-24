@@ -78,7 +78,7 @@ public class TempValidator {
 
     private static void validateField(Object object, String fieldName, List<String> errors) {
         try {
-            Field field = object.getClass().getDeclaredField(fieldName);
+            Field field = findFieldInHierarchy(object.getClass(), fieldName);
             field.setAccessible(true);
             Object value = field.get(object);
 
@@ -126,8 +126,10 @@ public class TempValidator {
                 }
             }
 
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            errors.add("Error validating field " + fieldName + ": " + e.getMessage());
+        } catch (NoSuchFieldException e) {
+            errors.add("The field was not found: " + fieldName + ": " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            errors.add("Error validating field, check field accessibility: " + fieldName + ": " + e.getMessage());
         }
     }
 
@@ -141,5 +143,17 @@ public class TempValidator {
 
     public static boolean isValidAlbum(Album album) {
         return validateAlbum(album).isEmpty();
+    }
+
+    private static Field findFieldInHierarchy(Class<?> clazz, String fieldName) throws NoSuchFieldException {
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                return field;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass(); // Переходим к родительскому классу
+            }
+        }
+        throw new NoSuchFieldException("Field '" + fieldName + "' not found in class hierarchy");
     }
 }

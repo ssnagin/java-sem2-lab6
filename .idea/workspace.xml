@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/common/collectionManager.common.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/com/ssnagin/collectionmanager/commands/commands/CommandAddTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandClear.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandClear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandSave.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandShow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/core/ClientCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/core/ClientCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/common/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/wrappers/LocalDateWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/wrappers/LocalDateWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/core/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/core/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/files/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/files/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/files/adapters/LocalDateAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/files/adapters/LocalDateAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ServerResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/validation/TempValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/validation/TempValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/core/ServerCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/core/ServerCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssnagin/collectionmanager/collection/CollectionManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/test/java/com/ssnagin/collectionmanager/collection/CollectionManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +98,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.CollectionManagerTest.executor": "Run",
+    "Gradle.CommandAddTest.executor": "Run",
     "Gradle.java-sem2-lab6 [:com.ssnagin.collectionmanager.App.main()].executor": "Run",
     "Gradle.java-sem2-lab6 [:com.ssnagin.lab5java.sem2.lab5.App.main()].executor": "Run",
     "Gradle.java-sem2-lab6 [build].executor": "Run",
@@ -129,11 +140,11 @@
       <recent name="$PROJECT_DIR$/commons/main/java/com/ssnagin/collectionmanager" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="P:\DEVELOPER\Data\projects\Java\Github\java-sem2-lab6\common\src\test\java\com\ssnagin\collectionmanager\collection" />
       <recent name="P:\DEVELOPER\Data\projects\Java\Github\java-sem2-lab6\server\src\main\resources" />
       <recent name="$PROJECT_DIR$/server/src/main/java" />
       <recent name="$PROJECT_DIR$/client/src/main/java" />
       <recent name="$PROJECT_DIR$/commons/src" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.ssnagin.collectionmanager.commands.commands" />
@@ -144,7 +155,7 @@
       <recent name="com.ssnagin.collectionmanager.commands.commands" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.java-sem2-lab6 [shadowJar]">
+  <component name="RunManager" selected="Gradle.CommandAddTest">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
       <module name="collectionManager.client.main" />
@@ -158,18 +169,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
-      <module name="collectionManager.server.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ssnagin.collectionmanager.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="CollectionManagerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":common:test" />
+            <option value="--tests" />
+            <option value="&quot;com.ssnagin.collectionmanager.collection.CollectionManagerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommandAddTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":server:test" />
+            <option value="--tests" />
+            <option value="&quot;com.ssnagin.collectionmanager.commands.commands.CommandAddTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
     </configuration>
     <configuration name="java-sem2-lab6 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -183,28 +229,6 @@
         <option name="taskNames">
           <list>
             <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="java-sem2-lab6 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="run" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -248,18 +272,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.App" />
-      <item itemvalue="Application.Server" />
+      <item itemvalue="Gradle.CollectionManagerTest" />
+      <item itemvalue="Gradle.CommandAddTest" />
       <item itemvalue="Gradle.java-sem2-lab6 [build]" />
-      <item itemvalue="Gradle.java-sem2-lab6 [run]" />
       <item itemvalue="Gradle.java-sem2-lab6 [shadowJar]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.CommandAddTest" />
+        <item itemvalue="Gradle.CollectionManagerTest" />
         <item itemvalue="Gradle.java-sem2-lab6 [shadowJar]" />
         <item itemvalue="Gradle.java-sem2-lab6 [build]" />
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.Server" />
-        <item itemvalue="Gradle.java-sem2-lab6 [run]" />
       </list>
     </recent_temporary>
   </component>
@@ -305,6 +329,24 @@
           <properties class="java.lang.ClassCastException" package="java.lang" />
           <option name="timeStamp" value="12" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/validation/TempValidator.java</url>
+          <line>13</line>
+          <properties class="com.ssnagin.collectionmanager.validation.TempValidator" method="validateMusicBand">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/validation/TempValidator.java</url>
+          <line>78</line>
+          <properties class="com.ssnagin.collectionmanager.validation.TempValidator" method="validateField">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
