@@ -34,7 +34,7 @@ public class CommandShow extends UserCommand {
             return ApplicationStatus.RUNNING;
         }
 
-        Long counter = 0L;
+        long counter = 0L;
 
         for (MusicBand musicBand : this.collectionManager.getCollection()) {
             counter += 1;

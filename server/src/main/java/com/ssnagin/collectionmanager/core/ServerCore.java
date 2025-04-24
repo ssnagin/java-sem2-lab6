@@ -126,9 +126,6 @@ public class ServerCore extends Core {
     }
 
     private void registerCommands() {
-        // this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
-        // this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
-        // this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, collectionManager, scriptManager));
         this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager));
         // this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", collectionManager));
@@ -140,7 +137,6 @@ public class ServerCore extends Core {
         // this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
-        this.commandManager.register(new CommandSave("save", "save | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager, this.getCollectionPath()));
         this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }
 }
