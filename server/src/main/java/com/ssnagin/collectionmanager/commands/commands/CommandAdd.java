@@ -49,6 +49,8 @@ public class CommandAdd extends ServerCommand {
 
         this.collectionManager.addElement(musicBand);
 
+        response.appendMessage("Successfully added music band");
+
         return response;
     }
 }

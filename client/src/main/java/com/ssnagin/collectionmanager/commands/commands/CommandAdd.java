@@ -35,21 +35,6 @@ public class CommandAdd extends UserCommand {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
-        /*
-            Пример создания коллекции
-
-            MusicBand musicBand = new MusicBand(
-                1,
-                "test",
-                new Coordinates((long) 28, 1),
-                LocalDate.now(),
-                1L,
-                1,
-                MusicGenre.MATH_ROCK,
-                new Album("Test", (long) 123)
-            );
-        */
-
         if (!parsedString.getArguments().isEmpty()) {
             if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
@@ -60,15 +45,11 @@ public class CommandAdd extends UserCommand {
         try {
 
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
-
-            var result = new LocalDateWrapper(
-                    musicBand
-            );
+            var result = new LocalDateWrapper(musicBand);
 
             ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
+            Console.separatePrint(response.toString(), "SERVER");
 
-            Console.separatePrint(response.getResponseStatus(), "SERVER");
-            Console.separatePrint("Successfully added!", "SUCCESS");
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
