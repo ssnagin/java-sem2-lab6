@@ -19,23 +19,20 @@ import java.io.IOException;
  *
  * @author developer
  */
-public class CommandClear extends UserCommand {
-
-    Networking networking;
+public class CommandClear extends UserNetworkCommand {
 
     public CommandClear(String name, String description, Networking networking) {
-        super(name, description);
-
-        this.networking = networking;
+        super(name, description, networking);
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
 
         try {
             ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString));
 
-            Console.separatePrint("OK", "SERVER");
+            Console.separatePrint(response.getMessage(), "SERVER");
         } catch (IOException | ClassNotFoundException e) {
             Console.error(e.toString());
         }

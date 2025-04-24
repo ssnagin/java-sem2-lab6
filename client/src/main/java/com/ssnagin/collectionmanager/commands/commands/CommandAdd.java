@@ -18,28 +18,21 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CommandAdd extends UserCommand {
+public class CommandAdd extends UserNetworkCommand {
 
-    private Networking networking;
     private ScriptManager scriptManager;
 
     public CommandAdd(String name, String description, Networking networking, ScriptManager scriptManager) {
-        super(name, description);
-
-        this.networking = networking;
+        super(name, description, networking);
 
         this.scriptManager = scriptManager;
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
+
         Scanner scanner = this.scriptManager.getCurrentScanner();
-
-        if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().get(0)))
-                return this.showUsage(parsedString);
-        }
-
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
 
         try {

@@ -11,22 +11,16 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
-public class CommandRandom extends UserCommand {
+public class CommandRandom extends UserNetworkCommand {
 
-    private Networking networking;
 
     public CommandRandom(String name, String description, Networking networking) {
-        super(name, description);
-        this.networking = networking;
+        super(name, description, networking);
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-
-        if (!parsedString.getArguments().isEmpty()) {
-            if (" h".equals(parsedString.getArguments().get(0)))
-                return this.showUsage(parsedString);
-        }
+        super.executeCommand(parsedString);
 
         try {
             long id;

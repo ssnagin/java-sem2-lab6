@@ -27,6 +27,7 @@ public class CommandHistory extends UserCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
 
         if (this.commandManager.getCommandHistory().isEmpty()) {
             Console.log("There were no commands!");

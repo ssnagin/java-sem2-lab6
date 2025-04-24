@@ -10,35 +10,49 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.sun.source.tree.Tree;
+
+import java.io.IOException;
+import java.util.TreeSet;
 
 /**
  * Shows brief description about available commands
  *
  * @author developer
  */
-public class CommandShow extends UserCommand {
+public class CommandShow extends UserNetworkCommand {
 
-    private CollectionManager collectionManager;
-
-    public CommandShow(String name, String description, CollectionManager collectionManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
+    public CommandShow(String name, String description, Networking networking) {
+        super(name, description, networking);
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
 
-        if (this.collectionManager.isEmpty()) {
-            Console.log("Collection is empty!");
-            return ApplicationStatus.RUNNING;
-        }
+        ServerResponse response;
+        Long counter = 1L;
 
-        long counter = 0L;
+        try {
+            response = this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, null)
+            );
 
-        for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            counter += 1;
-            Console.println(Long.toString(counter) + " | ========\n" + musicBand.getDescription());
+            Console.separatePrint(response.getMessage(), "SERVER");
+
+            if (response.getData() == null) return ApplicationStatus.RUNNING;
+
+            for (MusicBand musicBand : (TreeSet<MusicBand>) response.getData()) {
+                Console.separatePrint(musicBand.getDescription(), Long.toString(counter));
+                counter++;
+            }
+
+            Console.separatePrint(response.getMessage(), "SERVER");
+        } catch (IOException | ClassNotFoundException e) {
+            Console.error(e.toString());
         }
 
         return ApplicationStatus.RUNNING;

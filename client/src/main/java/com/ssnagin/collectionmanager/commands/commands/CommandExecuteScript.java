@@ -38,6 +38,9 @@ public class CommandExecuteScript extends UserCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
+        super.executeCommand(parsedString);
+
         // FOR THE FUTURE:
         // This command requires uri string, so we will have to edit ParsedString to ParseMode.URI !!!
 

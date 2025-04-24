@@ -33,6 +33,8 @@ public class CommandHelp extends UserCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
+
         Console.println(temporaryCreatedHeadMessage);
 
         ArrayList<String> sortedKeys = new ArrayList<String>(this.commandManager.getCommands().keySet());

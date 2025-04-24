@@ -16,7 +16,13 @@ public abstract class UserCommand extends Command {
      * @param parsedString
      * @return
      */
-    public abstract ApplicationStatus executeCommand(ParsedString parsedString);
+    public ApplicationStatus executeCommand(ParsedString parsedString) {
+        if (!parsedString.getArguments().isEmpty()) {
+            if ("h".equals(parsedString.getArguments().get(0)))
+                return this.showUsage(parsedString);
+        }
+        return ApplicationStatus.RUNNING;
+    }
 
     /**
      * basic usage of a command

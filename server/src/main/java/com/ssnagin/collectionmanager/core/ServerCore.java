@@ -132,7 +132,7 @@ public class ServerCore extends Core {
 
     private void registerCommands() {
         this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager));
-        // this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
+        this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", collectionManager));
         // this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, commandManager));
         // this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));

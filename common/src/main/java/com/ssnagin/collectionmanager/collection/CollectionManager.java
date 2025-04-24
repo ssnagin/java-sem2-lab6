@@ -4,10 +4,13 @@
  */
 package com.ssnagin.collectionmanager.collection;
 
+import com.ssnagin.collectionmanager.collection.comparators.CoordinatesComparator;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
@@ -15,7 +18,7 @@ import java.util.TreeSet;
 /**
  * @author developer
  */
-public class CollectionManager {
+public class CollectionManager implements Serializable {
 
     // Using singleton
 
@@ -24,7 +27,15 @@ public class CollectionManager {
 
     @Getter
     @Setter
-    private TreeSet<MusicBand> collection = new TreeSet<>();
+    private TreeSet<MusicBand> collection;
+
+    public CollectionManager(Comparator<? super MusicBand> comparator) {
+        collection = new TreeSet<>(comparator);
+    }
+
+    public CollectionManager() {
+        this(new CoordinatesComparator());
+    }
 
     public void addElement(MusicBand element) {
         this.collection.add(element);
