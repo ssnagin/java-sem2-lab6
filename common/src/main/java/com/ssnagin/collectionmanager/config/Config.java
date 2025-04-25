@@ -6,7 +6,7 @@ public class Config {
     }
 
     public class Networking {
-        public static final int PORT = 22813;
+        public static final int PORT = 22814;
         public static final int BUFFER_SIZE = 65535;
     }
 

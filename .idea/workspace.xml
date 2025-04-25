@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandUpdate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandCountByNumberOfParticipants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandAdd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ClientRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ClientRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ServerResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/TransferData.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/TransferData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/config/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandCountByNumberOfParticipants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandCountByNumberOfParticipants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
