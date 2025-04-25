@@ -1,6 +1,9 @@
 package com.ssnagin.collectionmanager.networking.data;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.UUID;

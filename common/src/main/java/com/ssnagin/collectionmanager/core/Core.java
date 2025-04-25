@@ -5,6 +5,8 @@ import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.ToString;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
 @ToString
 public abstract class Core {
@@ -21,5 +23,14 @@ public abstract class Core {
         scriptManager = ScriptManager.getInstance();
     }
 
-    public abstract void start(String[] args);
+    public void start(String[] args) {
+        Signal.handle(new Signal("INT"), new SignalHandler() {  // Ctrl+C
+            @Override
+            public void handle(Signal sig) {
+                onExit();
+            }
+        });
+    }
+
+    public abstract void onExit();
 }

@@ -6,10 +6,8 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
-import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
-import com.ssnagin.collectionmanager.scripts.ScriptManager;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!

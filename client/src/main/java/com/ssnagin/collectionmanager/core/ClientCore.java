@@ -18,8 +18,6 @@ import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.Getter;
 import lombok.ToString;
-import sun.misc.Signal;
-import sun.misc.SignalHandler;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -36,7 +34,7 @@ public class ClientCore extends Core {
     @Getter
     protected ApplicationStatus applicationStatus;
 
-    public static final String ASCII_LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
+    public static final String LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
             "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
             "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
@@ -83,21 +81,13 @@ public class ClientCore extends Core {
 
     @Override
     public void start(String[] args) {
+        super.start(args);
 
         // Step-by-step description of the algorithm.
 
         // 0. First, print logo
 
         this.printLogo();
-
-        // 0.5 Register SIGINT:
-
-        Signal.handle(new Signal("INT"), new SignalHandler() {  // Ctrl+C
-            @Override
-            public void handle(Signal sig) {
-                onExit();
-            }
-        });
 
         // 2. Wait for the user input.
         // After it, parse given arguments with ArgumentParser
@@ -129,7 +119,7 @@ public class ClientCore extends Core {
     }
 
     public void printLogo() {
-        Console.print(ClientCore.ASCII_LOGO);
+        Console.print(ClientCore.LOGO);
     }
 
     protected void runCommand(ParsedString parsedString) {
@@ -148,6 +138,7 @@ public class ClientCore extends Core {
 
     // === EVENTS ==== //
 
+    @Override
     public void onExit() {
         // Some code here, for example saving json.
 

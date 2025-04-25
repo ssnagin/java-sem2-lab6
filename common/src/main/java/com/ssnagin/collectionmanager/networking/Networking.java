@@ -38,8 +38,7 @@ public class Networking {
         setConnectionTimeout(connectionTimeout);
     }
 
-    public Networking(InetAddress address, int port, int connectionTimeout) throws SocketException  {
-
+    public Networking(InetAddress address, int port, int connectionTimeout) throws SocketException {
 
 
     }

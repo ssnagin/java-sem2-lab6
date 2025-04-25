@@ -1,13 +1,9 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.collection.model.Album;
 import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.collection.model.MusicGenre;
-
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
-import com.ssnagin.collectionmanager.commands.commands.CommandAdd;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -15,7 +11,6 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

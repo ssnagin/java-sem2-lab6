@@ -6,15 +6,10 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
-import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
-import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
-import com.ssnagin.collectionmanager.scripts.ScriptManager;
-
-import java.util.Scanner;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
@@ -43,7 +38,7 @@ public class CommandAddIfMin extends ServerCollectionCommand {
 //            return response;
 //        }
 
-          // Adding into CollectionManager with Creation Date if it is the lowest element:
+        // Adding into CollectionManager with Creation Date if it is the lowest element:
         if (musicBand.compareTo(this.collectionManager.getLowestElement()) != -1) {
             response.appendMessage("The element was not added");
             return response;

@@ -5,15 +5,12 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
-import com.sun.source.tree.Tree;
 
 import java.io.IOException;
 import java.util.TreeSet;

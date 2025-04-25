@@ -4,21 +4,16 @@
  */
 package com.ssnagin.collectionmanager.commands.commands;
 
-import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
-import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.config.Config;
-import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlialization.types.SerializableTreeSet;
 
 import java.util.NavigableSet;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -59,7 +54,7 @@ public class CommandShow extends ServerCollectionCommand {
                 sortedMusicBands.stream().limit(shownElements)
                         .collect(
                                 Collectors.toCollection(
-                                    () -> new SerializableTreeSet<>(sortedMusicBands.comparator())
+                                        () -> new SerializableTreeSet<>(sortedMusicBands.comparator())
                                 )
                         )
         );

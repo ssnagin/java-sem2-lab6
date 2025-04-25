@@ -8,7 +8,6 @@ import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.networking.Networking;
-import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlialization.DataStream;
@@ -35,6 +34,8 @@ public class ServerCore extends Core {
 
     private static final String LOGO = "CollectionManager SERVER ver. " + Config.Core.VERSION;
 
+    private int commandSaveCounter = 0;
+    private static final int MAX_COMMAND_SAVE_INTERVAL = 10;
 
     @Getter
     @Setter
@@ -56,6 +57,8 @@ public class ServerCore extends Core {
 
     @Override
     public void start(String[] args) {
+        super.start(args);
+
         logger.info(LOGO);
 
         // 1. Load file if given here:
@@ -98,7 +101,7 @@ public class ServerCore extends Core {
                 ClientRequest request = DataStream.deserialize(receivePacket.getData());
 
                 logger.debug(
-                "{}:{} sent a package ({})",
+                        "{}:{} sent a package ({})",
                         receivePacket.getAddress(),
                         receivePacket.getPort(),
                         request.getId()
@@ -137,9 +140,10 @@ public class ServerCore extends Core {
 
         logger.debug(result.toString());
 
-        if (command instanceof ServerCollectionCommand) {
-            ((ServerCommand) this.commandManager.get("save"))
-                    .executeCommand(new ClientRequest());
+        if (commandSaveCounter > MAX_COMMAND_SAVE_INTERVAL) commandSaveCounter = 0;
+        if (command instanceof ServerCollectionCommand && commandSaveCounter >= MAX_COMMAND_SAVE_INTERVAL) {
+            saveCollection();
+            commandSaveCounter += 1;
         }
 
         return result;
@@ -159,5 +163,18 @@ public class ServerCore extends Core {
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
+    }
+
+    @Override
+    public void onExit() {
+        // Some code here, for example saving json.
+        saveCollection();
+        logger.info("Bye, have a great time!");
+        System.exit(0);
+    }
+
+    private void saveCollection() {
+        ((ServerCommand) this.commandManager.get("save"))
+                .executeCommand(new ClientRequest());
     }
 }

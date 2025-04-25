@@ -56,7 +56,8 @@ public class CommandAddIfMin extends UserNetworkCommand {
             Console.separatePrint(response.getMessage(), "SERVER");
 
 
-        } catch (ClassNotFoundException | IOException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+        } catch (ClassNotFoundException | IOException | NoSuchMethodException | InstantiationException |
+                 IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
             Console.error(ex.toString());
         }
