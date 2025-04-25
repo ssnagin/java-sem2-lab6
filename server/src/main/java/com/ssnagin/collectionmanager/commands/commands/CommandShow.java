@@ -36,8 +36,7 @@ public class CommandShow extends ServerCollectionCommand {
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
         ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
-        int shownElements = 0;
-        long counter = 0L;
+        int shownElements;
 
         if (this.collectionManager.isEmpty()) {
             serverResponse.appendMessage("Collection is empty");
@@ -46,13 +45,15 @@ public class CommandShow extends ServerCollectionCommand {
 
         serverResponse.appendMessage("Collection contains " + this.collectionManager.getSize() + " elements ");
 
+        shownElements = this.collectionManager.getSize();
+
         if (this.collectionManager.getSize() > Config.Commands.MAX_SHOWN_COLLECTION_ELEMENTS) {
             shownElements = Config.Commands.MAX_SHOWN_COLLECTION_ELEMENTS;
             serverResponse.appendMessage("(shown first " + shownElements + " elements, sorted by coordinates)");
         }
 
         NavigableSet<MusicBand> sortedMusicBands = this.collectionManager.getCollection().descendingSet();
-        
+
         // Limits for the response
         serverResponse.setData(
                 sortedMusicBands.stream().limit(shownElements)

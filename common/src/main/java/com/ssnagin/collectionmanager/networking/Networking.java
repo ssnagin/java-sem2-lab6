@@ -4,6 +4,7 @@ import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlialization.DataStream;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.*;
@@ -14,25 +15,41 @@ public class Networking {
 
     @Getter
     private int connectionTimeout;
-
+    @Setter
     private DatagramSocket datagramSocket;
+    @Getter
     private InetAddress inetAddress;
+    @Getter
+    @Setter
     private int port;
+
+    public Networking() throws SocketException {
+        setDatagramSocket(new DatagramSocket());
+    }
 
     public Networking(String host, int port) throws UnknownHostException, SocketException {
         this(host, port, 3000);
     }
 
     public Networking(String host, int port, int connectionTimeout) throws UnknownHostException, SocketException {
-        this(InetAddress.getByName(host), port, connectionTimeout);
+        setInetAddress(host);
+        setPort(port);
+        setDatagramSocket(new DatagramSocket());
+        setConnectionTimeout(connectionTimeout);
     }
 
     public Networking(InetAddress address, int port, int connectionTimeout) throws SocketException  {
-        this.inetAddress = address;
-        this.port = port;
 
-        this.datagramSocket = new DatagramSocket();
-        this.setConnectionTimeout(connectionTimeout);
+
+
+    }
+
+    public void setInetAddress(String address) throws UnknownHostException {
+        setInetAddress(InetAddress.getByName(address));
+    }
+
+    public void setInetAddress(InetAddress inetAddress) {
+        this.inetAddress = inetAddress;
     }
 
     public ServerResponse sendClientRequest(ClientRequest request) throws IOException, ClassNotFoundException, SocketTimeoutException {

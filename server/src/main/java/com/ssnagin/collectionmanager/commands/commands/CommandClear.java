@@ -31,6 +31,6 @@ public class CommandClear extends ServerCollectionCommand {
 
         serverResponse.appendMessage("Collection was erased!");
 
-        return new ServerResponse();
+        return serverResponse;
     }
 }

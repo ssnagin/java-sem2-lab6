@@ -14,6 +14,7 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlialization.DataStream;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +42,14 @@ public class ServerCore extends Core {
 
     private DatagramSocket datagramSocket;
 
+    @SneakyThrows
     public ServerCore() {
         super();
 
         this.fileManager = FileManager.getInstance();
+//        this.networking = new Networking(receivePacket.getAddress(), receivePacket.getPort(), 3000);
+        this.networking = new Networking();
+        this.networking.setConnectionTimeout(3000);
 
         registerCommands();
     }
@@ -71,8 +76,6 @@ public class ServerCore extends Core {
     public void listening() {
 
         logger.debug(this.collectionManager.getCollection().toString());
-
-        ServerResponse response;
 
         try {
             datagramSocket = new DatagramSocket(Config.Networking.PORT);
@@ -101,7 +104,7 @@ public class ServerCore extends Core {
                         request.getId()
                 );
 
-                response = runCommand(request);
+                ServerResponse response = runCommand(request);
 
                 logger.info(
                         response.getResponseStatus() + " {} {}",
@@ -110,9 +113,8 @@ public class ServerCore extends Core {
                 );
 
                 // Change this code in the future
-                this.networking = new Networking(receivePacket.getAddress(), receivePacket.getPort(), 3000);
-
-
+                networking.setInetAddress(receivePacket.getAddress());
+                this.networking.setPort(receivePacket.getPort());
                 this.networking.sendServerResponse(response);
 
             } catch (IOException e) {
