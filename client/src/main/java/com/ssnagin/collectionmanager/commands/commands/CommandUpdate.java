@@ -1,0 +1,122 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.ssnagin.collectionmanager.commands.commands;
+
+import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
+import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
+import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.description.DescriptionParser;
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.reflection.Reflections;
+import com.ssnagin.collectionmanager.scripts.ScriptManager;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ * @author developer
+ */
+public class CommandUpdate extends UserNetworkCommand {
+
+    private ScriptManager scriptManager;
+
+    public CommandUpdate(String name,
+                         String description, Networking networking, ScriptManager scriptManager) {
+        super(name, description, networking);
+
+        this.scriptManager = scriptManager;
+    }
+
+    @Override
+    public ApplicationStatus executeCommand(ParsedString parsedString) {
+        super.executeCommand(parsedString);
+        Scanner scanner = this.scriptManager.getCurrentScanner();
+
+        Long id;
+        Integer stage;
+
+        try {
+            id = (Long) Reflections.parsePrimitiveInput(
+                    Long.class,
+                    parsedString.getArguments().get(0)
+            );
+        } catch (NumberFormatException ex) {
+            Console.log("Неверный формат числа");
+            return ApplicationStatus.RUNNING;
+        } catch (IndexOutOfBoundsException e) {
+            return showUsage(parsedString);
+        }
+
+
+        try {
+            ServerResponse serverResponse = this.networking.sendClientRequest(
+                    new ClientRequest(
+                            parsedString,
+                            id,
+                            1
+                    )
+            );
+
+            if (serverResponse.getResponseStatus() != ResponseStatus.OK) {
+                Console.separatePrint(
+                        serverResponse.getMessage(),
+                        String.valueOf(serverResponse.getResponseStatus()
+                        )
+                );
+                return ApplicationStatus.RUNNING;
+            }
+
+            stage = serverResponse.getStage();
+            Console.separatePrint("Please, fill in the form with your values:", "SERVER");
+
+            LocalDateWrapper result = new LocalDateWrapper(
+                    Reflections.parseModel(MusicBand.class, scanner)
+            );
+
+            result.setId(id);
+
+            serverResponse = this.networking.sendClientRequest(
+                new ClientRequest(
+                        parsedString,
+                        result,
+                        stage
+                )
+            );
+
+            Console.separatePrint(serverResponse.getMessage(), serverResponse.getResponseStatus().toString());
+
+
+        } catch (IndexOutOfBoundsException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException | IOException | ClassNotFoundException ex) {
+            Console.error(ex.toString());
+            return ApplicationStatus.RUNNING;
+        }
+
+        return ApplicationStatus.RUNNING;
+    }
+
+    @Override
+    public ApplicationStatus showUsage(ParsedString parsedString) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("usage: update <id> <field> <value>\n").append("things that can be updated:\n");
+        stringBuilder.append(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
+
+        Console.println(stringBuilder);
+
+        return ApplicationStatus.RUNNING;
+    }
+}

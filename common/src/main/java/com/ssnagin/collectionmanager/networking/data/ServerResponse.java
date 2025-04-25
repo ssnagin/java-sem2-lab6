@@ -17,6 +17,11 @@ public class ServerResponse extends TransferData {
     public Serializable data;
 
     public ServerResponse(ResponseStatus type, String message, Serializable data) {
+        this(type, message, data, 0);
+    }
+
+    public ServerResponse(ResponseStatus type, String message, Serializable data, Integer stage) {
+        super(stage);
 
         if (message == null) message = "";
 

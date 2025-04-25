@@ -30,8 +30,8 @@ public class CommandAdd extends UserNetworkCommand {
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         super.executeCommand(parsedString);
-
         Scanner scanner = this.scriptManager.getCurrentScanner();
+
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
 
         try {

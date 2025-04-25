@@ -16,7 +16,15 @@ public abstract class TransferData implements Serializable {
     @Setter
     private Long id = generateId();
 
+    @Getter
+    @Setter
+    private Integer stage = 0;
+
     private static long generateId() {
         return UUID.randomUUID().getLeastSignificantBits();
+    }
+
+    public TransferData(Integer stage) {
+        setStage(stage);
     }
 }

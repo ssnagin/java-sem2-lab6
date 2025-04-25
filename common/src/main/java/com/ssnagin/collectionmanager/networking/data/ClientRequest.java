@@ -17,6 +17,12 @@ public class ClientRequest extends TransferData {
 
 
     public ClientRequest(ParsedString parsedString, Serializable data) {
+        this(parsedString, data, 0);
+    }
+
+    public ClientRequest(ParsedString parsedString, Serializable data, Integer stage) {
+        super(stage);
+
         setParsedString(parsedString);
         setData(data);
     }
