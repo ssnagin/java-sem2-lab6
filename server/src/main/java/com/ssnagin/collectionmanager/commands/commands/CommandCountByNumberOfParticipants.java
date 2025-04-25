@@ -40,7 +40,7 @@ public class CommandCountByNumberOfParticipants extends ServerCommand {
             return serverResponse;
         }
 
-        Long numberOfParticipants = (Lo2ng) clientRequest.getData();
+        Long numberOfParticipants = (Long) clientRequest.getData();
 
         for (MusicBand musicBand : this.collectionManager.getCollection()) {
             if (numberOfParticipants == musicBand.getNumberOfParticipants()) {
