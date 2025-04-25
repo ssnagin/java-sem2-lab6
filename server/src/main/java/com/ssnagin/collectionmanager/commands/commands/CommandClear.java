@@ -5,6 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -15,15 +16,10 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
  *
  * @author developer
  */
-public class CommandClear extends ServerCommand {
-
-    CollectionManager collectionManager;
-
+public class CommandClear extends ServerCollectionCommand {
 
     public CommandClear(String name, String description, CollectionManager collectionManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
+        super(name, description, collectionManager);
     }
 
     @Override

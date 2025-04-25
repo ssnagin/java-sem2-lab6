@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -20,14 +21,10 @@ import java.util.List;
  *
  * @author developer
  */
-public class CommandAdd extends ServerCommand {
-
-    private CollectionManager collectionManager;
+public class CommandAdd extends ServerCollectionCommand {
 
     public CommandAdd(String name, String description, CollectionManager collectionManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
+        super(name, description, collectionManager);
     }
 
     @Override

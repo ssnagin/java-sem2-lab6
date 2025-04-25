@@ -2,14 +2,16 @@ package com.ssnagin.collectionmanager.core;
 
 
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
-import com.ssnagin.collectionmanager.networking.serlializer.DataStream;
+import com.ssnagin.collectionmanager.networking.serlialization.DataStream;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -68,6 +70,8 @@ public class ServerCore extends Core {
 
     public void listening() {
 
+        logger.debug(this.collectionManager.getCollection().toString());
+
         ServerResponse response;
 
         try {
@@ -80,6 +84,7 @@ public class ServerCore extends Core {
         logger.info("Started listening on port {}", Config.Networking.PORT);
 
         while (true) {
+
             try {
                 byte[] receiveBuffer = new byte[Config.Networking.BUFFER_SIZE];
 
@@ -120,27 +125,36 @@ public class ServerCore extends Core {
 
     protected ServerResponse runCommand(ClientRequest clientRequest) {
         logger.debug(clientRequest.toString());
+
+        ServerResponse result = new ServerResponse();
+
         ServerCommand command = (ServerCommand) this.commandManager.get(clientRequest.getParsedString().getCommand());
 
-        ServerResponse result = command.executeCommand(clientRequest);
+        if (command.isAccessible())
+            result = command.executeCommand(clientRequest);
+
         logger.debug(result.toString());
-        ((ServerCommand) this.commandManager.get("save"))
-                .executeCommand(new ClientRequest());
+
+        if (command instanceof ServerCollectionCommand) {
+            ((ServerCommand) this.commandManager.get("save"))
+                    .executeCommand(new ClientRequest());
+        }
 
         return result;
     }
 
     private void registerCommands() {
+        this.commandManager.register(new CommandSave("save", "saves the collection", collectionManager, fileManager, this.collectionPath));
         this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager));
         this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", collectionManager));
         // this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, commandManager));
         // this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
-        this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scriptManager));
+        this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager));
         // this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
         // this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
         // this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
-        // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
+        // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
     }

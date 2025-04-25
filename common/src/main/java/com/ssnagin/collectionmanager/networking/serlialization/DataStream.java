@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.networking.serlializer;
+package com.ssnagin.collectionmanager.networking.serlialization;
 
 import java.io.*;
 

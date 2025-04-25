@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -17,15 +18,12 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
  *
  * @author developer
  */
-public class CommandRandom extends ServerCommand {
-
-    private CollectionManager collectionManager;
+public class CommandRandom extends ServerCollectionCommand {
 
     private static final int MAX_RANDOM_AMOUNT = 50;
 
     public CommandRandom(String name, String description, CollectionManager collectionManager) {
-        super(name, description);
-        this.collectionManager = collectionManager;
+        super(name, description, collectionManager);
     }
 
     @Override

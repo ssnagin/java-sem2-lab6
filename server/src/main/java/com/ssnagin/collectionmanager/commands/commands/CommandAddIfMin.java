@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -20,19 +21,10 @@ import java.util.Scanner;
  *
  * @author developer
  */
-public class CommandAddIfMin extends ServerCommand {
+public class CommandAddIfMin extends ServerCollectionCommand {
 
-    private CommandManager commandManager;
-    private CollectionManager collectionManager;
-    private Scanner scanner;
-    private ScriptManager scriptManager;
-
-    public CommandAddIfMin(String name, String description, CollectionManager collectionManager, CommandManager commandManager, ScriptManager scriptManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
-        this.commandManager = commandManager;
-        this.scriptManager = scriptManager;
+    public CommandAddIfMin(String name, String description, CollectionManager collectionManager) {
+        super(name, description, collectionManager);
     }
 
     @Override

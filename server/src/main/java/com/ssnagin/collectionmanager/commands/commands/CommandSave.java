@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.files.FileManager;
@@ -20,9 +21,10 @@ import lombok.Setter;
  *
  * @author developer
  */
-public class CommandSave extends ServerCommand {
+public class CommandSave extends ServerCollectionCommand {
 
-    private CollectionManager collectionManager;
+    @Getter
+    @Setter
     private FileManager fileManager;
 
     @Getter
@@ -30,30 +32,18 @@ public class CommandSave extends ServerCommand {
     private String collectionPath;
 
     public CommandSave(String name, String description, CollectionManager collectionManager, FileManager fileManager, String collectionPath) {
-        super(name, description);
+        super(name, description, collectionManager);
 
-        this.collectionManager = collectionManager;
-        this.fileManager = fileManager;
+        setAccessible(false);
+
+        setFileManager(fileManager);
         setCollectionPath(collectionPath);
-    }
-
-    public ApplicationStatus executeCommand(ParsedString parsedString) {
-
-        String path = parsedString.getArguments().get(0);
-
-        try {
-            fileManager.write(this.collectionManager.getCollection(), path);
-        } catch (Exception ex) {
-            Console.error(ex);
-        }
-
-        return ApplicationStatus.RUNNING;
     }
 
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
         try {
-            fileManager.write(this.collectionManager.getCollection(), getCollectionPath());
+            fileManager.write(this.collectionManager.getCollection(), collectionPath);
         } catch (Exception ex) {
             Console.error(ex);
         }

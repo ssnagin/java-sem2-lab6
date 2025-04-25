@@ -50,7 +50,6 @@ public class CommandShow extends UserNetworkCommand {
                 counter++;
             }
 
-            Console.separatePrint(response.getMessage(), "SERVER");
         } catch (IOException | ClassNotFoundException e) {
             Console.error(e.toString());
         }

@@ -13,7 +13,6 @@ public abstract class Core {
     protected ScriptManager scriptManager;
     protected CommandManager commandManager;
 
-
     protected Networking networking;
 
     public Core() {

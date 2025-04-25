@@ -5,6 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
@@ -15,17 +16,10 @@ import com.ssnagin.collectionmanager.scripts.ScriptManager;
  *
  * @author developer
  */
-public class CommandRemoveLower extends ServerCommand {
+public class CommandRemoveLower extends ServerCollectionCommand {
 
-    private CollectionManager collectionManager;
-    private ScriptManager scriptManager;
-
-
-    public CommandRemoveLower(String name, String description, CollectionManager collectionManager, ScriptManager scriptManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
-        this.scriptManager = scriptManager;
+    public CommandRemoveLower(String name, String description, CollectionManager collectionManager) {
+        super(name, description, collectionManager);
     }
 
     @Override

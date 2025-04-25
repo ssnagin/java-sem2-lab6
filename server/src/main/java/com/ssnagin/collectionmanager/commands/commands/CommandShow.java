@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.console.Console;
@@ -14,6 +15,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.networking.serlialization.types.SerializableTreeSet;
 
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -24,14 +26,10 @@ import java.util.stream.Collectors;
  *
  * @author developer
  */
-public class CommandShow extends ServerCommand {
-
-    CollectionManager collectionManager;
+public class CommandShow extends ServerCollectionCommand {
 
     public CommandShow(String name, String description, CollectionManager collectionManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
+        super(name, description, collectionManager);
     }
 
     @Override
@@ -54,26 +52,16 @@ public class CommandShow extends ServerCommand {
         }
 
         NavigableSet<MusicBand> sortedMusicBands = this.collectionManager.getCollection().descendingSet();
-
-
-
+        
         // Limits for the response
         serverResponse.setData(
                 sortedMusicBands.stream().limit(shownElements)
                         .collect(
                                 Collectors.toCollection(
-                                    () -> new TreeSet<>(sortedMusicBands.comparator())
+                                    () -> new SerializableTreeSet<>(sortedMusicBands.comparator())
                                 )
                         )
         );
-
-//        for (MusicBand musicBand : sortedMusicBands) {
-//            if (counter >= shownElements) break;
-//            serverResponse.appendMessage(
-//                    counter + " | ========\n" + musicBand.getDescription()
-//            );
-//            counter += 1;
-//        }
 
         return serverResponse;
     }

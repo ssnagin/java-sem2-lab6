@@ -5,6 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
@@ -12,15 +13,10 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 /**
  * @author developer
  */
-public class CommandGroupCountingByCreationDate extends ServerCommand {
+public class CommandGroupCountingByCreationDate extends ServerCollectionCommand {
 
-    private CollectionManager collectionManager;
-
-    public CommandGroupCountingByCreationDate(String name, String description, CollectionManager
-            collectionManager) {
-        super(name, description);
-
-        this.collectionManager = collectionManager;
+    public CommandGroupCountingByCreationDate(String name, String description, CollectionManager collectionManager) {
+        super(name, description, collectionManager);
     }
 
     @Override
