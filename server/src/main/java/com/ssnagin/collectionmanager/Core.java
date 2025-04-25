@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.core;
+package com.ssnagin.collectionmanager;
 
 
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
@@ -25,11 +25,11 @@ import java.net.SocketException;
 import java.util.TreeSet;
 
 @ToString
-public class ServerCore extends Core {
+public class Core extends AbstractCore {
     @Getter
-    private static ServerCore instance = new ServerCore();
+    private static Core instance = new Core();
 
-    private static final Logger logger = LoggerFactory.getLogger(ServerCore.class);
+    private static final Logger logger = LoggerFactory.getLogger(Core.class);
     protected FileManager fileManager;
 
     private static final String LOGO = "CollectionManager SERVER ver. " + Config.Core.VERSION;
@@ -44,7 +44,7 @@ public class ServerCore extends Core {
     private DatagramSocket datagramSocket;
 
     @SneakyThrows
-    public ServerCore() {
+    public Core() {
         super();
 
         this.fileManager = FileManager.getInstance();

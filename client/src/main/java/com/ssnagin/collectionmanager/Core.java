@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.core;
+package com.ssnagin.collectionmanager;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -26,10 +26,10 @@ import java.net.UnknownHostException;
  * @author developer
  */
 @ToString
-public class ClientCore extends Core {
+public class Core extends AbstractCore {
 
     @Getter
-    private static ClientCore instance = new ClientCore();
+    private static Core instance = new Core();
 
     @Getter
     protected ApplicationStatus applicationStatus;
@@ -42,7 +42,7 @@ public class ClientCore extends Core {
             "                                                                   ▝▀▜▌          \n" +
             "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
-    public ClientCore() {
+    public Core() {
         super();
 
         // Singletone pattern
@@ -119,7 +119,7 @@ public class ClientCore extends Core {
     }
 
     public void printLogo() {
-        Console.print(ClientCore.LOGO);
+        Console.print(Core.LOGO);
     }
 
     protected void runCommand(ParsedString parsedString) {

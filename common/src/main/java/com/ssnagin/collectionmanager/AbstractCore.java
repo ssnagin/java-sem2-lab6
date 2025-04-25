@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.core;
+package com.ssnagin.collectionmanager;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.CommandManager;
@@ -9,7 +9,7 @@ import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
 @ToString
-public abstract class Core {
+public abstract class AbstractCore {
 
     protected CollectionManager collectionManager;
     protected ScriptManager scriptManager;
@@ -17,7 +17,7 @@ public abstract class Core {
 
     protected Networking networking;
 
-    public Core() {
+    public AbstractCore() {
         collectionManager = CollectionManager.getInstance();
         commandManager = CommandManager.getInstance();
         scriptManager = ScriptManager.getInstance();
