@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
@@ -16,8 +17,6 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
  */
 public class CommandRemoveById extends ServerCollectionCommand {
 
-    private CollectionManager collectionManager;
-
     public CommandRemoveById(String name, CollectionManager collectionManager) {
         super(name, collectionManager);
     }
@@ -25,7 +24,19 @@ public class CommandRemoveById extends ServerCollectionCommand {
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
+        ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
 
-        return new ServerResponse();
+        if (!(clientRequest.getData() instanceof Long)) {
+            return serverResponse.corruption("wrong long type format");
+        }
+
+        Long id = (Long) clientRequest.getData();
+
+        if (collectionManager.getElementById(id) == null) {
+            return serverResponse.error("Element with given id does not exist");
+        }
+
+        collectionManager.removeElementById(id);
+        return serverResponse;
     }
 }

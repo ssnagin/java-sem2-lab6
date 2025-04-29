@@ -4,10 +4,10 @@ import com.ssnagin.collectionmanager.collection.CollectionManager;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
+@Getter
 public abstract class ServerCollectionCommand extends ServerCommand {
 
-    @Getter
-    @Setter
     protected CollectionManager collectionManager;
 
     public ServerCollectionCommand(String name, CollectionManager collectionManager) {

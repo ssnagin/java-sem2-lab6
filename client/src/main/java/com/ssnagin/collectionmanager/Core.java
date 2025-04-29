@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
@@ -51,7 +52,7 @@ public class Core extends AbstractCore {
         this.scriptManager = ScriptManager.getInstance();
 
         try {
-            this.networking = new Networking("localhost", 22814);
+            this.networking = new Networking("localhost", Config.Networking.PORT);
         } catch (UnknownHostException | SocketException e) {
             throw new RuntimeException(e);
         }
@@ -123,8 +124,15 @@ public class Core extends AbstractCore {
     }
 
     protected void runCommand(ParsedString parsedString) {
-        UserCommand command = (UserCommand) this.commandManager.get(parsedString.getCommand());
-        this.setApplicationStatus(command.executeCommand(parsedString));
+        Command command = this.commandManager.get(parsedString.getCommand());
+        if (command instanceof UserCommand)
+            this.setApplicationStatus(
+                    ((UserCommand) command).executeCommand(parsedString)
+            );
+        else
+            this.setApplicationStatus(
+                    new CommandDefault("", "").executeCommand(parsedString)
+            );
     }
 
     private void setApplicationStatus(ApplicationStatus applicationStatus) {

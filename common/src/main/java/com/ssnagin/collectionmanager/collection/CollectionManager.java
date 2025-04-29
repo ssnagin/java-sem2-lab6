@@ -64,9 +64,9 @@ public class CollectionManager implements Serializable {
                 .orElse(null);
     }
 
-    public void removeElementById(Long id) {
+    public void removeElementById(Long id) throws NoSuchElementException {
         if (!collection.removeIf(musicBand -> musicBand.getId().equals(id)))
-            throw new NoSuchElementException("No such element with id");
+            throw new NoSuchElementException(String.format("Element with id=%d does not exist", id));
     }
 
     public int getSize() {

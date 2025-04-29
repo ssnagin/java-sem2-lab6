@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public abstract class UserCommand extends Command {
 
-    public String description;
+    protected String description;
 
     public UserCommand(String name, String description) {
 
@@ -25,10 +25,11 @@ public abstract class UserCommand extends Command {
      * @return
      */
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        if (!parsedString.getArguments().isEmpty()) {
+        try {
             if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
-        }
+        } catch (Exception ignored) {}
+
         return ApplicationStatus.RUNNING;
     }
 

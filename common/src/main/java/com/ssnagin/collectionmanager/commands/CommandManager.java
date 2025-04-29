@@ -4,7 +4,6 @@
  */
 package com.ssnagin.collectionmanager.commands;
 
-import com.ssnagin.collectionmanager.commands.commands.CommandDefault;
 import com.ssnagin.collectionmanager.commands.interfaces.Manageable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,7 +41,7 @@ public class CommandManager implements Manageable<Command> {
             return command;
         }
 
-        return new CommandDefault("");
+        return null;
     }
 
     public List<Command> getCommandsList() {

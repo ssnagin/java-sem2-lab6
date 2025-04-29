@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager;
 
 
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
@@ -133,10 +134,15 @@ public class Core extends AbstractCore {
 
         ServerResponse result = new ServerResponse();
 
-        ServerCommand command = (ServerCommand) this.commandManager.get(clientRequest.getParsedString().getCommand());
+        Command command = this.commandManager.get(clientRequest.getParsedString().getCommand());
 
-        if (command.isAccessible())
-            result = command.executeCommand(clientRequest);
+        if (!(command instanceof ServerCommand))
+            return result;
+
+        ServerCommand serverCommand = (ServerCommand) command;
+
+        if (serverCommand.isAccessible())
+            result = serverCommand.executeCommand(clientRequest);
 
         logger.debug(result.toString());
 
@@ -154,7 +160,7 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandAdd("add", collectionManager));
         this.commandManager.register(new CommandShow("show", collectionManager));
         this.commandManager.register(new CommandClear("clear", collectionManager));
-        this.commandManager.register(new CommandUpdate("update", collectionManager, commandManager));
+        this.commandManager.register(new CommandUpdate("update", collectionManager));
         this.commandManager.register(new CommandRemoveById("remove_by_id", collectionManager));
         this.commandManager.register(new CommandAddIfMin("add_if_min", collectionManager));
         // this.commandManager.register(new CommandPrintDescending("print_descending", collectionManager));

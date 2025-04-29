@@ -42,4 +42,18 @@ public class ServerResponse extends TransferData {
     public ServerResponse() {
         this(null, null, null);
     }
+
+    public ServerResponse error(String message) {
+        setResponseStatus(ResponseStatus.ERROR);
+        setMessage(new StringBuilder().append(message));
+
+        return this;
+    }
+
+    public ServerResponse corruption(String message) {
+        setResponseStatus(ResponseStatus.CORRUPTED);
+        setMessage(new StringBuilder().append(message));
+
+        return this;
+    }
 }
