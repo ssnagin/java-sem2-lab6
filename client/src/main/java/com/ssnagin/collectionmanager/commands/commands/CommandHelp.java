@@ -33,18 +33,20 @@ public class CommandHelp extends UserCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        super.executeCommand(parsedString);
+
+        ApplicationStatus applicationStatus = super.executeCommand(parsedString);
+        if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         Console.println(temporaryCreatedHeadMessage);
 
         ArrayList<String> sortedKeys = new ArrayList<String>(this.commandManager.getCommands().keySet());
         Collections.sort(sortedKeys);
 
-        Command selectedCommand;
+        UserCommand selectedCommand;
 
         for (String command : sortedKeys) {
 
-            selectedCommand = this.commandManager.get(command);
+            selectedCommand = (UserCommand) this.commandManager.get(command);
 
             Console.println(selectedCommand.getName() + "   " + selectedCommand.getDescription());
         }

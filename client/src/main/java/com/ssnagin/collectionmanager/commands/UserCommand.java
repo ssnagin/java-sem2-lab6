@@ -3,11 +3,19 @@ package com.ssnagin.collectionmanager.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class UserCommand extends Command {
 
+    public String description;
+
     public UserCommand(String name, String description) {
-        super(name, description);
+
+        super(name);
+        setDescription(description);
     }
 
     /**
@@ -35,5 +43,11 @@ public abstract class UserCommand extends Command {
         Console.log("Usage is still not implemented: " + parsedString.toString());
 
         return ApplicationStatus.RUNNING;
+    }
+
+    public int compareTo(UserCommand otherCommand) {
+        int result = super.compareTo(otherCommand);
+        if (result == 0) result = description.compareTo(otherCommand.getDescription());
+        return result;
     }
 }

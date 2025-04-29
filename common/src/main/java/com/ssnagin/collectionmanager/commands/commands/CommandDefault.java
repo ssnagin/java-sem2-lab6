@@ -17,8 +17,8 @@ public class CommandDefault extends Command {
             + "(or it was given incorecctly)\n\n"
             + "Please, make another try :) or type help to see available commands";
 
-    public CommandDefault(String name, String description) {
-        super(name, description);
+    public CommandDefault(String name) {
+        super(name);
     }
 
 //    @Override

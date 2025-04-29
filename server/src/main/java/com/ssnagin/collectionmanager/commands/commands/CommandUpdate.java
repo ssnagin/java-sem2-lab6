@@ -21,10 +21,9 @@ public class CommandUpdate extends ServerCommand {
     private CommandManager commandManager;
 
     public CommandUpdate(String name,
-                         String description,
                          CollectionManager collectionManager,
                          CommandManager commandManager) {
-        super(name, description);
+        super(name);
 
         this.collectionManager = collectionManager;
         this.commandManager = commandManager;

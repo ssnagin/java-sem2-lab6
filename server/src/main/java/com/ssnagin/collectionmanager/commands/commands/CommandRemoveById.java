@@ -18,12 +18,14 @@ public class CommandRemoveById extends ServerCollectionCommand {
 
     private CollectionManager collectionManager;
 
-    public CommandRemoveById(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandRemoveById(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
+
+
         return new ServerResponse();
     }
 }

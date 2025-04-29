@@ -1,7 +1,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -20,6 +20,9 @@ public class CommandCountByNumberOfParticipants extends UserNetworkCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
+
+        ApplicationStatus applicationStatus = super.executeCommand(parsedString);
+        if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         Long numberOfParticipants;
 

@@ -15,8 +15,8 @@ public abstract class ServerCommand extends Command {
     @Setter
     protected boolean isAccessible = true;
 
-    public ServerCommand(String name, String description) {
-        super(name, description);
+    public ServerCommand(String name) {
+        super(name);
     }
 
     public abstract ServerResponse executeCommand(ClientRequest clientRequest);

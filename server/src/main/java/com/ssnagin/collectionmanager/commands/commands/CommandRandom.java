@@ -21,8 +21,8 @@ public class CommandRandom extends ServerCollectionCommand {
 
     private static final int MAX_RANDOM_AMOUNT = 50;
 
-    public CommandRandom(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandRandom(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

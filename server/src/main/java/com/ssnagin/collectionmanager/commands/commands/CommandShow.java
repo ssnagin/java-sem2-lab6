@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
  */
 public class CommandShow extends ServerCollectionCommand {
 
-    public CommandShow(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandShow(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

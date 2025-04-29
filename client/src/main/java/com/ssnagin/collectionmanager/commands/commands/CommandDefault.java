@@ -26,7 +26,9 @@ public class CommandDefault extends UserCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        super.executeCommand(parsedString);
+
+        ApplicationStatus applicationStatus = super.executeCommand(parsedString);
+        if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         Console.println(temporaryCreatedHeadMessage);
         return ApplicationStatus.RUNNING;

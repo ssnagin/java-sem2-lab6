@@ -42,7 +42,7 @@ public class CommandManager implements Manageable<Command> {
             return command;
         }
 
-        return new CommandDefault("", "");
+        return new CommandDefault("");
     }
 
     public List<Command> getCommandsList() {

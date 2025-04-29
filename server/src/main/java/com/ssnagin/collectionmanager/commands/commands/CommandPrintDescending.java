@@ -18,8 +18,8 @@ public class CommandPrintDescending extends ServerCollectionCommand {
 
     private CollectionManager collectionManager;
 
-    public CommandPrintDescending(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandPrintDescending(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

@@ -20,27 +20,17 @@ public abstract class Command implements Comparable<Command> {
     @Getter
     @Setter
     private String name;
-    @Getter
-    @Setter
-    private String description;
 
     /**
      * Parent constructor of a command
      *
      * @param name
-     * @param description
      */
-    public Command(String name, String description) {
+    public Command(String name) {
         this.setName(name);
-        this.setDescription(description);
     }
 
     public int compareTo(Command otherCommand) {
-
-        int result = this.getName().compareTo(otherCommand.getName());
-
-        if (result == 0) this.getDescription().compareTo(otherCommand.getDescription());
-
-        return result;
+        return this.getName().compareTo(otherCommand.getName());
     }
 }
