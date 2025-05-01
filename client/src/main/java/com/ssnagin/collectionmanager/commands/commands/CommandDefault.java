@@ -16,7 +16,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
  */
 public class CommandDefault extends UserCommand {
 
-    private String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
+    private final String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
             + "(or it was given incorecctly)\n\n"
             + "Please, make another try :) or type help to see available commands";
 

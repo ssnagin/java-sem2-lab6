@@ -146,9 +146,12 @@ public class Core extends AbstractCore {
 
         logger.debug(result.toString());
 
-        if (commandSaveCounter > MAX_COMMAND_SAVE_INTERVAL) commandSaveCounter = 0;
-        if (command instanceof ServerCollectionCommand && commandSaveCounter >= MAX_COMMAND_SAVE_INTERVAL) {
+        if (commandSaveCounter > MAX_COMMAND_SAVE_INTERVAL) {
             saveCollection();
+            commandSaveCounter = 0;
+        }
+        if (command instanceof ServerCollectionCommand) {
+
             commandSaveCounter += 1;
         }
 

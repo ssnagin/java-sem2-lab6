@@ -38,11 +38,6 @@ public class Networking {
         setConnectionTimeout(connectionTimeout);
     }
 
-    public Networking(InetAddress address, int port, int connectionTimeout) throws SocketException {
-
-
-    }
-
     public void setInetAddress(String address) throws UnknownHostException {
         setInetAddress(InetAddress.getByName(address));
     }

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-@ToString
+@ToString(callSuper = true)
 @Getter
 @Setter
 public class ClientRequest extends TransferData {
