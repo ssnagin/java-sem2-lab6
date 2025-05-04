@@ -32,47 +32,19 @@ public class CommandCountByNumberOfParticipants extends UserNetworkCommand {
                     parsedString.getArguments().get(0)
             );
 
-            ServerResponse serverResponse = this.networking.sendClientRequest(
-                    new ClientRequest(
-                            parsedString,
-                            numberOfParticipants
-                    )
+            this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, numberOfParticipants), response -> {
+                        Console.separatePrint(response.getMessage(), "SERVER");
+                    }
             );
-
-            Console.separatePrint(serverResponse.getMessage(), "SERVER");
 
         } catch (NumberFormatException ex) {
             Console.log("Неверный формат числа");
             return ApplicationStatus.RUNNING;
-        } catch (IndexOutOfBoundsException | NoSuchElementException | IOException | ClassNotFoundException ex) {
+        } catch (IndexOutOfBoundsException | NoSuchElementException | IOException ex) {
             return this.showUsage(parsedString);
         }
-
-
 
         return ApplicationStatus.RUNNING;
-
-        /*long counter = 0;
-        long numberOfParticipants;
-
-        try {
-            numberOfParticipants = (Long) Reflections.parsePrimitiveInput(
-                    Long.class,
-                    parsedString.getArguments().get(0)
-            );
-        } catch (NumberFormatException ex) {
-            Console.log("Неверный формат числа");
-            return ApplicationStatus.RUNNING;
-        } catch (IndexOutOfBoundsException | NoSuchElementException ex) {
-            return this.showUsage(parsedString);
-        }
-
-        for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            if (numberOfParticipants == musicBand.getNumberOfParticipants()) counter += 1;
-        }
-
-        Console.separatePrint(counter, "AMOUNT");
-
- */       //return ApplicationStatus.RUNNING;
     }
 }

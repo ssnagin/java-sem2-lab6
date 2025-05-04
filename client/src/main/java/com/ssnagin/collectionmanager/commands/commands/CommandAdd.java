@@ -43,10 +43,12 @@ public class CommandAdd extends UserNetworkCommand {
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
             var result = new LocalDateWrapper(musicBand);
 
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
-            Console.separatePrint(response.toString(), "SERVER");
+            this.networking.sendClientRequest(new ClientRequest(parsedString, result), response -> {
+                Console.separatePrint(response.toString(), "SERVER");
+            });
 
-        } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
+
+        } catch (IOException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
             Console.error(ex.toString());

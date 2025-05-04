@@ -5,7 +5,6 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
@@ -26,13 +25,12 @@ import java.io.IOException;
 public class CommandExecuteScript extends UserCommand {
 
     private final CommandManager commandManager;
-    private final CollectionManager collectionManager;
     private ScriptManager scriptManager;
 
-    public CommandExecuteScript(String name, String description, CommandManager commandManager, CollectionManager collectionManager, ScriptManager scriptManager) {
+    public CommandExecuteScript(String name, String description, CommandManager commandManager, ScriptManager scriptManager) {
         super(name, description);
         this.commandManager = commandManager;
-        this.collectionManager = collectionManager;
+
         this.scriptManager = scriptManager;
     }
 
@@ -74,13 +72,12 @@ public class CommandExecuteScript extends UserCommand {
         } catch (Exception e) {
             Console.error("Un");
         }
-        //finally {
+
         try {
             this.scriptManager.popScanner(file);
         } catch (IOException e) {
             Console.error("Error while accessing to File, stop all executables...");
         }
-        //}
 
         return ApplicationStatus.RUNNING;
     }

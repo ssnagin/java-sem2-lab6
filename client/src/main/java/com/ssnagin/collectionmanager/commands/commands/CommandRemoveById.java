@@ -38,11 +38,14 @@ public class CommandRemoveById extends UserNetworkCommand {
         }
 
         try {
-            ServerResponse response = this.networking.sendClientRequest(
-                    new ClientRequest(parsedString, id)
+            this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, id),
+                    response -> {
+                        Console.separatePrint(response.getMessage(), "SERVER");
+                    }
             );
-            Console.separatePrint(response.getMessage(), "SERVER");
-        } catch (IndexOutOfBoundsException | IOException | ClassNotFoundException e) {
+
+        } catch (IndexOutOfBoundsException | IOException e) {
             Console.error(e.toString());
         }
 

@@ -53,13 +53,12 @@ public class CommandAddIfMin extends UserNetworkCommand {
             var result = new LocalDateWrapper(musicBand);
 
 
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
+            this.networking.sendClientRequest(new ClientRequest(parsedString, result), response -> {
+                Console.separatePrint(response.getResponseStatus(), "SERVER");
+                Console.separatePrint(response.getMessage(), "SERVER");
+            });
 
-            Console.separatePrint(response.getResponseStatus(), "SERVER");
-            Console.separatePrint(response.getMessage(), "SERVER");
-
-
-        } catch (ClassNotFoundException | IOException | NoSuchMethodException | InstantiationException |
+        } catch (IOException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
             Console.error(ex.toString());

@@ -32,10 +32,10 @@ public class CommandClear extends UserNetworkCommand {
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         try {
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString));
-
-            Console.separatePrint(response.getMessage(), "SERVER");
-        } catch (IOException | ClassNotFoundException e) {
+            this.networking.sendClientRequest(new ClientRequest(parsedString), response -> {
+                Console.separatePrint(response.getMessage(), "SERVER");
+            });
+        } catch (IOException e) {
             Console.error(e.toString());
         }
 

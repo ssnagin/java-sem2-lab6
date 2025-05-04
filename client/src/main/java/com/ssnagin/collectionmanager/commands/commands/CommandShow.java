@@ -31,23 +31,16 @@ public class CommandShow extends UserNetworkCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-
         ApplicationStatus applicationStatus = super.executeCommand(parsedString);
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
-        ServerResponse response;
-
-        // Trying to parse positive int value:
         Long page;
-
         try {
             page = (Long) Reflections.parsePrimitiveInput(
                     Long.class,
                     parsedString.getArguments().get(0)
             );
-
             if (page <= 0) throw new NumberFormatException();
-
         } catch (NumberFormatException ex) {
             Console.error("Неверный формат числа");
             return ApplicationStatus.RUNNING;
@@ -56,15 +49,16 @@ public class CommandShow extends UserNetworkCommand {
         }
 
         try {
-
             ClientRequest clientRequest = new ClientRequest(parsedString, page, 1);
 
-            response = this.networking.sendClientRequest(clientRequest);
+            // Создаём синхронную обёртку
+            ServerResponse response = sendRequestSync(clientRequest);
+
             Console.separatePrint(response.getMessage(), "SERVER");
 
             clientRequest.setStage(100);
             do {
-                response = this.networking.sendClientRequest(clientRequest);
+                response = sendRequestSync(clientRequest);
                 clientRequest.setStage(response.getStage());
 
                 if (response.getResponseStatus() != ResponseStatus.OK) {
@@ -76,14 +70,11 @@ public class CommandShow extends UserNetworkCommand {
                 if (!(response.getData() instanceof MusicBand)) break;
 
                 var data = (MusicBand) response.getData();
-
-                Console.println(
-                        data.getDescription()
-                );
+                Console.println(data.getDescription());
 
             } while (response.getStage() != 99 || response.getResponseStatus() == ResponseStatus.OK);
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
             Console.error(e.toString());
         }
 

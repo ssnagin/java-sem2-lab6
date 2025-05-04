@@ -20,4 +20,5 @@ public abstract class ServerCommand extends Command {
     }
 
     public abstract ServerResponse executeCommand(ClientRequest clientRequest);
+
 }

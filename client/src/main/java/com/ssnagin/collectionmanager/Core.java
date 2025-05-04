@@ -20,6 +20,7 @@ import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
@@ -53,7 +54,7 @@ public class Core extends AbstractCore {
 
         try {
             this.networking = new Networking("localhost", Config.Networking.PORT);
-        } catch (UnknownHostException | SocketException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -65,7 +66,7 @@ public class Core extends AbstractCore {
     private void registerCommands() {
         this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
         this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
-        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, collectionManager, scriptManager));
+        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, scriptManager));
         this.commandManager.register(new CommandAdd("add", "add an object to collection", networking, scriptManager));
         this.commandManager.register(new CommandShow("show", "show collection's elements", networking));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", networking));

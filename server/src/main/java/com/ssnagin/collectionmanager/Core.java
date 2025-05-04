@@ -20,9 +20,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+import java.net.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.DatagramChannel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.TreeSet;
 
 @ToString
@@ -78,54 +82,58 @@ public class Core extends AbstractCore {
     }
 
     public void listening() {
-
         logger.debug(this.collectionManager.getCollection().toString());
 
         try {
-            datagramSocket = new DatagramSocket(Config.Networking.PORT);
-        } catch (SocketException e) {
-            logger.error("could not start the server on port {}", Config.Networking.PORT);
-            return;
+            DatagramChannel channel = DatagramChannel.open();
+            channel.configureBlocking(false);
+            channel.bind(new InetSocketAddress(Config.Networking.PORT));
+
+            Selector selector = Selector.open();
+            channel.register(selector, SelectionKey.OP_READ);
+
+            logger.info("Started listening on port {}", Config.Networking.PORT);
+
+            while (true) {
+                if (selector.select() > 0) {
+                    Set<SelectionKey> keys = selector.selectedKeys();
+                    Iterator<SelectionKey> iter = keys.iterator();
+
+                    while (iter.hasNext()) {
+                        SelectionKey key = iter.next();
+                        iter.remove();
+
+                        if (key.isReadable()) {
+                            handleIncomingPacket(channel);
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            logger.error("Error setting up server", e);
         }
+    }
 
-        logger.info("Started listening on port {}", Config.Networking.PORT);
+    private void handleIncomingPacket(DatagramChannel channel) {
+        ByteBuffer buffer = ByteBuffer.allocate(Config.Networking.BUFFER_SIZE);
+        SocketAddress clientAddress;
 
-        while (true) {
+        try {
+            clientAddress = channel.receive(buffer);
+            if (clientAddress != null) {
+                buffer.flip();
+                byte[] data = new byte[buffer.remaining()];
+                buffer.get(data);
 
-            try {
-                byte[] receiveBuffer = new byte[Config.Networking.BUFFER_SIZE];
-
-                DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
-
-                datagramSocket.receive(receivePacket);
-
-                ClientRequest request = DataStream.deserialize(receivePacket.getData());
-
-                logger.debug(
-                        "{}:{} sent a package ({})",
-                        receivePacket.getAddress(),
-                        receivePacket.getPort(),
-                        request.getId()
-                );
-
+                ClientRequest request = DataStream.deserialize(data);
                 ServerResponse response = runCommand(request);
 
-                logger.info(
-                        response.getResponseStatus() + " {} {}",
-                        response.getId(),
-                        response.getMessage().substring(0, Math.min(response.getMessage().length(), 100))
-                );
-
-                // Change this code in the future
-                networking.setInetAddress(receivePacket.getAddress());
-                this.networking.setPort(receivePacket.getPort());
-                this.networking.sendServerResponse(response);
-
-            } catch (IOException e) {
-                logger.error("Error processing UDP packet", e);
-            } catch (ClassNotFoundException e) {
-                logger.error("Error ClassNotFoundException");
+                byte[] responseData = DataStream.serialize(response);
+                ByteBuffer responseBuffer = ByteBuffer.wrap(responseData);
+                channel.send(responseBuffer, clientAddress);
             }
+        } catch (IOException | ClassNotFoundException e) {
+            logger.error("Error processing packet", e);
         }
     }
 

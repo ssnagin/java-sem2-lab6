@@ -39,15 +39,12 @@ public class CommandUpdate extends UserNetworkCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-
         ApplicationStatus applicationStatus = super.executeCommand(parsedString);
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
         Long id;
-        Integer stage;
-
         try {
             id = (Long) Reflections.parsePrimitiveInput(
                     Long.class,
@@ -60,49 +57,37 @@ public class CommandUpdate extends UserNetworkCommand {
             return showUsage(parsedString);
         }
 
-
         try {
-            ServerResponse serverResponse = this.networking.sendClientRequest(
-                    new ClientRequest(
-                            parsedString,
-                            id,
-                            1
-                    )
+
+            ServerResponse serverResponse = sendRequestSync(
+                    new ClientRequest(parsedString, id, 1)
             );
 
             if (serverResponse.getResponseStatus() != ResponseStatus.OK) {
                 Console.separatePrint(
                         serverResponse.getMessage(),
-                        String.valueOf(serverResponse.getResponseStatus()
-                        )
+                        String.valueOf(serverResponse.getResponseStatus())
                 );
                 return ApplicationStatus.RUNNING;
             }
 
-            stage = serverResponse.getStage();
+            int stage = serverResponse.getStage();
             Console.separatePrint("Please, fill in the form with your values:", "SERVER");
 
             LocalDateWrapper result = new LocalDateWrapper(
                     Reflections.parseModel(MusicBand.class, scanner)
             );
-
             result.setId(id);
 
-            serverResponse = this.networking.sendClientRequest(
-                new ClientRequest(
-                        parsedString,
-                        result,
-                        stage
-                )
+            serverResponse = sendRequestSync(
+                    new ClientRequest(parsedString, result, stage)
             );
 
-            Console.separatePrint(serverResponse.getMessage(), serverResponse.getResponseStatus().toString());
+            Console.separatePrint(serverResponse.getMessage(),
+                    serverResponse.getResponseStatus().toString());
 
-
-        } catch (IndexOutOfBoundsException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
-                 InvocationTargetException | IOException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Console.error(ex.toString());
-            return ApplicationStatus.RUNNING;
         }
 
         return ApplicationStatus.RUNNING;

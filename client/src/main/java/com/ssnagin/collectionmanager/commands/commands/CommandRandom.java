@@ -28,17 +28,20 @@ public class CommandRandom extends UserNetworkCommand {
             // Try to parse Integer
             id = Long.parseLong(parsedString.getArguments().get(0));
 
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, id));
-
-            Console.separatePrint(response.getResponseStatus(), "SERVER");
-            Console.separatePrint(response.getMessage(), "SERVER");
+            this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, id),
+                    response -> {
+                        Console.separatePrint(response.getResponseStatus(), "SERVER");
+                        Console.separatePrint(response.getMessage(), "SERVER");
+                    }
+            );
 
         } catch (NumberFormatException ex) {
             Console.log("Wrong number format");
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException ex) {
             return this.showUsage(parsedString);
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             Console.error(e.toString());
         }
 
