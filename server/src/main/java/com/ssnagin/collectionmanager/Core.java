@@ -49,7 +49,6 @@ public class Core extends AbstractCore {
         super();
 
         this.fileManager = FileManager.getInstance();
-//        this.networking = new Networking(receivePacket.getAddress(), receivePacket.getPort(), 3000);
         this.networking = new Networking();
         this.networking.setConnectionTimeout(3000);
 
