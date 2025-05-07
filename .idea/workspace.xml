@@ -7,18 +7,8 @@
     <list default="true" id="96db00c2-d90e-438d-8102-f018acd78f7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/UserCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/UserCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveById.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/collection/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandDefault.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/config/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager/networking/data/ServerResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/collection.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/ServerCollectionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/ServerCollectionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandDefault.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveById.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandRemoveById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/ssnagin/collectionmanager/commands/commands/CommandUpdate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +108,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "to__merge",
+    "git-widget-placeholder": "to__merge__dev",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab6/server/src/main/java/com/ssnagin/collectionmanager/commands",
     "last_opened_file_path": "P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab6",
@@ -156,7 +146,7 @@
       <recent name="com.ssnagin.collectionmanager.commands.commands" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.java-sem2-lab6 [shadowJar]">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
       <module name="collectionManager.client.main" />
@@ -276,6 +266,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.App" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Gradle.Tests in 'collectionManager.server.test'" />
       <item itemvalue="Gradle.CommandAddTest" />

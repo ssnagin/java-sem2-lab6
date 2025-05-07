@@ -41,7 +41,7 @@ public class Core extends AbstractCore {
             "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
             "                          ▐▌                                      ▐▌ ▐▌          \n" +
             "                                                                   ▝▀▜▌          \n" +
-            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
+            "  ver. %s | github.com/ssnagin/java-sem2-lab6.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
     public Core() {
         super();
