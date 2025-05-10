@@ -20,12 +20,10 @@ public class CommandCountByNumberOfParticipants extends ServerCommand {
 
     private CollectionManager collectionManager;
 
-    public CommandCountByNumberOfParticipants(String name, String description, CollectionManager collectionManager) {
-        super(name, description);
+    public CommandCountByNumberOfParticipants(String name, CollectionManager collectionManager) {
+        super(name);
 
         this.collectionManager = collectionManager;
-
-
     }
 
     @Override

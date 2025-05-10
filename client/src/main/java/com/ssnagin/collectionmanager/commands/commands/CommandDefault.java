@@ -16,7 +16,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
  */
 public class CommandDefault extends UserCommand {
 
-    private String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
+    private final String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
             + "(or it was given incorecctly)\n\n"
             + "Please, make another try :) or type help to see available commands";
 
@@ -26,7 +26,9 @@ public class CommandDefault extends UserCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        super.executeCommand(parsedString);
+
+        ApplicationStatus applicationStatus = super.executeCommand(parsedString);
+        if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         Console.println(temporaryCreatedHeadMessage);
         return ApplicationStatus.RUNNING;

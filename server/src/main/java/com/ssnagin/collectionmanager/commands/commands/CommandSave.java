@@ -28,8 +28,8 @@ public class CommandSave extends ServerCollectionCommand {
     @Setter
     private String collectionPath;
 
-    public CommandSave(String name, String description, CollectionManager collectionManager, FileManager fileManager, String collectionPath) {
-        super(name, description, collectionManager);
+    public CommandSave(String name, CollectionManager collectionManager, FileManager fileManager, String collectionPath) {
+        super(name, collectionManager);
 
         setAccessible(false);
 

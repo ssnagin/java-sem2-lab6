@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
@@ -11,17 +7,13 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.reflection.Reflections;
 
 import java.io.IOException;
 
-/**
- * Throws when other commands does not exist. The only one unregistered command!
- *
- * @author developer
- */
-public class CommandClear extends UserNetworkCommand {
+public class CommandRemoveById extends UserNetworkCommand {
 
-    public CommandClear(String name, String description, Networking networking) {
+    public CommandRemoveById(String name, String description, Networking networking) {
         super(name, description, networking);
     }
 
@@ -31,11 +23,26 @@ public class CommandClear extends UserNetworkCommand {
         ApplicationStatus applicationStatus = super.executeCommand(parsedString);
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
-        try {
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString));
+        Long id;
 
+        try {
+            id = (Long) Reflections.parsePrimitiveInput(
+                    Long.class,
+                    parsedString.getArguments().get(0)
+            );
+        } catch (NumberFormatException ex) {
+            Console.log("Неверный формат числа");
+            return ApplicationStatus.RUNNING;
+        } catch (IndexOutOfBoundsException e) {
+            return showUsage(parsedString);
+        }
+
+        try {
+            ServerResponse response = this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, id)
+            );
             Console.separatePrint(response.getMessage(), "SERVER");
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IndexOutOfBoundsException | IOException | ClassNotFoundException e) {
             Console.error(e.toString());
         }
 

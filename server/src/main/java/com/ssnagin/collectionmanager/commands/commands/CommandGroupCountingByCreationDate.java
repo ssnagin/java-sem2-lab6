@@ -15,7 +15,7 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 public class CommandGroupCountingByCreationDate extends ServerCollectionCommand {
 
     public CommandGroupCountingByCreationDate(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+        super(name, collectionManager);
     }
 
     @Override

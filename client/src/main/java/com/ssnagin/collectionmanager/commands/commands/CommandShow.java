@@ -6,11 +6,14 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.reflection.Reflections;
 
 import java.io.IOException;
 import java.util.TreeSet;
@@ -28,24 +31,57 @@ public class CommandShow extends UserNetworkCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        super.executeCommand(parsedString);
+
+        ApplicationStatus applicationStatus = super.executeCommand(parsedString);
+        if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         ServerResponse response;
-        Long counter = 1L;
+
+        // Trying to parse positive int value:
+        Long page;
 
         try {
-            response = this.networking.sendClientRequest(
-                    new ClientRequest(parsedString, null)
+            page = (Long) Reflections.parsePrimitiveInput(
+                    Long.class,
+                    parsedString.getArguments().get(0)
             );
 
+            if (page <= 0) throw new NumberFormatException();
+
+        } catch (NumberFormatException ex) {
+            Console.error("Неверный формат числа");
+            return ApplicationStatus.RUNNING;
+        } catch (IndexOutOfBoundsException e) {
+            page = 1L;
+        }
+
+        try {
+
+            ClientRequest clientRequest = new ClientRequest(parsedString, page, 1);
+
+            response = this.networking.sendClientRequest(clientRequest);
             Console.separatePrint(response.getMessage(), "SERVER");
 
-            if (response.getData() == null) return ApplicationStatus.RUNNING;
+            clientRequest.setStage(100);
+            do {
+                response = this.networking.sendClientRequest(clientRequest);
+                clientRequest.setStage(response.getStage());
 
-            for (MusicBand musicBand : (TreeSet<MusicBand>) response.getData()) {
-                Console.separatePrint(musicBand.getDescription(), Long.toString(counter));
-                counter++;
-            }
+                if (response.getResponseStatus() != ResponseStatus.OK) {
+                    Console.separatePrint(response.getMessage(), "SERVER");
+                    break;
+                }
+
+                if (response.getData() == null) break;
+                if (!(response.getData() instanceof MusicBand)) break;
+
+                var data = (MusicBand) response.getData();
+
+                Console.println(
+                        data.getDescription()
+                );
+
+            } while (response.getStage() != 99 || response.getResponseStatus() == ResponseStatus.OK);
 
         } catch (IOException | ClassNotFoundException e) {
             Console.error(e.toString());

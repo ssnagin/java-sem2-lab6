@@ -1,11 +1,10 @@
-package com.ssnagin.collectionmanager.commands.commands;
+package com.ssnagin.collectionmanager.commands;
 
-import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.networking.Networking;
 
 public class UserNetworkCommand extends UserCommand {
 
-    Networking networking;
+    protected Networking networking;
 
     public UserNetworkCommand(String name, String description, Networking networking) {
         super(name, description);

@@ -18,16 +18,12 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 public class CommandUpdate extends ServerCommand {
 
     private CollectionManager collectionManager;
-    private CommandManager commandManager;
 
     public CommandUpdate(String name,
-                         String description,
-                         CollectionManager collectionManager,
-                         CommandManager commandManager) {
-        super(name, description);
+                         CollectionManager collectionManager) {
+        super(name);
 
         this.collectionManager = collectionManager;
-        this.commandManager = commandManager;
     }
 
     @Override

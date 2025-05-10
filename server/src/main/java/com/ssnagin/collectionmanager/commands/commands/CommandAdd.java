@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class CommandAdd extends ServerCollectionCommand {
 
-    public CommandAdd(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandAdd(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

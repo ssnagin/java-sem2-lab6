@@ -16,8 +16,8 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
  */
 public class CommandRemoveLower extends ServerCollectionCommand {
 
-    public CommandRemoveLower(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandRemoveLower(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

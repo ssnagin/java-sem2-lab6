@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
@@ -40,7 +41,7 @@ public class Core extends AbstractCore {
             "▝▚▄▄▖      █ █            ▐▌  █             ▐▌  ▐▌                 ▗▄▖           \n" +
             "                          ▐▌                                      ▐▌ ▐▌          \n" +
             "                                                                   ▝▀▜▌          \n" +
-            "  ver. %s | github.com/ssnagin/java-sem2-lab5.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
+            "  ver. %s | github.com/ssnagin/java-sem2-lab6.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
     public Core() {
         super();
@@ -51,7 +52,7 @@ public class Core extends AbstractCore {
         this.scriptManager = ScriptManager.getInstance();
 
         try {
-            this.networking = new Networking("localhost", 22814);
+            this.networking = new Networking("localhost", Config.Networking.PORT);
         } catch (UnknownHostException | SocketException e) {
             throw new RuntimeException(e);
         }
@@ -69,7 +70,7 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandShow("show", "show collection's elements", networking));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", networking));
         this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", networking, scriptManager));
-        // this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
+        this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", networking));
         this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", scriptManager, networking));
         this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
         // this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
@@ -123,8 +124,15 @@ public class Core extends AbstractCore {
     }
 
     protected void runCommand(ParsedString parsedString) {
-        UserCommand command = (UserCommand) this.commandManager.get(parsedString.getCommand());
-        this.setApplicationStatus(command.executeCommand(parsedString));
+        Command command = this.commandManager.get(parsedString.getCommand());
+        if (command instanceof UserCommand)
+            this.setApplicationStatus(
+                    ((UserCommand) command).executeCommand(parsedString)
+            );
+        else
+            this.setApplicationStatus(
+                    new CommandDefault("", "").executeCommand(parsedString)
+            );
     }
 
     private void setApplicationStatus(ApplicationStatus applicationStatus) {

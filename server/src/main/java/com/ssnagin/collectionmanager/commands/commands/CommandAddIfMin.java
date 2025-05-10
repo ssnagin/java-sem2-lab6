@@ -18,8 +18,8 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
  */
 public class CommandAddIfMin extends ServerCollectionCommand {
 
-    public CommandAddIfMin(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandAddIfMin(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

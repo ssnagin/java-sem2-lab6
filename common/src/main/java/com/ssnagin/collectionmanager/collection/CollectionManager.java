@@ -10,10 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author developer
@@ -64,13 +61,24 @@ public class CollectionManager implements Serializable {
                 .orElse(null);
     }
 
-    public void removeElementById(Long id) {
+    public void removeElementById(Long id) throws NoSuchElementException {
         if (!collection.removeIf(musicBand -> musicBand.getId().equals(id)))
-            throw new NoSuchElementException("No such element with id");
+            throw new NoSuchElementException(String.format("Element with id=%d does not exist", id));
     }
 
     public int getSize() {
         return this.collection.size();
+    }
+
+    public MusicBand getNthLowest(Long n) {
+        if (n < 0 || n >= collection.size()) {
+            throw new IndexOutOfBoundsException("Invalid index: " + n);
+        }
+        Iterator<MusicBand> iterator = collection.iterator();
+        for (int i = 0; i < n; i++) {
+            iterator.next();
+        }
+        return iterator.next();
     }
 
     public boolean isEmpty() {

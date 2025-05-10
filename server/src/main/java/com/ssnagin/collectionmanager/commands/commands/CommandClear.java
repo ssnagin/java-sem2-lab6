@@ -17,8 +17,8 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
  */
 public class CommandClear extends ServerCollectionCommand {
 
-    public CommandClear(String name, String description, CollectionManager collectionManager) {
-        super(name, description, collectionManager);
+    public CommandClear(String name, CollectionManager collectionManager) {
+        super(name, collectionManager);
     }
 
     @Override

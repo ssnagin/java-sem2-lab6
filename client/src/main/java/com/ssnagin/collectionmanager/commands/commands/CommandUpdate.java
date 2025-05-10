@@ -5,10 +5,9 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
-import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -20,7 +19,6 @@ import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -41,7 +39,10 @@ public class CommandUpdate extends UserNetworkCommand {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        super.executeCommand(parsedString);
+
+        ApplicationStatus applicationStatus = super.executeCommand(parsedString);
+        if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
+
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
         Long id;

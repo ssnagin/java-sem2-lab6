@@ -81,46 +81,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.CollectionManagerTest.executor": "Run",
-    "Gradle.CommandAddTest.executor": "Run",
-    "Gradle.Tests in 'collectionManager.common.test'.executor": "Run",
-    "Gradle.Tests in 'collectionManager.server.test'.executor": "Run",
-    "Gradle.java-sem2-lab6 [:com.ssnagin.collectionmanager.App.main()].executor": "Run",
-    "Gradle.java-sem2-lab6 [:com.ssnagin.lab5java.sem2.lab5.App.main()].executor": "Run",
-    "Gradle.java-sem2-lab6 [build].executor": "Run",
-    "Gradle.java-sem2-lab6 [run].executor": "Run",
-    "Gradle.java-sem2-lab6 [shadowJar].executor": "Run",
-    "Gradle.java-sem2-lab6:client [:client:com.ssnagin.collectionmanager.App.main()].executor": "Run",
-    "Gradle.java-sem2-lab6:client [:client:com.ssnagin.collectionmanager.client.App.main()].executor": "Run",
-    "Gradle.java-sem2-lab6:client [shadowJar].executor": "Run",
-    "Gradle.java-sem2-lab6:common [shadowJar].executor": "Run",
-    "Gradle.java-sem2-lab6:server [:server:com.ssnagin.collectionmanager.App.main()].executor": "Debug",
-    "Gradle.java-sem2-lab6:server [shadowJar].executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab6/server/src/main/java/com/ssnagin/collectionmanager/commands",
-    "last_opened_file_path": "P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab6",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "consents",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent"></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/common/src/main/java/com/ssnagin/collectionmanager" />
@@ -143,21 +104,10 @@
       <recent name="com.ssnagin.collectionmanager.commands.commands" />
     </key>
   </component>
+  <component name="RunManager" selected="Application.Server">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
   <component name="RunManager" selected="Gradle.Tests in 'collectionManager.common.test'">
     <configuration name="App (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
-      <module name="collectionManager.server.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ssnagin.collectionmanager.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
       <module name="collectionManager.client.main" />
       <extension name="coverage">
@@ -173,6 +123,20 @@
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
       <module name="collectionManager.server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ssnagin.collectionmanager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.ssnagin.collectionmanager.App" />
+      <module name="collectionManager.server.main" />
+      <option name="PROGRAM_PARAMETERS" value="collection.json" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ssnagin.collectionmanager.*" />
@@ -262,6 +226,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.App" />
+      <item itemvalue="Application.Server" />
       <item itemvalue="Application.App (1)" />
       <item itemvalue="Gradle.Tests in 'collectionManager.common.test'" />
       <item itemvalue="Gradle.Tests in 'collectionManager.server.test'" />
@@ -271,8 +236,8 @@
       <list>
         <item itemvalue="Gradle.Tests in 'collectionManager.common.test'" />
         <item itemvalue="Gradle.java-sem2-lab6 [shadowJar]" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="Gradle.Tests in 'collectionManager.server.test'" />
-        <item itemvalue="Application.App (1)" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -325,5 +290,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/collectionManager$App__1_.ic" NAME="App (1) Coverage Results" MODIFIED="1745969078887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.ssnagin.collectionmanager.*</FILTER>
+    </SUITE>
   </component>
 </project>
