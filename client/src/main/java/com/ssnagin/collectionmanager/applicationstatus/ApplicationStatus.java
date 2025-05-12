@@ -9,7 +9,9 @@ package com.ssnagin.collectionmanager.applicationstatus;/*
 public enum ApplicationStatus {
     RUNNING(-1),
     EXIT(0),
-    ERROR(1);
+    EXIT_FROM_COMMAND(1),
+    ERROR(100);
+
 
     private final int code;
 

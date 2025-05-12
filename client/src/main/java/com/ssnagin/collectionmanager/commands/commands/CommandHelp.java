@@ -5,7 +5,6 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;

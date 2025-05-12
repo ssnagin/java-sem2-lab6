@@ -1,12 +1,14 @@
 package com.ssnagin.collectionmanager;
 
 
+import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
@@ -31,24 +33,22 @@ public class Core extends AbstractCore {
     private static Core instance = new Core();
 
     private static final Logger logger = LoggerFactory.getLogger(Core.class);
-    protected FileManager fileManager;
 
     private static final String LOGO = "CollectionManager SERVER ver. " + Config.Core.VERSION;
 
-    private int commandSaveCounter = 0;
-    private static final int MAX_COMMAND_SAVE_INTERVAL = 10;
-
-    @Getter
-    @Setter
-    protected String collectionPath = "collection.json";
+    private DatabaseManager databaseManager;
 
     private DatagramSocket datagramSocket;
+
+    private CollectionManager collectionManager;
 
     @SneakyThrows
     public Core() {
         super();
 
-        this.fileManager = FileManager.getInstance();
+        this.databaseManager = DatabaseManager.getInstance();
+        this.collectionManager = CollectionManager.getInstance();
+
         this.networking = new Networking();
         this.networking.setConnectionTimeout(3000);
 
@@ -63,22 +63,20 @@ public class Core extends AbstractCore {
 
         // 1. Load file if given here:
 
-        if (args.length > 0) {
-            String path = String.join("", args);
-            try {
-                TreeSet<MusicBand> elements = fileManager.readCollection(path);
-                this.collectionManager.setCollection(elements);
-            } catch (Exception e) {
-                logger.warn("Error while reading file, skip adding into collection / {}", String.valueOf(e));
-            }
-        }
+//        if (args.length > 0) {
+//            String path = String.join("", args);
+//            try {
+//                TreeSet<MusicBand> elements = fileManager.readCollection(path);
+//                this.collectionManager.setCollection(elements);
+//            } catch (Exception e) {
+//                logger.warn("Error while reading file, skip adding into collection / {}", String.valueOf(e));
+//            }
+//        }
 
         listening();
     }
 
     public void listening() {
-
-        logger.debug(this.collectionManager.getCollection().toString());
 
         try {
             datagramSocket = new DatagramSocket(Config.Networking.PORT);
@@ -145,20 +143,11 @@ public class Core extends AbstractCore {
 
         logger.debug(result.toString());
 
-        if (commandSaveCounter > MAX_COMMAND_SAVE_INTERVAL) {
-            saveCollection();
-            commandSaveCounter = 0;
-        }
-        if (command instanceof ServerCollectionCommand) {
-
-            commandSaveCounter += 1;
-        }
-
         return result;
     }
 
     private void registerCommands() {
-        this.commandManager.register(new CommandSave("save", collectionManager, fileManager, collectionPath));
+        // this.commandManager.register(new CommandSave("save", collectionManager, fileManager, collectionPath));
         this.commandManager.register(new CommandAdd("add", collectionManager));
         this.commandManager.register(new CommandShow("show", collectionManager));
         this.commandManager.register(new CommandClear("clear", collectionManager));
@@ -172,13 +161,7 @@ public class Core extends AbstractCore {
     @Override
     public void onExit() {
         // Some code here, for example saving json.
-        saveCollection();
         logger.info("Bye, have a great time!");
         System.exit(0);
-    }
-
-    private void saveCollection() {
-        ((ServerCommand) this.commandManager.get("save"))
-                .executeCommand(new ClientRequest());
     }
 }

@@ -6,10 +6,13 @@ package com.ssnagin.collectionmanager.collection;
 
 import com.ssnagin.collectionmanager.collection.comparators.CoordinatesComparator;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -20,18 +23,25 @@ public class CollectionManager implements Serializable {
     // Using singleton
 
     @Getter
-    private static CollectionManager instance = new CollectionManager();
+    private static CollectionManager instance;
 
-    @Getter
-    @Setter
-    private TreeSet<MusicBand> collection;
-
-    public CollectionManager(Comparator<? super MusicBand> comparator) {
-        collection = new TreeSet<>(comparator);
+    static {
+        try {
+            instance = new CollectionManager(
+                    DatabaseManager.getInstance()
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public CollectionManager() {
-        this(new CoordinatesComparator());
+    private DatabaseManager databaseManager;
+
+//    @Setter
+//    private TreeSet<MusicBand> collection;
+
+    public CollectionManager(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     public void addElement(MusicBand element) {
@@ -121,5 +131,9 @@ public class CollectionManager implements Serializable {
         result.append("}\n");
 
         return result.toString();
+    }
+
+    public TreeSet<MusicBand> getCollection() {
+        return this.collection; // TEMPORARY
     }
 }

@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+
     implementation(project(":common"))
 
     compileOnly("org.projectlombok:lombok:1.18.36")
@@ -29,6 +30,8 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.12.1")
     implementation("org.apache.commons:commons-lang3:3.17.0")
+
+    implementation("org.postgresql:postgresql:42.7.3")
 }
 
 application {

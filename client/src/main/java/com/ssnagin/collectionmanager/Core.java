@@ -5,7 +5,6 @@ package com.ssnagin.collectionmanager;
  */
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
-import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
@@ -47,7 +46,6 @@ public class Core extends AbstractCore {
         super();
 
         // Singletone pattern
-        this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
         this.scriptManager = ScriptManager.getInstance();
 
@@ -65,7 +63,7 @@ public class Core extends AbstractCore {
     private void registerCommands() {
         this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
         this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
-        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, collectionManager, scriptManager));
+        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, scriptManager));
         this.commandManager.register(new CommandAdd("add", "add an object to collection", networking, scriptManager));
         this.commandManager.register(new CommandShow("show", "show collection's elements", networking));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", networking));

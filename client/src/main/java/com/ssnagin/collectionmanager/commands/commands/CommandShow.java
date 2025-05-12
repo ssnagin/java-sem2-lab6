@@ -16,7 +16,6 @@ import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 
 import java.io.IOException;
-import java.util.TreeSet;
 
 /**
  * Shows brief description about available commands
