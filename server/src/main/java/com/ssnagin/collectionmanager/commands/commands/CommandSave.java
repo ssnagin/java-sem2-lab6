@@ -8,8 +8,8 @@ import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.files.FileManager;
-import com.ssnagin.collectionmanager.networking.data.ClientRequest;
-import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import lombok.Getter;
 import lombok.Setter;
 

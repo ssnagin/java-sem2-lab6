@@ -1,7 +1,7 @@
 package com.ssnagin.collectionmanager.commands;
 
-import com.ssnagin.collectionmanager.networking.data.ClientRequest;
-import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;

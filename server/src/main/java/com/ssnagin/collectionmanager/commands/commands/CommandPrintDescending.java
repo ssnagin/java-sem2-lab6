@@ -6,8 +6,8 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
-import com.ssnagin.collectionmanager.networking.data.ClientRequest;
-import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 
 /**
  * Shows brief description about available commands

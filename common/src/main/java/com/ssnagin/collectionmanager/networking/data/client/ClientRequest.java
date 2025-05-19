@@ -1,8 +1,8 @@
-package com.ssnagin.collectionmanager.networking.data;
+package com.ssnagin.collectionmanager.networking.data.client;
 
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+import com.ssnagin.collectionmanager.networking.data.TransferData;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

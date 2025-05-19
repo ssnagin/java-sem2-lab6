@@ -1,6 +1,7 @@
-package com.ssnagin.collectionmanager.networking.data;
+package com.ssnagin.collectionmanager.networking.data.server;
 
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
+import com.ssnagin.collectionmanager.networking.data.TransferData;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,20 +1,17 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.commands.ServerCommand;
-import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.crypto.generators.CryptoSHA1Generator;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
-import com.ssnagin.collectionmanager.networking.data.ClientRequest;
-import com.ssnagin.collectionmanager.networking.data.ServerResponse;
+import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.session.SessionKey;
 import com.ssnagin.collectionmanager.session.generators.SessionKeyGenerator;
 import com.ssnagin.collectionmanager.user.excetions.NoSuchUserException;
 import com.ssnagin.collectionmanager.user.objects.User;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HexFormat;
 import java.util.List;
 
 public class CommandLogin extends ServerCommand {
