@@ -8,6 +8,7 @@ import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.files.FileManager;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import lombok.Getter;
@@ -39,6 +40,10 @@ public class CommandSave extends ServerCollectionCommand {
 
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
+
+        ServerResponse serverResponse = super.executeCommand(clientRequest);
+        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
+
         try {
             fileManager.write(this.collectionManager.getCollection(), collectionPath);
         } catch (Exception ex) {

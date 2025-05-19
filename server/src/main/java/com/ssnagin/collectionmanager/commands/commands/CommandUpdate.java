@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
@@ -16,13 +17,11 @@ import java.sql.SQLException;
 /**
  * @author developer
  */
-public class CommandUpdate extends ServerCommand {
-
-    private CollectionManager collectionManager;
+public class CommandUpdate extends ServerCollectionCommand {
 
     public CommandUpdate(String name,
                          CollectionManager collectionManager) {
-        super(name);
+        super(name, collectionManager);
 
         this.collectionManager = collectionManager;
     }
@@ -30,8 +29,11 @@ public class CommandUpdate extends ServerCommand {
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
+        ServerResponse serverResponse = super.executeCommand(clientRequest);
+        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
+
         try {
-            ServerResponse serverResponse = switch (clientRequest.getStage()) {
+            serverResponse = switch (clientRequest.getStage()) {
                 case 1 -> stage1(clientRequest);
                 case 100 -> stage100(clientRequest);
                 default -> new ServerResponse(

@@ -24,7 +24,8 @@ public class CommandRemoveById extends ServerCollectionCommand {
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
-        ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
+        ServerResponse serverResponse = super.executeCommand(clientRequest);
+        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
 
         if (!(clientRequest.getData() instanceof Long)) {
             return serverResponse.corruption("wrong long type format");

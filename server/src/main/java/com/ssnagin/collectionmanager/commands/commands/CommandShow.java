@@ -32,6 +32,9 @@ public class CommandShow extends ServerCollectionCommand {
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
+        ServerResponse serverResponse = super.executeCommand(clientRequest);
+        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
+
         if (!(clientRequest.getData() instanceof Long))
             return new ServerResponse(ResponseStatus.CORRUPTED, "Page number must be valid", null);
 

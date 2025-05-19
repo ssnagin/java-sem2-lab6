@@ -29,7 +29,8 @@ public class CommandAdd extends ServerCollectionCommand {
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
-        ServerResponse response = new ServerResponse(ResponseStatus.OK);
+        ServerResponse response = super.executeCommand(clientRequest);
+        if (response.getResponseStatus() != ResponseStatus.OK) return response;
 
         MusicBand musicBand = (MusicBand) clientRequest.getData();
         List<String> errors = TempValidator.validateMusicBand(musicBand);

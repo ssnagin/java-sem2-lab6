@@ -44,7 +44,7 @@ public class CommandAdd extends UserNetworkCommand {
             var result = new LocalDateWrapper(musicBand);
 
             ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
-            Console.separatePrint(response.toString(), "SERVER");
+            Console.separatePrint(response.getMessage(), "SERVER");
 
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |

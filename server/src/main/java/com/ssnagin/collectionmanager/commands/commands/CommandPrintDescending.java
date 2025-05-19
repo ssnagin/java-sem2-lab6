@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 
@@ -24,6 +25,10 @@ public class CommandPrintDescending extends ServerCollectionCommand {
 
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
+
+        ServerResponse serverResponse = super.executeCommand(clientRequest);
+        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
+
         return new ServerResponse();
     }
 }
