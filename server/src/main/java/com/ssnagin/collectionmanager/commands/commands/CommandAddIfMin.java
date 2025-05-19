@@ -11,6 +11,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  *
@@ -44,7 +46,11 @@ public class CommandAddIfMin extends ServerCollectionCommand {
             return response;
         }
 
-        this.collectionManager.addElement(musicBand);
+        try {
+            this.collectionManager.addElement(musicBand);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         return response;
     }

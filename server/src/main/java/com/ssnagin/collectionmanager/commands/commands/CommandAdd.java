@@ -12,6 +12,7 @@ import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.validation.TempValidator;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -42,7 +43,11 @@ public class CommandAdd extends ServerCollectionCommand {
             return response;
         }
 
-        this.collectionManager.addElement(musicBand);
+        try {
+            this.collectionManager.addElement(musicBand);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         response.appendMessage("Successfully added music band");
 

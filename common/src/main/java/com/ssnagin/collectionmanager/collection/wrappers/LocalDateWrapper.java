@@ -20,7 +20,7 @@ import java.time.LocalDate;
  */
 
 @EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 @Getter
 @Setter
 public class LocalDateWrapper extends MusicBand {

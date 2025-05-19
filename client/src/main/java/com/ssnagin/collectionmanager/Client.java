@@ -12,7 +12,7 @@ import lombok.ToString;
  */
 @EqualsAndHashCode
 @ToString
-public class App {
+public class Client {
     public static void main(String[] args) {
         Core.getInstance().start(args);
     }

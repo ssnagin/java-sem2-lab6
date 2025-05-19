@@ -35,7 +35,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.ssnagin.collectionmanager.App")
+    mainClass.set("com.ssnagin.collectionmanager.Server")
 }
 
 java {

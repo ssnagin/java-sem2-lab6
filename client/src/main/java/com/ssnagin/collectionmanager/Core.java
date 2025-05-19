@@ -76,6 +76,7 @@ public class Core extends AbstractCore {
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", networking));
+        this.commandManager.register(new CommandLogin("login", "Log in into the system", networking, scriptManager));
     }
 
     @Override
@@ -98,10 +99,16 @@ public class Core extends AbstractCore {
             Console.print(Console.getShellArrow());
 
             // I need to replace this code for the future custom input (executeCommand from script) integration.
+//
+//            String inputLine = this.scriptManager.getCurrentScanner().hasNextLine()
+//                    ? this.scriptManager.getCurrentScanner().nextLine()
+//                    : "";
 
-            String inputLine = this.scriptManager.getCurrentScanner().hasNextLine()
-                    ? this.scriptManager.getCurrentScanner().nextLine()
-                    : "";
+            String inputLine = this.scriptManager.getCurrentScanner().nextLine();
+
+            if (inputLine.contains("\u0004")) {
+                onExit();
+            }
 
             parsedString = InputParser.parse(inputLine, ParseMode.COMMAND_ONLY);
 

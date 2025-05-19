@@ -12,6 +12,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  * @author developer
  */
@@ -80,7 +82,11 @@ public class CommandUpdate extends ServerCommand {
         Long musicBandId = musicBand.getId();
 
         this.collectionManager.removeElementById(musicBandId);
-        this.collectionManager.addElement(musicBand);
+        try {
+            this.collectionManager.addElement(musicBand);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         return serverResponse;
     }

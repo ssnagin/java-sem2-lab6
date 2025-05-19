@@ -19,7 +19,7 @@ public class DatabaseManager {
 
     public DatabaseManager() throws SQLException {
         init(
-            new DatabaseCredentials("postgres", "", "127.0.0.1", 5432, "collection")
+            new DatabaseCredentials("postgres", "12345", "127.0.0.1", 5432, "collection")
         );
     }
 
@@ -43,7 +43,7 @@ public class DatabaseManager {
         establishConnection();
     }
 
-    public void establishConnection() throws SQLException {
+    protected void establishConnection() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
         }
@@ -150,3 +150,41 @@ db.executeTransaction(conn -> {
 
      */
 }
+
+
+//        EXAMPLE DATABASE QUERY
+//
+//        try {
+//            List<User> users = this.databaseManager.executeQuery(
+//                    "SELECT id, username, password, is_banned, registered FROM cm_user WHERE id = 0;",
+//                    res -> new User(
+//                            res.getLong("id"),
+//                            res.getString("username"),
+//                            res.getString("password").toCharArray(),
+//                            res.getBoolean("is_banned"),
+//                            res.getTimestamp("registered").toLocalDateTime()
+//                    )
+//            );
+//
+//        EXAMPLE DATABASE QUERY
+//
+//        try {
+//            List<User> users = this.databaseManager.executeQuery(
+//                    "SELECT id, username, password, is_banned, registered FROM cm_user WHERE id = 0;",
+//                    res -> new User(
+//                            res.getLong("id"),
+//                            res.getString("username"),
+//                            res.getString("password").toCharArray(),
+//                            res.getBoolean("is_banned"),
+//                            res.getTimestamp("registered").toLocalDateTime()
+//                    )
+//            );
+//
+//            Console.print(users.toString());
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//            Console.print(users.toString());
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }

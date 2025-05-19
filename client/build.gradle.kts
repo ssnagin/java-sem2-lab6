@@ -28,7 +28,7 @@ java {
 }
 
 application {
-    mainClass.set("com.ssnagin.collectionmanager.App")
+    mainClass.set("com.ssnagin.collectionmanager.Client")
 }
 
 tasks.jar {

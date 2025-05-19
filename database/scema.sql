@@ -13,25 +13,25 @@ CREATE SEQUENCE secure_id_seq
     CACHE 100
     NO CYCLE;
 
-CREATE FUNCTION generate_secure_id()
+CREATE OR REPLACE FUNCTION generate_secure_id()
 RETURNS bigint AS $$
 DECLARE
     next_val bigint;
     random_part bigint;
 BEGIN
     next_val := nextval('secure_id_seq');
-    random_part := floor(random() * 100000000)::bigint;
-    RETURN (next_val * 100000000) + random_part;
+    random_part := floor(random() * 100000)::bigint;
+    RETURN (next_val * 100000) + random_part;
 END;
 $$ LANGUAGE plpgsql
 VOLATILE;
 
 CREATE TABLE cm_user (
     id BIGINT PRIMARY KEY DEFAULT generate_secure_id(),
-    username TEXT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     is_banned INTEGER NOT NULL,
-    registered TIMESTAMP NOT NULL
+    created TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE cm_user_access (

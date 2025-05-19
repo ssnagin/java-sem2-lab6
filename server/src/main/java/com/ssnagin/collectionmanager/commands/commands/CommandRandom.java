@@ -12,6 +12,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  *
@@ -47,9 +49,13 @@ public class CommandRandom extends ServerCollectionCommand {
         }
 
         for (long i = 0; i < id; i++) {
-            this.collectionManager.addElement(
-                    new LocalDateWrapper(new MusicBand()).random()
-            );
+            try {
+                this.collectionManager.addElement(
+                        new LocalDateWrapper(new MusicBand()).random()
+                );
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         serverResponse.appendMessage(String.format("%d items were added", id));

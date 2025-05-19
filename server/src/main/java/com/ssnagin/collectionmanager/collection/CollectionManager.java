@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.collection;
 import com.ssnagin.collectionmanager.collection.comparators.CoordinatesComparator;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
+import com.sun.source.tree.Tree;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -24,6 +25,8 @@ public class CollectionManager implements Serializable {
 
     @Getter
     private static CollectionManager instance;
+
+    private static final TreeSet<MusicBand> collection = new TreeSet<>();
 
     static {
         try {
@@ -44,8 +47,13 @@ public class CollectionManager implements Serializable {
         this.databaseManager = databaseManager;
     }
 
-    public void addElement(MusicBand element) {
-        this.collection.add(element);
+    public Integer addElement(MusicBand element) throws SQLException {
+        return this.databaseManager.update(
+                "INSERT INTO cm_collection (name, number_of_participants, singles_count) VALUES (?. ?, )",
+                element.getId(), element.getName()
+
+                // АДАПТИРОВАТЬ
+        );
     }
 
     public MusicBand getLowestElement() {

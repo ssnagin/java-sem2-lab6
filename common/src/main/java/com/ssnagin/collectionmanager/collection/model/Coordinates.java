@@ -9,6 +9,7 @@ import com.ssnagin.collectionmanager.validation.annotations.MaxValue;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author DEVELOPER

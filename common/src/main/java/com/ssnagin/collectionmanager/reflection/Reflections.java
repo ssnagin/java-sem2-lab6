@@ -164,6 +164,7 @@ public final class Reflections {
         java.lang.reflect.Method setter = Reflections.findSetterByParameterName(setterClazz, value.getClass());
 
 
+
         // exception here 
         setter.invoke(instance, value);
     }
@@ -196,6 +197,10 @@ public final class Reflections {
         // VALIDATION HERE | NoT yEt ImPlEmEnTeD!!!!!
         // ex. validatePrimitiveInput()
 
+        if (type == char[].class) {
+            type = String.class;
+        }
+
         // Let's Map our statements in order to simplify our life
         Map<Class<?>, Function<String, Object>> parsers = new HashMap<>();
 
@@ -211,6 +216,7 @@ public final class Reflections {
         parsers.put(Byte.class, Byte::parseByte);
         parsers.put(boolean.class, Boolean::parseBoolean);
         parsers.put(Boolean.class, Boolean::parseBoolean);
+
         parsers.put(String.class, s -> s);
 
         Function<String, Object> parser = parsers.get(type);

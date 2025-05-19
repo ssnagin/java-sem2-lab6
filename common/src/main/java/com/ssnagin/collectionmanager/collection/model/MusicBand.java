@@ -9,10 +9,7 @@ import com.ssnagin.collectionmanager.description.annotations.Description;
 import com.ssnagin.collectionmanager.validation.annotations.NotEmpty;
 import com.ssnagin.collectionmanager.validation.annotations.NotNull;
 import com.ssnagin.collectionmanager.validation.annotations.PositiveNumber;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.UUID;
