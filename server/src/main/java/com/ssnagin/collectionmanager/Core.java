@@ -3,6 +3,7 @@ package com.ssnagin.collectionmanager;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
@@ -11,6 +12,7 @@ import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.networking.serlialization.DataStream;
+import com.ssnagin.collectionmanager.session.SessionManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.ToString;
@@ -37,9 +39,13 @@ public class Core extends AbstractCore {
 
     private CollectionManager collectionManager;
 
+    private SessionManager sessionManager;
+
     @SneakyThrows
     public Core() {
         super();
+
+        this.sessionManager = SessionManager.getInstance();
 
         this.databaseManager = DatabaseManager.getInstance();
         this.collectionManager = CollectionManager.getInstance();
@@ -123,6 +129,7 @@ public class Core extends AbstractCore {
 
     protected ServerResponse runCommand(ClientRequest clientRequest) {
         logger.debug(clientRequest.toString());
+        logger.debug(sessionManager.getActiveSessions().toString());
 
         ServerResponse result = new ServerResponse();
 
@@ -152,7 +159,7 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", collectionManager));
         this.commandManager.register(new CommandRandom("random", collectionManager));
 
-        this.commandManager.register(new CommandLogin("login", databaseManager));
+        this.commandManager.register(new CommandLogin("login", databaseManager, sessionManager));
     }
 
     @Override

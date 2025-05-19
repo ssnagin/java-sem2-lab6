@@ -7,6 +7,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.session.SessionKey;
+import com.ssnagin.collectionmanager.session.SessionManager;
+import com.ssnagin.collectionmanager.session.SessionStatus;
 import com.ssnagin.collectionmanager.session.generators.SessionKeyGenerator;
 import com.ssnagin.collectionmanager.user.excetions.NoSuchUserException;
 import com.ssnagin.collectionmanager.user.objects.User;
@@ -18,13 +20,15 @@ public class CommandLogin extends ServerCommand {
 
     private DatabaseManager databaseManager;
 
+    private SessionManager sessionManager;
+
     private static String LOGIN_ERROR_TEXT = "Login failed. Please, check the credentials once again";
 
-    public CommandLogin(String name, DatabaseManager databaseManager) {
+    public CommandLogin(String name, DatabaseManager databaseManager, SessionManager sessionManager) {
         super(name);
 
         this.databaseManager = databaseManager;
-
+        this.sessionManager = sessionManager;
     }
 
     @Override
@@ -46,7 +50,13 @@ public class CommandLogin extends ServerCommand {
                     CryptoSHA1Generator.getInstance().getSHA1(user.getPassword())
             );
 
-            SessionKey sessionKey = SessionKeyGenerator.generateSessionKey();
+            user = response.get(0);
+
+            if (user.getIsBanned() == 1) {
+                return serverResponse.error("YOU ARE BANNED!!!");
+            }
+
+            SessionKey sessionKey = sessionManager.createNewSession(user.getId());
 
             serverResponse.setData(sessionKey);
 

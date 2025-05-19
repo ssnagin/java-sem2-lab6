@@ -57,4 +57,11 @@ public class ServerResponse extends TransferData {
 
         return this;
     }
+
+    public ServerResponse ok(String message) {
+        setResponseStatus(ResponseStatus.OK);
+        setMessage(new StringBuilder().append(message));
+
+        return this;
+    }
 }

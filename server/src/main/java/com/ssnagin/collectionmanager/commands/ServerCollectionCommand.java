@@ -5,6 +5,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
+import com.ssnagin.collectionmanager.session.SessionManager;
+import com.ssnagin.collectionmanager.session.SessionStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +17,17 @@ import lombok.Setter;
 public abstract class ServerCollectionCommand extends ServerCommand {
 
     private static String UNAUTHORIZED = "Unauthorized user. Please, log in first.";
+    private static String SESSION_EXPIRED = "Session expired. Please, log in again.";
 
     protected CollectionManager collectionManager;
+
+    protected SessionManager sessionManager;
 
     public ServerCollectionCommand(String name, CollectionManager collectionManager) {
         super(name);
         setCollectionManager(collectionManager);
+
+        this.sessionManager = SessionManager.getInstance();
     }
 
     public ServerResponse executeCommand(ClientRequest clientRequest) {
@@ -29,8 +36,17 @@ public abstract class ServerCollectionCommand extends ServerCommand {
         if (!(clientRequest instanceof SessionClientRequest))
             return serverResponse.error(UNAUTHORIZED);
 
-        // Проверка внутри SessionManager
+        // Проверка токена внутри SessionManager
 
-        return serverResponse;
+        SessionClientRequest sessionRequest = (SessionClientRequest) clientRequest;
+
+        SessionStatus status = SessionManager.getInstance().checkAuth(sessionRequest.getSessionKey());
+
+        return switch (status) {
+            case UNAUTHORIZED -> serverResponse.error(UNAUTHORIZED);
+            case EXPIRED -> serverResponse.error(SESSION_EXPIRED);
+            case LOGGED_IN -> serverResponse;
+            default -> serverResponse.error("Unknown session status");
+        };
     }
 }
