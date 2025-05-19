@@ -151,6 +151,8 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandAddIfMin("add_if_min", collectionManager));
         this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", collectionManager));
         this.commandManager.register(new CommandRandom("random", collectionManager));
+
+        this.commandManager.register(new CommandLogin("login", databaseManager));
     }
 
     @Override

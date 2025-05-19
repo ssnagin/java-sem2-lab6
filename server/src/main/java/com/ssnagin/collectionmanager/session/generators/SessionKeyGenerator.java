@@ -1,9 +1,11 @@
 package com.ssnagin.collectionmanager.session.generators;
 
+import com.ssnagin.collectionmanager.session.SessionKey;
+
 import java.security.SecureRandom;
 
 public class SessionKeyGenerator {
-    public static char[] generateSessionKey(Integer length) {
+    public static SessionKey generateSessionKey(Integer length) {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[length];
         random.nextBytes(bytes);
@@ -12,10 +14,10 @@ public class SessionKeyGenerator {
         for (int i = 0; i < bytes.length; i++) {
             result[i] = (char) (bytes[i] & 0xFF);
         }
-        return result;
+        return new SessionKey(result);
     }
 
-    public static char[] generateSessionKey() {
+    public static SessionKey generateSessionKey() {
         return generateSessionKey(1024);
     }
 }

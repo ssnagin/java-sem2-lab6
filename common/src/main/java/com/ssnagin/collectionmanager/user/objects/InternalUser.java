@@ -28,7 +28,7 @@ public class InternalUser extends User {
         super.setId(user.getId());
         super.setUsername(user.getUsername());
         super.setIsBanned(user.getIsBanned());
-        super.setCreated(user.getCreated());
+        super.setRegistered(user.getRegistered());
 
         super.setPassword(user.getPassword());
     }

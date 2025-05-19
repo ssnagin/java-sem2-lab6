@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.networking.data;
 
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

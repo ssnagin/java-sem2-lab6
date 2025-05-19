@@ -5,9 +5,13 @@ import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
+import com.ssnagin.collectionmanager.networking.data.ClientRequest;
+import com.ssnagin.collectionmanager.networking.data.ServerResponse;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import com.ssnagin.collectionmanager.user.objects.InternalUser;
+import com.ssnagin.collectionmanager.user.objects.User;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationTargetException;
@@ -39,9 +43,19 @@ public class CommandLogin extends UserNetworkCommand {
         try {
 
             InternalUser user = Reflections.parseModel(InternalUser.class, scanner);
+            user.setIsBanned(0);
 
+            ClientRequest clientRequest = new ClientRequest(
+                parsedString, (User) user
+            );
 
-            Console.log(user.toString());
+            ServerResponse serverResponse = this.networking.sendClientRequest(clientRequest);
+
+            Console.separatePrint(
+                    serverResponse.getMessage(),
+                    String.valueOf(serverResponse.getResponseStatus())
+            );
+
         } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             Console.error(e);
         }
