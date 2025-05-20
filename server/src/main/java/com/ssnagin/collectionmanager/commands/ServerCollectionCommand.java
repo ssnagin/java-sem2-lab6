@@ -1,6 +1,7 @@
 package com.ssnagin.collectionmanager.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
@@ -14,20 +15,24 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public abstract class ServerDatabaseCommand extends ServerCommand {
+public abstract class ServerCollectionCommand extends ServerCommand {
 
     private static String UNAUTHORIZED = "Unauthorized user. Please, log in first.";
     private static String SESSION_EXPIRED = "Session expired. Please, log in again.";
 
     protected CollectionManager collectionManager;
 
+    protected DatabaseManager databaseManager;
+
     protected SessionManager sessionManager;
 
-    public ServerDatabaseCommand(String name, CollectionManager collectionManager) {
+    public ServerCollectionCommand(String name, CollectionManager collectionManager) {
         super(name);
         setCollectionManager(collectionManager);
 
-        this.sessionManager = SessionManager.getInstance();
+        setSessionManager(SessionManager.getInstance());
+
+        setDatabaseManager(collectionManager.getDatabaseManager());
     }
 
     public ServerResponse executeCommand(ClientRequest clientRequest) {

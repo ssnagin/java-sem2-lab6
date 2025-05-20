@@ -4,10 +4,12 @@ import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +35,11 @@ public class CommandAddTest {
     }
 
     @Test
+    @SneakyThrows
     public void executeCommandTest() {
 
         ClientRequest request = new ClientRequest(new ParsedString());
-        CommandAdd commandAdd = new CommandAdd("add", "testCommand", collectionManager);
+        CommandAdd commandAdd = new CommandAdd("add", new DatabaseManager());
         ServerResponse response;
 
         // 0. Correct MusicBand and LocalDateWrappers:

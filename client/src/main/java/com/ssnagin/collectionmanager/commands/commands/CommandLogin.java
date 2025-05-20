@@ -14,7 +14,9 @@ import com.ssnagin.collectionmanager.user.objects.InternalUser;
 import com.ssnagin.collectionmanager.user.objects.User;
 import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 public class CommandLogin extends UserNetworkCommand {
@@ -28,7 +30,6 @@ public class CommandLogin extends UserNetworkCommand {
     }
 
     @Override
-    @SneakyThrows
     public ApplicationStatus executeCommand(ParsedString parsedString) {
 
         ApplicationStatus applicationStatus = super.executeCommand(parsedString);
@@ -60,7 +61,7 @@ public class CommandLogin extends UserNetworkCommand {
                     String.valueOf(serverResponse.getResponseStatus())
             );
 
-        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+        } catch (IOException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             Console.error(e);
         }
 

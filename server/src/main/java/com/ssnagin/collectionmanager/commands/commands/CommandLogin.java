@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.crypto.generators.CryptoSHA1Generator;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
@@ -8,8 +9,6 @@ import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.session.SessionKey;
 import com.ssnagin.collectionmanager.session.SessionManager;
-import com.ssnagin.collectionmanager.session.SessionStatus;
-import com.ssnagin.collectionmanager.session.generators.SessionKeyGenerator;
 import com.ssnagin.collectionmanager.user.excetions.NoSuchUserException;
 import com.ssnagin.collectionmanager.user.objects.User;
 
@@ -18,17 +17,17 @@ import java.util.List;
 
 public class CommandLogin extends ServerCommand {
 
-    private DatabaseManager databaseManager;
-
     private SessionManager sessionManager;
+
+    private DatabaseManager databaseManager;
 
     private static String LOGIN_ERROR_TEXT = "Login failed. Please, check the credentials once again";
 
     public CommandLogin(String name, DatabaseManager databaseManager, SessionManager sessionManager) {
         super(name);
 
-        this.databaseManager = databaseManager;
         this.sessionManager = sessionManager;
+        this.databaseManager = databaseManager;
     }
 
     @Override
@@ -37,13 +36,13 @@ public class CommandLogin extends ServerCommand {
 
         try {
             User user = (User) clientRequest.getData();
-
+            logger.debug(CryptoSHA1Generator.getInstance().getSHA1(user.getPassword()));
             List<User> response = this.databaseManager.executeQuery("SELECT * FROM cm_user WHERE username = ? AND password = ? LIMIT 1",
                     res -> new User(
                             res.getLong("id"),
                             res.getString("username"),
                             res.getInt("is_banned"),
-                            res.getTimestamp("registered").toLocalDateTime(),
+                            res.getTimestamp("created").toLocalDateTime(),
                             res.getString("password").toCharArray()
                     ),
                     user.getUsername(),
@@ -66,7 +65,7 @@ public class CommandLogin extends ServerCommand {
             if (response.isEmpty()) throw new NoSuchUserException("");
 
         } catch (SQLException e) {
-            return serverResponse.corruption("Internal server error");
+            return serverResponse.corruption("Internal server error: " + e.getMessage());
         } catch (NoSuchUserException e) {
             return serverResponse.error(LOGIN_ERROR_TEXT);
         }

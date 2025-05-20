@@ -5,7 +5,8 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.ServerDatabaseCommand;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
@@ -15,7 +16,7 @@ import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
  *
  * @author developer
  */
-public class CommandShow extends ServerDatabaseCommand {
+public class CommandShow extends ServerCollectionCommand {
 
     protected static final Integer MAX_PAGE_SIZE = 50;
 

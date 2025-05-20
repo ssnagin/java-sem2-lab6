@@ -15,6 +15,7 @@ import java.util.*;
 /**
  * @author developer
  */
+@Deprecated
 public class OldCollectionManager implements Serializable {
 
     // Using singleton

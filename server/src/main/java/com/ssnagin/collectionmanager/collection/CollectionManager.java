@@ -5,6 +5,7 @@
 package com.ssnagin.collectionmanager.collection;
 
 import com.ssnagin.collectionmanager.collection.comparators.CoordinatesComparator;
+import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.sun.source.tree.Tree;
@@ -38,6 +39,8 @@ public class CollectionManager implements Serializable {
         }
     }
 
+    @Getter
+    @Setter
     private DatabaseManager databaseManager;
 
 //    @Setter
@@ -47,13 +50,46 @@ public class CollectionManager implements Serializable {
         this.databaseManager = databaseManager;
     }
 
-    public Integer addElement(MusicBand element) throws SQLException {
-        return this.databaseManager.update(
-                "INSERT INTO cm_collection (name, number_of_participants, singles_count) VALUES (?. ?, )",
-                element.getId(), element.getName()
+    public Long addElement(MusicBand element, Long userId) throws SQLException {
 
-                // АДАПТИРОВАТЬ
-        );
+        Long coordinatesId = this.databaseManager.executeQuerySingle(
+                "INSERT INTO cm_collection_coordinates (x, y) VALUES (?, ?) RETURNING id",
+                rs -> rs.getLong("id"),
+                element.getCoordinates().getX(),
+                element.getCoordinates().getY()
+        ).orElseThrow(() -> new SQLException("Failed to insert coordinates"));
+
+        Long bestAlbumId = null;
+        if (element.getBestAlbum() != null) {
+            bestAlbumId = this.databaseManager.executeQuerySingle(
+                    "INSERT INTO cm_collection_album (name, tracks) VALUES (?, ?) RETURNING id",
+                    rs -> rs.getLong("id"),
+                    element.getBestAlbum().getName(),
+                    element.getBestAlbum().getTracks()
+            ).orElseThrow(() -> new SQLException("Failed to insert album"));
+        }
+
+        Long musicBandId = this.databaseManager.executeQuerySingle(
+                "INSERT INTO cm_collection (name, number_of_participants, singles_count, " +
+                        "coordinates_id, genre, best_album_id) VALUES (?, ?, ?, ?, ?, ?) RETURNING id",
+                rs -> rs.getLong("id"),
+                element.getName(),
+                element.getNumberOfParticipants(),
+                element.getSinglesCount(),
+                coordinatesId,
+                element.getGenre().name(),
+                bestAlbumId
+        ).orElseThrow(() -> new SQLException("Failed to insert music band"));
+
+        this.databaseManager.executeQuerySingle(
+                "INSERT INTO cm_user_collection (user_id, collection_id)" +
+                        "VALUES (?, ?) RETURNING id",
+                res -> res.getLong("id"),
+                userId,
+                musicBandId
+        ).orElseThrow(() -> new SQLException("Failed to attach connection " + userId.toString() + " - " + musicBandId.toString()));
+
+        return musicBandId;
     }
 
     public MusicBand getLowestElement() {

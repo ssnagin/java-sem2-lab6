@@ -7,10 +7,12 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
-import com.ssnagin.collectionmanager.commands.ServerDatabaseCommand;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 
 import java.sql.SQLException;
 
@@ -19,7 +21,7 @@ import java.sql.SQLException;
  *
  * @author developer
  */
-public class CommandRandom extends ServerDatabaseCommand {
+public class CommandRandom extends ServerCollectionCommand {
 
     private static final int MAX_RANDOM_AMOUNT = 50;
 
@@ -52,7 +54,8 @@ public class CommandRandom extends ServerDatabaseCommand {
         for (long i = 0; i < id; i++) {
             try {
                 this.collectionManager.addElement(
-                        new LocalDateWrapper(new MusicBand()).random()
+                        new LocalDateWrapper(new MusicBand()).random(),
+                        sessionManager.getUserId(((SessionClientRequest) clientRequest).getSessionKey())
                 );
             } catch (SQLException e) {
                 throw new RuntimeException(e);

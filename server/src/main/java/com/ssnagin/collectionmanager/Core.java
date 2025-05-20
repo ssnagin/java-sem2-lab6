@@ -61,18 +61,6 @@ public class Core extends AbstractCore {
 
         logger.info(LOGO);
 
-        // 1. Load file if given here:
-
-//        if (args.length > 0) {
-//            String path = String.join("", args);
-//            try {
-//                TreeSet<MusicBand> elements = fileManager.readCollection(path);
-//                this.collectionManager.setCollection(elements);
-//            } catch (Exception e) {
-//                logger.warn("Error while reading file, skip adding into collection / {}", String.valueOf(e));
-//            }
-//        }
-
         listening();
     }
 
@@ -149,14 +137,14 @@ public class Core extends AbstractCore {
 
     private void registerCommands() {
         // this.commandManager.register(new CommandSave("save", collectionManager, fileManager, collectionPath));
-        this.commandManager.register(new CommandAdd("add", collectionManager));
-        this.commandManager.register(new CommandShow("show", collectionManager));
-        this.commandManager.register(new CommandClear("clear", collectionManager));
-        this.commandManager.register(new CommandUpdate("update", collectionManager));
-        this.commandManager.register(new CommandRemoveById("remove_by_id", collectionManager));
-        this.commandManager.register(new CommandAddIfMin("add_if_min", collectionManager));
-        this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", collectionManager));
-        this.commandManager.register(new CommandRandom("random", collectionManager));
+        this.commandManager.register(new CommandAdd("add" , collectionManager));
+        this.commandManager.register(new CommandShow("show" , collectionManager));
+        this.commandManager.register(new CommandClear("clear" , collectionManager));
+        this.commandManager.register(new CommandUpdate("update" , collectionManager));
+        this.commandManager.register(new CommandRemoveById("remove_by_id" , collectionManager));
+        this.commandManager.register(new CommandAddIfMin("add_if_min" , collectionManager));
+        this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants" , collectionManager));
+        this.commandManager.register(new CommandRandom("random" , collectionManager));
 
         this.commandManager.register(new CommandLogin("login", databaseManager, sessionManager));
     }

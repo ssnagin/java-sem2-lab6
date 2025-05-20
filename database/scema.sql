@@ -34,6 +34,9 @@ CREATE TABLE cm_user (
     created TIMESTAMP NOT NULL DEFAULT now()
 );
 
+INSERT INTO cm_user (username, password, is_banned)
+VALUES ('admin', 'dff0de22f2bcde9b5a9b6cc632d8beb88156633e', 0);
+
 CREATE TABLE cm_user_access (
     id SERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL REFERENCES cm_user(id) ON DELETE CASCADE,
@@ -61,15 +64,15 @@ CREATE TABLE cm_collection (
     singles_count INTEGER NOT NULL DEFAULT 0,
     coordinates_id INTEGER NOT NULL REFERENCES cm_collection_coordinates(id),
 
-    genre_id INTEGER,
+    -- Специально не выносил значения, чтобы не возиться с enum'om и его обработкой. Небольшой костыль
+    genre TEXT NOT NULL,
     best_album_id INTEGER REFERENCES cm_collection_album(id),
 
     created TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE cm_user_collection (
+    id BIGINT PRIMARY KEY DEFAULT generate_secure_id(),
     user_id BIGINT NOT NULL REFERENCES cm_user(id) ON DELETE CASCADE,
-    collection_id BIGINT NOT NULL REFERENCES cm_collection(id) ON DELETE CASCADE,
-
-    PRIMARY KEY (user_id, collection_id)
+    collection_id BIGINT NOT NULL REFERENCES cm_collection(id) ON DELETE CASCADE
 );

@@ -6,23 +6,23 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.commands.ServerDatabaseCommand;
+import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 
 import java.sql.SQLException;
 
 /**
  * @author developer
  */
-public class CommandUpdate extends ServerDatabaseCommand {
+public class CommandUpdate extends ServerCollectionCommand {
 
     public CommandUpdate(String name,
                          CollectionManager collectionManager) {
         super(name, collectionManager);
-
-        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CommandUpdate extends ServerDatabaseCommand {
         try {
             serverResponse = switch (clientRequest.getStage()) {
                 case 1 -> stage1(clientRequest);
-                case 100 -> stage100(clientRequest);
+                case 100 -> stage100((SessionClientRequest) clientRequest);
                 default -> new ServerResponse(
                         ResponseStatus.ERROR,
                         "Unknown command stage",
@@ -75,7 +75,7 @@ public class CommandUpdate extends ServerDatabaseCommand {
     }
 
     //  id;
-    private ServerResponse stage100(ClientRequest clientRequest) {
+    private ServerResponse stage100(SessionClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
 
         MusicBand musicBand = (MusicBand) clientRequest.getData();
@@ -83,7 +83,11 @@ public class CommandUpdate extends ServerDatabaseCommand {
 
         this.collectionManager.removeElementById(musicBandId);
         try {
-            this.collectionManager.addElement(musicBand);
+            this.collectionManager.addElement(
+                    musicBand,
+                    sessionManager.getUserId(clientRequest.getSessionKey()
+                    )
+            );
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
