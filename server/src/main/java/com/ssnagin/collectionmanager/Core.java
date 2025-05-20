@@ -147,6 +147,7 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandRandom("random" , collectionManager));
 
         this.commandManager.register(new CommandLogin("login", databaseManager, sessionManager));
+        this.commandManager.register(new CommandRegister("register", databaseManager));
     }
 
     @Override

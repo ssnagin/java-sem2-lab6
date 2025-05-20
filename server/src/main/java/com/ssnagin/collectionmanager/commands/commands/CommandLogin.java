@@ -49,6 +49,8 @@ public class CommandLogin extends ServerCommand {
                     CryptoSHA1Generator.getInstance().getSHA1(user.getPassword())
             );
 
+            if (response.isEmpty()) return serverResponse.error(LOGIN_ERROR_TEXT);
+
             user = response.get(0);
 
             if (user.getIsBanned() == 1) {
@@ -59,7 +61,7 @@ public class CommandLogin extends ServerCommand {
 
             serverResponse.setData(sessionKey);
 
-            serverResponse.appendMessage("Successfully logged in!\n\nYour session key -- " +
+            serverResponse.appendMessage("Successfully logged in as " + user.getUsername() + "!\n\nYour session key -- " +
                     String.valueOf(sessionKey.getSessionKey()).substring(0, 50) + "...\n\nexpires after 20 minutes of inactivity.");
 
             if (response.isEmpty()) throw new NoSuchUserException("");

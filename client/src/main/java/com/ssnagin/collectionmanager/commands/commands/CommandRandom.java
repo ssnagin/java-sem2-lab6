@@ -7,6 +7,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 
 import java.io.IOException;
 
@@ -28,7 +29,9 @@ public class CommandRandom extends UserNetworkCommand {
             // Try to parse Integer
             id = Long.parseLong(parsedString.getArguments().get(0));
 
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, id));
+            ServerResponse response = this.networking.sendClientRequest(
+                    new SessionClientRequest(new ClientRequest(parsedString, id), sessionKeyManager.getSessionKey())
+            );
 
             Console.separatePrint(response.getResponseStatus(), "SERVER");
             Console.separatePrint(response.getMessage(), "SERVER");

@@ -1,29 +1,28 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
+import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
-import com.ssnagin.collectionmanager.session.SessionKey;
 import com.ssnagin.collectionmanager.user.objects.InternalUser;
-import com.ssnagin.collectionmanager.user.objects.User;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
-public class CommandLogin extends UserNetworkCommand {
+public class CommandRegister extends UserNetworkCommand {
 
-    protected ScriptManager scriptManager;
+    private ScriptManager scriptManager;
 
-    public CommandLogin(String name, String description, Networking networking, ScriptManager scriptManager) {
+    public CommandRegister(String name, String description, Networking networking, ScriptManager scriptManager) {
         super(name, description, networking);
 
         this.scriptManager = scriptManager;
@@ -37,32 +36,22 @@ public class CommandLogin extends UserNetworkCommand {
 
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
-//        User user = Reflections.parseModel(User.class, scanner);
-//
-//        Console.log(user.toString());
+        Console.separatePrint("Please, fill in registration form:", this.getName().toUpperCase());
 
         try {
 
             InternalUser user = Reflections.parseModel(InternalUser.class, scanner);
             user.setIsBanned(0);
 
-            ClientRequest clientRequest = new ClientRequest(
-                parsedString, user
+            ServerResponse response = this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, user)
             );
+            Console.separatePrint(response.getMessage(), "SERVER");
 
-            ServerResponse serverResponse = this.networking.sendClientRequest(clientRequest);
-
-            SessionKey sessionKey = (SessionKey) serverResponse.getData();
-
-            sessionKeyManager.setSessionKey(sessionKey);
-            
-            Console.separatePrint(
-                    serverResponse.getMessage(),
-                    String.valueOf(serverResponse.getResponseStatus())
-            );
-
-        } catch (IOException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-            Console.error(e);
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
+                 IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException ex) {
+            Console.error(ex.toString());
         }
 
         return ApplicationStatus.RUNNING;

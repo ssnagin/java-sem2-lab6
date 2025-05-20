@@ -59,15 +59,12 @@ public class CollectionManager implements Serializable {
                 element.getCoordinates().getY()
         ).orElseThrow(() -> new SQLException("Failed to insert coordinates"));
 
-        Long bestAlbumId = null;
-        if (element.getBestAlbum() != null) {
-            bestAlbumId = this.databaseManager.executeQuerySingle(
-                    "INSERT INTO cm_collection_album (name, tracks) VALUES (?, ?) RETURNING id",
-                    rs -> rs.getLong("id"),
-                    element.getBestAlbum().getName(),
-                    element.getBestAlbum().getTracks()
-            ).orElseThrow(() -> new SQLException("Failed to insert album"));
-        }
+        Long bestAlbumId = this.databaseManager.executeQuerySingle(
+                "INSERT INTO cm_collection_album (name, tracks) VALUES (?, ?) RETURNING id",
+                rs -> rs.getLong("id"),
+                element.getBestAlbum().getName(),
+                element.getBestAlbum().getTracks()
+        ).orElseThrow(() -> new SQLException("Failed to insert album"));
 
         Long musicBandId = this.databaseManager.executeQuerySingle(
                 "INSERT INTO cm_collection (name, number_of_participants, singles_count, " +
