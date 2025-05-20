@@ -9,6 +9,7 @@ import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
+import com.ssnagin.collectionmanager.session.SessionKey;
 import com.ssnagin.collectionmanager.user.objects.InternalUser;
 import com.ssnagin.collectionmanager.user.objects.User;
 import lombok.SneakyThrows;
@@ -50,6 +51,10 @@ public class CommandLogin extends UserNetworkCommand {
 
             ServerResponse serverResponse = this.networking.sendClientRequest(clientRequest);
 
+            SessionKey sessionKey = (SessionKey) serverResponse.getData();
+
+            sessionKeyManager.setSessionKey(sessionKey);
+            
             Console.separatePrint(
                     serverResponse.getMessage(),
                     String.valueOf(serverResponse.getResponseStatus())

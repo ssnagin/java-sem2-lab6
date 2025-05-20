@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.networking.wrappers;
 
+import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.session.SessionKey;
 import lombok.EqualsAndHashCode;

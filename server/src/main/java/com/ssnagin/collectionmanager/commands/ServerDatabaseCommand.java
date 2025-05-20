@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public abstract class ServerCollectionCommand extends ServerCommand {
+public abstract class ServerDatabaseCommand extends ServerCommand {
 
     private static String UNAUTHORIZED = "Unauthorized user. Please, log in first.";
     private static String SESSION_EXPIRED = "Session expired. Please, log in again.";
@@ -23,7 +23,7 @@ public abstract class ServerCollectionCommand extends ServerCommand {
 
     protected SessionManager sessionManager;
 
-    public ServerCollectionCommand(String name, CollectionManager collectionManager) {
+    public ServerDatabaseCommand(String name, CollectionManager collectionManager) {
         super(name);
         setCollectionManager(collectionManager);
 

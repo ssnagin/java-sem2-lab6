@@ -10,6 +10,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 
@@ -43,7 +44,9 @@ public class CommandAdd extends UserNetworkCommand {
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
             var result = new LocalDateWrapper(musicBand);
 
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
+            ServerResponse response = this.networking.sendClientRequest(
+                    new SessionClientRequest(new ClientRequest(parsedString, result), this.sessionKeyManager.getSessionKey())
+            );
             Console.separatePrint(response.getMessage(), "SERVER");
 
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |

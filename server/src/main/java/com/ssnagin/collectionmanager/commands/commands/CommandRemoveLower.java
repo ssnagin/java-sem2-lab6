@@ -5,7 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.commands.ServerDatabaseCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
@@ -15,7 +15,7 @@ import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
  *
  * @author developer
  */
-public class CommandRemoveLower extends ServerCollectionCommand {
+public class CommandRemoveLower extends ServerDatabaseCommand {
 
     public CommandRemoveLower(String name, CollectionManager collectionManager) {
         super(name, collectionManager);

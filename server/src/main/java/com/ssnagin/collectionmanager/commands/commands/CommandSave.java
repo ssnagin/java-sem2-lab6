@@ -5,7 +5,7 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
-import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
+import com.ssnagin.collectionmanager.commands.ServerDatabaseCommand;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.files.FileManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
@@ -19,7 +19,7 @@ import lombok.Setter;
  *
  * @author developer
  */
-public class CommandSave extends ServerCollectionCommand {
+public class CommandSave extends ServerDatabaseCommand {
 
     @Getter
     @Setter

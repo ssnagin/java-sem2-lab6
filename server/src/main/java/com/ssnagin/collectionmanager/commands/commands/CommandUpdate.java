@@ -6,8 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.collection.CollectionManager;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
-import com.ssnagin.collectionmanager.commands.ServerCommand;
+import com.ssnagin.collectionmanager.commands.ServerDatabaseCommand;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
@@ -17,7 +16,7 @@ import java.sql.SQLException;
 /**
  * @author developer
  */
-public class CommandUpdate extends ServerCollectionCommand {
+public class CommandUpdate extends ServerDatabaseCommand {
 
     public CommandUpdate(String name,
                          CollectionManager collectionManager) {
