@@ -6,6 +6,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.console.Console;
 
@@ -33,9 +34,12 @@ public class CommandCountByNumberOfParticipants extends UserNetworkCommand {
             );
 
             ServerResponse serverResponse = this.networking.sendClientRequest(
-                    new ClientRequest(
-                            parsedString,
-                            numberOfParticipants
+                    new SessionClientRequest(
+                            new ClientRequest(
+                                    parsedString,
+                                    numberOfParticipants
+                            ),
+                            sessionKeyManager.getSessionKey()
                     )
             );
 
@@ -51,28 +55,5 @@ public class CommandCountByNumberOfParticipants extends UserNetworkCommand {
 
 
         return ApplicationStatus.RUNNING;
-
-        /*long counter = 0;
-        long numberOfParticipants;
-
-        try {
-            numberOfParticipants = (Long) Reflections.parsePrimitiveInput(
-                    Long.class,
-                    parsedString.getArguments().get(0)
-            );
-        } catch (NumberFormatException ex) {
-            Console.log("Неверный формат числа");
-            return ApplicationStatus.RUNNING;
-        } catch (IndexOutOfBoundsException | NoSuchElementException ex) {
-            return this.showUsage(parsedString);
-        }
-
-        for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            if (numberOfParticipants == musicBand.getNumberOfParticipants()) counter += 1;
-        }
-
-        Console.separatePrint(counter, "AMOUNT");
-
- */       //return ApplicationStatus.RUNNING;
     }
 }

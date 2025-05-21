@@ -12,6 +12,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  *
  *
@@ -29,7 +31,7 @@ public class CommandCountByNumberOfParticipants extends ServerCollectionCommand 
         ServerResponse serverResponse = super.executeCommand(clientRequest);
         if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
 
-        Long counter = 0L;
+        Integer result;
 
         if (!(clientRequest.getData() instanceof Long)) {
             serverResponse.setResponseStatus(ResponseStatus.CORRUPTED);
@@ -39,14 +41,18 @@ public class CommandCountByNumberOfParticipants extends ServerCollectionCommand 
 
         Long numberOfParticipants = (Long) clientRequest.getData();
 
-        for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            if (numberOfParticipants == musicBand.getNumberOfParticipants()) {
-                counter += 1;
-            }
+        try {
+            result = this.databaseManager.executeQuerySingle(
+                    "SELECT COUNT(*) FROM cm_collection WHERE number_of_participants = ?",
+                    res -> res.getInt("count"),
+                    numberOfParticipants
+            ).orElseThrow(() -> new SQLException("Error while counting"));
+        } catch (SQLException e) {
+            return serverResponse.error(e.getMessage());
         }
 
-        serverResponse.setData(counter);
-        serverResponse.appendMessage("Counted " + numberOfParticipants + " participants");
+        serverResponse.setData(result);
+        serverResponse.appendMessage("Counted " + result + " participants");
 
         return serverResponse;
     }
