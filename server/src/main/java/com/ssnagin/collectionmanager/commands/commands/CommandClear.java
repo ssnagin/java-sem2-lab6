@@ -11,6 +11,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  *
@@ -28,7 +30,11 @@ public class CommandClear extends ServerCollectionCommand {
         ServerResponse serverResponse = super.executeCommand(clientRequest);
         if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
 
-        this.collectionManager.removeAllElements();
+        try {
+            this.collectionManager.removeAllElements();
+        } catch (SQLException e) {
+            return serverResponse.error("Couldn't clear the collection");
+        }
 
         serverResponse.appendMessage("Collection was erased!");
 

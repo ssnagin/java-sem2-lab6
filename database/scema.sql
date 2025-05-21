@@ -62,11 +62,11 @@ CREATE TABLE cm_collection (
     number_of_participants BIGINT NOT NULL DEFAULT 0,
 
     singles_count INTEGER NOT NULL DEFAULT 0,
-    coordinates_id INTEGER NOT NULL REFERENCES cm_collection_coordinates(id),
+    coordinates_id INTEGER NOT NULL REFERENCES cm_collection_coordinates(id) ON DELETE CASCADE,
 
     -- Специально не выносил значения, чтобы не возиться с enum'om и его обработкой. Небольшой костыль
     genre TEXT NOT NULL,
-    best_album_id INTEGER REFERENCES cm_collection_album(id),
+    best_album_id INTEGER REFERENCES cm_collection_album(id) ON DELETE CASCADE,
 
     created TIMESTAMP NOT NULL DEFAULT now()
 );
