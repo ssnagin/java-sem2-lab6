@@ -50,6 +50,6 @@ public class CommandRemoveById extends ServerCollectionCommand {
             serverResponse.error(e.getMessage());
         }
 
-        return serverResponse;
+        return serverResponse.ok("Successfully removed");
     }
 }

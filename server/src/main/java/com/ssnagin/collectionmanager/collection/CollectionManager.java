@@ -109,6 +109,9 @@ public class CollectionManager implements Serializable {
 
 
     public void removeAllElements() throws SQLException {
+
+        this.databaseManager.update("DELETE FROM cm_collection");
+
         this.databaseManager.update("TRUNCATE TABLE cm_user_collection CASCADE");
         this.databaseManager.update("TRUNCATE TABLE cm_collection CASCADE");
         this.databaseManager.update("TRUNCATE TABLE cm_collection_coordinates CASCADE");
@@ -139,13 +142,40 @@ public class CollectionManager implements Serializable {
             throw new NoSuchElementException("Element id cannot be null");
         }
 
+        // Удаляем связи пользователей с коллекцией
+        this.databaseManager.update(
+                "DELETE FROM cm_user_collection WHERE collection_id = ?",
+                id
+        );
+
+        Map<String, Long> relatedIds = this.databaseManager.executeQuerySingle(
+                "SELECT coordinates_id, best_album_id FROM cm_collection WHERE id = ?",
+                rs -> {
+                    Map<String, Long> ids = new HashMap<>();
+                    ids.put("coordinates_id", rs.getLong("coordinates_id"));
+                    if (!rs.wasNull()) {
+                        ids.put("best_album_id", rs.getLong("best_album_id"));
+                    }
+                    return ids;
+                },
+                id
+        ).orElseThrow(() -> new NoSuchElementException(String.format("Element with id=%d does not exist", id)));
+
         int affectedRows = this.databaseManager.update(
                 "DELETE FROM cm_collection WHERE id = ?",
                 id
         );
 
-        if (affectedRows == 0) {
-            throw new NoSuchElementException(String.format("Element with id=%d does not exist", id));
+        this.databaseManager.update(
+                "DELETE FROM cm_collection_coordinates WHERE id = ?",
+                relatedIds.get("coordinates_id")
+        );
+
+        if (relatedIds.containsKey("best_album_id")) {
+            this.databaseManager.update(
+                    "DELETE FROM cm_collection_album WHERE id = ?",
+                    relatedIds.get("best_album_id")
+            );
         }
     }
 
@@ -244,3 +274,4 @@ public class CollectionManager implements Serializable {
         return this.collection; // TEMPORARY
     }
 }
+
