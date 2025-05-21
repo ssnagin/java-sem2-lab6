@@ -13,6 +13,7 @@ import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 
 import java.io.IOException;
@@ -56,7 +57,10 @@ public class CommandShow extends UserNetworkCommand {
 
         try {
 
-            ClientRequest clientRequest = new ClientRequest(parsedString, page, 1);
+            ClientRequest clientRequest = new SessionClientRequest(
+                    new ClientRequest(parsedString, page, 1),
+                    sessionKeyManager.getSessionKey()
+            );
 
             response = this.networking.sendClientRequest(clientRequest);
             Console.separatePrint(response.getMessage(), "SERVER");

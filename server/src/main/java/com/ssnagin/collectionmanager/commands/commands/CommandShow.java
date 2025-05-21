@@ -11,6 +11,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  * Shows brief description about available commands
  *
@@ -48,42 +50,18 @@ public class CommandShow extends ServerCollectionCommand {
 
         return new ServerResponse(ResponseStatus.ERROR, "Unknown stage", null);
 
-//        ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
-//        int shownElements;
-//
-//        if (this.collectionManager.isEmpty()) {
-//            serverResponse.appendMessage("Collection is empty");
-//            return serverResponse;
-//        }
-//
-//        serverResponse.appendMessage("Collection contains " + this.collectionManager.getSize() + " elements ");
-//
-//        shownElements = this.collectionManager.getSize();
-//
-//        if (this.collectionManager.getSize() > Config.Commands.MAX_SHOWN_COLLECTION_ELEMENTS) {
-//            shownElements = Config.Commands.MAX_SHOWN_COLLECTION_ELEMENTS;
-//            serverResponse.appendMessage("(shown first " + shownElements + " elements, sorted by coordinates)");
-//        }
-//
-//        NavigableSet<MusicBand> sortedMusicBands = this.collectionManager.getCollection().descendingSet();
-//
-//        // Limits for the response
-//        serverResponse.setData(
-//                sortedMusicBands.stream().limit(shownElements)
-//                        .collect(
-//                                Collectors.toCollection(
-//                                        () -> new SerializableTreeSet<>(sortedMusicBands.comparator())
-//                                )
-//                        )
-//        );
-//
-//        return serverResponse;
     }
 
     private ServerResponse stage1(ClientRequest clientRequest) {
         ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK, "", null);
 
-        int size = this.collectionManager.getSize();
+        int size;
+        try {
+            size = this.collectionManager.getSize();
+        } catch (SQLException e) {
+            return serverResponse.error(e.getMessage());
+        }
+
         Long maxPages = (long) Math.floorDiv(size, MAX_PAGE_SIZE) + 1;
         Long currentPage = (Long) clientRequest.getData();
 
@@ -114,8 +92,10 @@ public class CommandShow extends ServerCollectionCommand {
         ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
         serverResponse.setStage(clientRequest.getStage());
 
-        if (collectionManager.isEmpty()) {
-            serverResponse.error("Collection is empty");
+        try {
+            if (collectionManager.isEmpty()) return serverResponse.ok("Collection is empty");
+        } catch (SQLException e) {
+            return serverResponse.error("{Error while processing collection size}");
         }
 
         Long currentPage = (Long) clientRequest.getData();
@@ -128,7 +108,7 @@ public class CommandShow extends ServerCollectionCommand {
             serverResponse.setStage(
                     serverResponse.getStage() + 1
             );
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | SQLException e) {
             serverResponse.appendMessage(null);
             serverResponse.setStage(99);
         }

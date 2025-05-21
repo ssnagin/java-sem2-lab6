@@ -5,8 +5,11 @@
 package com.ssnagin.collectionmanager.collection;
 
 import com.ssnagin.collectionmanager.collection.comparators.CoordinatesComparator;
+import com.ssnagin.collectionmanager.collection.model.Album;
 import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.collection.model.MusicGenre;
+import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.sun.source.tree.Tree;
 import lombok.Getter;
@@ -117,23 +120,56 @@ public class CollectionManager implements Serializable {
             throw new NoSuchElementException(String.format("Element with id=%d does not exist", id));
     }
 
-    public int getSize() {
-        return this.collection.size();
+    public int getSize() throws SQLException {
+
+        return this.databaseManager.executeQuerySingle(
+                "SELECT COUNT(*) FROM cm_collection",
+                res -> res.getInt("count")
+        ).orElseThrow(() -> new SQLException("Internal error"));
     }
 
-    public MusicBand getNthLowest(Long n) {
-        if (n < 0 || n >= collection.size()) {
+    public MusicBand getNthLowest(Long n) throws SQLException, IndexOutOfBoundsException {
+        if (n < 0 || n >= getSize()) {
             throw new IndexOutOfBoundsException("Invalid index: " + n);
         }
-        Iterator<MusicBand> iterator = collection.iterator();
-        for (int i = 0; i < n; i++) {
-            iterator.next();
-        }
-        return iterator.next();
+
+        return this.databaseManager.executeQuerySingle(
+                "SELECT c.id, c.name, c.number_of_participants, c.singles_count, c.genre, c.created, " +
+                        "cc.x AS coord_x, cc.y AS coord_y, " +
+                        "ca.name AS album_name, ca.tracks AS album_tracks " +
+                        "FROM cm_collection c " +
+                        "JOIN cm_collection_coordinates cc ON c.coordinates_id = cc.id " +
+                        "JOIN cm_collection_album ca ON c.best_album_id = ca.id " +
+                        "ORDER BY c.number_of_participants ASC, c.id ASC " +
+                        "LIMIT 1 OFFSET ?",
+                rs -> {
+                    LocalDateWrapper musicBand = new LocalDateWrapper(new MusicBand());
+                    musicBand.setId(rs.getLong("id"));
+                    musicBand.setName(rs.getString("name"));
+                    musicBand.setNumberOfParticipants(rs.getLong("number_of_participants"));
+                    musicBand.setSinglesCount(rs.getInt("singles_count"));
+                    musicBand.setGenre(MusicGenre.valueOf(rs.getString("genre")));
+
+                    musicBand.setCreationDate(rs.getTimestamp("created").toLocalDateTime().toLocalDate());
+
+                    Coordinates coordinates = new Coordinates();
+                    coordinates.setX(rs.getLong("coord_x"));
+                    coordinates.setY(rs.getInt("coord_y"));
+                    musicBand.setCoordinates(coordinates);
+
+                    Album album = new Album();
+                    album.setName(rs.getString("album_name"));
+                    album.setTracks(rs.getLong("album_tracks"));
+                    musicBand.setBestAlbum(album);
+
+                    return musicBand;
+                },
+                n
+        ).orElseThrow(() -> new SQLException("Failed to get nth lowest element"));
     }
 
-    public boolean isEmpty() {
-        return this.collection.isEmpty();
+    public boolean isEmpty() throws SQLException {
+        return getSize() == 0;
     }
 
     public int removeLower(MusicBand element) {
