@@ -93,11 +93,24 @@ public class CollectionManager implements Serializable {
         return musicBandId;
     }
 
-    public MusicBand getLowestElement() {
-        if (this.collection.isEmpty()) {
-            return null;
-        }
-        return this.collection.first();
+    public MusicBand getLowestElement() throws SQLException {
+        return this.databaseManager.executeQuerySingle(
+                "SELECT c.id, c.name, c.number_of_participants, c.singles_count, c.genre, c.created, " +
+                        "cc.x AS coord_x, cc.y AS coord_y, " +
+                        "ca.name AS album_name, ca.tracks AS album_tracks " +
+                        "FROM cm_collection c " +
+                        "JOIN cm_collection_coordinates cc ON c.coordinates_id = cc.id " +
+                        "JOIN cm_collection_album ca ON c.best_album_id = ca.id " +
+                        "ORDER BY " +
+                        "c.name ASC, " +                // сначала по имени (A-Z)
+                        "c.singles_count ASC, " +        // затем по количеству синглов (по возрастанию)
+                        "cc.x ASC, cc.y ASC, " +         // затем по координатам (сначала x, потом y)
+                        "ca.name ASC, " +                // затем по названию лучшего альбома
+                        "c.genre ASC, " +                // затем по жанру
+                        "c.id ASC " +                    // в конце по ID (на случай одинаковых значений)
+                        "LIMIT 1",
+                this::mapResultSetToMusicBand
+        ).orElse(null);
     }
 
     public void removeElement(MusicBand musicBand) throws SQLException {

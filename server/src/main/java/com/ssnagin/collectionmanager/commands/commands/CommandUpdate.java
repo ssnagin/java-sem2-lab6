@@ -61,11 +61,24 @@ public class CommandUpdate extends ServerCollectionCommand {
 
         Long id = (Long) clientRequest.getData();
 
+        try {
+            Long result = this.databaseManager.executeQuerySingle(
+                    "SELECT id FROM cm_user_collection WHERE collection_id = ? AND user_id = ? LIMIT 1",
+                        res -> res.getLong("id"),
+                    id,
+                    sessionManager.getUserId(((SessionClientRequest) clientRequest).getSessionKey())
+                    ).orElseThrow(() -> new SQLException(""));
+
+            if (result == null) throw new SQLException("");
+        } catch (SQLException e) {
+            return serverResponse.error("You don't have a permission to update this object!");
+        }
+
         MusicBand musicBand = null;
         try {
             musicBand = this.collectionManager.getElementById(id);
         } catch (SQLException e) {
-            serverResponse.error(e.getMessage());
+            return serverResponse.error(e.getMessage());
         }
 
         if (musicBand == null) {
@@ -103,6 +116,6 @@ public class CommandUpdate extends ServerCollectionCommand {
             throw new RuntimeException(e);
         }
 
-        return serverResponse;
+        return serverResponse.ok("Successfully updated!");
     }
 }

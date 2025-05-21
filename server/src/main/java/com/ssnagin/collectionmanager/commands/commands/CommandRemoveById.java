@@ -10,6 +10,7 @@ import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 
 import java.sql.SQLException;
 
@@ -37,12 +38,18 @@ public class CommandRemoveById extends ServerCollectionCommand {
         Long id = (Long) clientRequest.getData();
 
         try {
-            if (collectionManager.getElementById(id) == null) {
-                return serverResponse.error("Element with given id does not exist");
-            }
+            Long result = this.databaseManager.executeQuerySingle(
+                    "SELECT id FROM cm_user_collection WHERE collection_id = ? AND user_id = ? LIMIT 1",
+                    res -> res.getLong("id"),
+                    id,
+                    sessionManager.getUserId(((SessionClientRequest) clientRequest).getSessionKey())
+            ).orElseThrow(() -> new SQLException("Internal error"));
+
+            if (result == null) throw new SQLException("Element with given id does not exist");
         } catch (SQLException e) {
-            serverResponse.error(e.getMessage());
+            return serverResponse.error("You don't have a permission to delete this object!");
         }
+
 
         try {
             collectionManager.removeElementById(id);

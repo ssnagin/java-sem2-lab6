@@ -13,6 +13,7 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 
@@ -53,7 +54,12 @@ public class CommandAddIfMin extends UserNetworkCommand {
             var result = new LocalDateWrapper(musicBand);
 
 
-            ServerResponse response = this.networking.sendClientRequest(new ClientRequest(parsedString, result));
+            ServerResponse response = this.networking.sendClientRequest(
+                    new SessionClientRequest(
+                            new ClientRequest(parsedString, result),
+                            sessionKeyManager.getSessionKey()
+                    )
+            );
 
             Console.separatePrint(response.getResponseStatus(), "SERVER");
             Console.separatePrint(response.getMessage(), "SERVER");

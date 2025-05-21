@@ -35,18 +35,14 @@ public class CommandAddIfMin extends ServerCollectionCommand {
         LocalDateWrapper musicBand = (LocalDateWrapper) clientRequest.getData();
         //List<String> errors = TempValidator.validateMusicBand(musicBand);
 
-//        if (!errors.isEmpty()) {
-//            response.setResponseStatus(ResponseStatus.ERROR);
-//            for (String error : errors) {
-//                response.appendMessage(error + "\n");
-//            }
-//            return response;
-//        }
-
         // Adding into CollectionManager with Creation Date if it is the lowest element:
-        if (musicBand.compareTo(this.collectionManager.getLowestElement()) != -1) {
-            response.appendMessage("The element was not added");
-            return response;
+        try {
+            if (musicBand.compareTo(this.collectionManager.getLowestElement()) != -1) {
+                response.appendMessage("The element was not added");
+                return response;
+            }
+        } catch (SQLException e) {
+            response.error(e.getMessage());
         }
 
         try {

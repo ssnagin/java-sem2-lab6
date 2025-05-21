@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.List;
 
 @ToString
 public class Core extends AbstractCore {
@@ -116,6 +117,7 @@ public class Core extends AbstractCore {
 
     protected ServerResponse runCommand(ClientRequest clientRequest) {
         logger.debug(clientRequest.toString());
+
         logger.debug(sessionManager.getActiveSessions().toString());
 
         ServerResponse result = new ServerResponse();
@@ -141,7 +143,7 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandClear("clear" , collectionManager));
         this.commandManager.register(new CommandUpdate("update" , collectionManager));
         this.commandManager.register(new CommandRemoveById("remove_by_id" , collectionManager));
-        // this.commandManager.register(new CommandAddIfMin("add_if_min" , collectionManager));
+        this.commandManager.register(new CommandAddIfMin("add_if_min" , collectionManager));
         // this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants" , collectionManager));
         this.commandManager.register(new CommandRandom("random" , collectionManager));
 
