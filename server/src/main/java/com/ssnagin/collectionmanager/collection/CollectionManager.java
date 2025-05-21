@@ -143,6 +143,8 @@ public class CollectionManager implements Serializable {
         this.databaseManager.update("TRUNCATE TABLE cm_collection CASCADE");
         this.databaseManager.update("TRUNCATE TABLE cm_collection_coordinates CASCADE");
         this.databaseManager.update("TRUNCATE TABLE cm_collection_album CASCADE");
+
+        this.collection.clear();
     }
 
     public MusicBand getElementById(Long id) throws SQLException {

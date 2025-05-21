@@ -22,7 +22,7 @@ import lombok.Setter;
  */
 @Deprecated
 public class CommandSave extends ServerCollectionCommand {
-
+//
     @Getter
     @Setter
     private FileManager fileManager;
@@ -39,19 +39,19 @@ public class CommandSave extends ServerCollectionCommand {
         setFileManager(fileManager);
         setCollectionPath(collectionPath);
     }
-
-    @Override
-    public ServerResponse executeCommand(ClientRequest clientRequest) {
-
-        ServerResponse serverResponse = super.executeCommand(clientRequest);
-        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
-
-        try {
-            fileManager.write(this.collectionManager.getCollection(), collectionPath);
-        } catch (Exception ex) {
-            Console.error(ex);
-        }
-
-        return new ServerResponse();
-    }
+//
+//    @Override
+//    public ServerResponse executeCommand(ClientRequest clientRequest) {
+//
+//        ServerResponse serverResponse = super.executeCommand(clientRequest);
+//        if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
+//
+//        try {
+//            fileManager.write(this.collectionManager.getCollection(), collectionPath);
+//        } catch (Exception ex) {
+//            Console.error(ex);
+//        }
+//
+//        return new ServerResponse();
+//    }
 }

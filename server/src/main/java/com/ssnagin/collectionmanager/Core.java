@@ -117,44 +117,6 @@ public class Core extends AbstractCore {
                 }
             }
         });
-
-//        while (true) {
-//
-//            try {
-//                byte[] receiveBuffer = new byte[Config.Networking.BUFFER_SIZE];
-//
-//                DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
-//
-//                datagramSocket.receive(receivePacket);
-//
-//                ClientRequest request = DataStream.deserialize(receivePacket.getData());
-//
-//                logger.debug(
-//                        "{}:{} sent a package ({})",
-//                        receivePacket.getAddress(),
-//                        receivePacket.getPort(),
-//                        request.getId()
-//                );
-//
-//                ServerResponse response = runCommand(request);
-//
-//                logger.info(
-//                        response.getResponseStatus() + " {} {}",
-//                        response.getId(),
-//                        response.getMessage().substring(0, Math.min(response.getMessage().length(), 100))
-//                );
-//
-//                // Change this code in the future
-//                networking.setInetAddress(receivePacket.getAddress());
-//                this.networking.setPort(receivePacket.getPort());
-//                this.networking.sendServerResponse(response);
-//
-//            } catch (IOException e) {
-//                logger.error("Error processing UDP packet", e);
-//            } catch (ClassNotFoundException e) {
-//                logger.error("Error ClassNotFoundException");
-//            }
-//        }
     }
 
     private void processRequest(DatagramPacket receivePacket) {
