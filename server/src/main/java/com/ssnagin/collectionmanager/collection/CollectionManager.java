@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +33,9 @@ public class CollectionManager implements Serializable {
     @Getter
     private static CollectionManager instance;
 
-    private final TreeSet<MusicBand> collection = new TreeSet<>();
+    // TEMPORARY
+    @Getter
+    private final ConcurrentSkipListSet<MusicBand> collection = new ConcurrentSkipListSet<>();
 
     static {
         try {
@@ -291,8 +294,5 @@ public class CollectionManager implements Serializable {
         return result.toString();
     }
 
-    public TreeSet<MusicBand> getCollection() {
-        return this.collection; // TEMPORARY
-    }
 }
 

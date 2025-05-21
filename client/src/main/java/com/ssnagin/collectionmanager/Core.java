@@ -51,7 +51,7 @@ public class Core extends AbstractCore {
         this.scriptManager = ScriptManager.getInstance();
 
         try {
-            this.networking = new Networking("localhost", Config.Networking.PORT);
+            this.networking = new Networking("192.168.10.80", Config.Networking.PORT);
         } catch (UnknownHostException | SocketException e) {
             throw new RuntimeException(e);
         }

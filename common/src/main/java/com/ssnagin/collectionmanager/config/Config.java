@@ -2,7 +2,13 @@ package com.ssnagin.collectionmanager.config;
 
 public class Config {
     public class Core {
+
+
         public static String VERSION = "1.1.0";
+
+
+        public static final int RESPONSE_SENDER_PARALLELISM = 8;
+        public static final int REQUEST_RECEIVER_THREADS = 4;
     }
 
     public class Networking {

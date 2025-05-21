@@ -1,3 +1,5 @@
+passes.txt
+
 .gradle
 **/build/
 !src/**/build/
