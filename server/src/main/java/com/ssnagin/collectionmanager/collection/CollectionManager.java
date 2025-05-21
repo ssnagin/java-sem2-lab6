@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author developer
@@ -31,7 +32,7 @@ public class CollectionManager implements Serializable {
     @Getter
     private static CollectionManager instance;
 
-    private static final TreeSet<MusicBand> collection = new TreeSet<>();
+    private final TreeSet<MusicBand> collection = new TreeSet<>();
 
     static {
         try {
@@ -47,8 +48,24 @@ public class CollectionManager implements Serializable {
     @Setter
     private DatabaseManager databaseManager;
 
-//    @Setter
-//    private TreeSet<MusicBand> collection;
+    public void loadFromDatabase() throws SQLException {
+        List<MusicBand> bands = databaseManager.executeQuery(
+                "SELECT c.id, c.name, c.number_of_participants, c.singles_count, c.genre, c.created, " +
+                        "cc.x AS coord_x, cc.y AS coord_y, " +
+                        "ca.name AS album_name, ca.tracks AS album_tracks " +
+                        "FROM cm_collection c " +
+                        "JOIN cm_collection_coordinates cc ON c.coordinates_id = cc.id " +
+                        "JOIN cm_collection_album ca ON c.best_album_id = ca.id",
+                this::mapResultSetToMusicBand
+        );
+
+        this.collection.addAll(bands);
+    }
+
+    public void syncWithDatabase() throws SQLException {
+        this.collection.clear();
+        loadFromDatabase();
+    }
 
     public CollectionManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
@@ -90,27 +107,21 @@ public class CollectionManager implements Serializable {
                 musicBandId
         ).orElseThrow(() -> new SQLException("Failed to attach connection " + userId.toString() + " - " + musicBandId.toString()));
 
+
+
+        MusicBand newBand = getElementById(musicBandId);
+        if (newBand != null) {
+            this.collection.add(newBand);
+        }
+
         return musicBandId;
     }
 
     public MusicBand getLowestElement() throws SQLException {
-        return this.databaseManager.executeQuerySingle(
-                "SELECT c.id, c.name, c.number_of_participants, c.singles_count, c.genre, c.created, " +
-                        "cc.x AS coord_x, cc.y AS coord_y, " +
-                        "ca.name AS album_name, ca.tracks AS album_tracks " +
-                        "FROM cm_collection c " +
-                        "JOIN cm_collection_coordinates cc ON c.coordinates_id = cc.id " +
-                        "JOIN cm_collection_album ca ON c.best_album_id = ca.id " +
-                        "ORDER BY " +
-                        "c.name ASC, " +                // сначала по имени (A-Z)
-                        "c.singles_count ASC, " +        // затем по количеству синглов (по возрастанию)
-                        "cc.x ASC, cc.y ASC, " +         // затем по координатам (сначала x, потом y)
-                        "ca.name ASC, " +                // затем по названию лучшего альбома
-                        "c.genre ASC, " +                // затем по жанру
-                        "c.id ASC " +                    // в конце по ID (на случай одинаковых значений)
-                        "LIMIT 1",
-                this::mapResultSetToMusicBand
-        ).orElse(null);
+        if (this.collection.isEmpty()) {
+            return null;
+        }
+        return this.collection.first();
     }
 
     public void removeElement(MusicBand musicBand) throws SQLException {
@@ -190,6 +201,12 @@ public class CollectionManager implements Serializable {
                     relatedIds.get("best_album_id")
             );
         }
+
+
+        MusicBand toRemove = getElementById(id);
+        if (toRemove != null) {
+            this.collection.remove(toRemove);
+        }
     }
 
     public int getSize() throws SQLException {
@@ -201,44 +218,35 @@ public class CollectionManager implements Serializable {
     }
 
     public MusicBand getNthLowest(Long n) throws SQLException, IndexOutOfBoundsException {
-        if (n < 0 || n >= getSize()) {
+        if (n < 0 || n >= collection.size()) {
             throw new IndexOutOfBoundsException("Invalid index: " + n);
         }
 
-        return this.databaseManager.executeQuerySingle(
-                "SELECT c.id, c.name, c.number_of_participants, c.singles_count, c.genre, c.created, " +
-                        "cc.x AS coord_x, cc.y AS coord_y, " +
-                        "ca.name AS album_name, ca.tracks AS album_tracks " +
-                        "FROM cm_collection c " +
-                        "JOIN cm_collection_coordinates cc ON c.coordinates_id = cc.id " +
-                        "JOIN cm_collection_album ca ON c.best_album_id = ca.id " +
-                        "ORDER BY c.number_of_participants ASC, c.id ASC " +
-                        "LIMIT 1 OFFSET ?",
-                this::mapResultSetToMusicBand,
-                n
-        ).orElseThrow(() -> new SQLException("Failed to get nth lowest element"));
+        Iterator<MusicBand> iterator = collection.iterator();
+        for (int i = 0; i < n; i++) {
+            iterator.next();
+        }
+        return iterator.next();
     }
 
     public boolean isEmpty() throws SQLException {
         return getSize() == 0;
     }
 
-    public int removeLower(MusicBand element) {
+    public int removeLower(MusicBand element) throws SQLException {
         if (element == null || collection.isEmpty()) {
             return 0;
         }
 
-        // Получаем подмножество элементов, которые меньше заданного
-        List<MusicBand> lowerElements = collection.stream()
-                .filter(musicBand -> musicBand.compareTo(element) < 0)
-                .toList();
+        List<MusicBand> toRemove = collection.stream()
+                .filter(mb -> mb.compareTo(element) < 0)
+                .collect(Collectors.toList());
 
-        // Запоминаем количество элементов для удаления
-        int count = lowerElements.size();
+        for (MusicBand mb : toRemove) {
+            removeElementById(mb.getId());
+        }
 
-        // Удаляем все элементы из основной коллекции
-        collection.removeAll(lowerElements);
-        return count;
+        return toRemove.size();
     }
 
     private MusicBand mapResultSetToMusicBand(ResultSet rs) throws SQLException {

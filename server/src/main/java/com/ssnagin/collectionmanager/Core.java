@@ -48,7 +48,9 @@ public class Core extends AbstractCore {
         this.sessionManager = SessionManager.getInstance();
 
         this.databaseManager = DatabaseManager.getInstance();
+
         this.collectionManager = CollectionManager.getInstance();
+        this.collectionManager.loadFromDatabase();
 
         this.networking = new Networking();
         this.networking.setConnectionTimeout(3000);
