@@ -11,6 +11,8 @@ import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 
+import java.sql.SQLException;
+
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  *
@@ -34,11 +36,20 @@ public class CommandRemoveById extends ServerCollectionCommand {
 
         Long id = (Long) clientRequest.getData();
 
-        if (collectionManager.getElementById(id) == null) {
-            return serverResponse.error("Element with given id does not exist");
+        try {
+            if (collectionManager.getElementById(id) == null) {
+                return serverResponse.error("Element with given id does not exist");
+            }
+        } catch (SQLException e) {
+            serverResponse.error(e.getMessage());
         }
 
-        collectionManager.removeElementById(id);
+        try {
+            collectionManager.removeElementById(id);
+        } catch (SQLException e) {
+            serverResponse.error(e.getMessage());
+        }
+
         return serverResponse;
     }
 }

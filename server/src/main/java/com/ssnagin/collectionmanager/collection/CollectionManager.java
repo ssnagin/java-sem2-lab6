@@ -17,6 +17,7 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -99,9 +100,13 @@ public class CollectionManager implements Serializable {
         return this.collection.first();
     }
 
-    public void removeElement(MusicBand musicBand) {
-        this.collection.remove(musicBand);
+    public void removeElement(MusicBand musicBand) throws SQLException {
+        if (musicBand == null || musicBand.getId() == null) {
+            return;
+        }
+        removeElementById(musicBand.getId());
     }
+
 
     public void removeAllElements() throws SQLException {
         this.databaseManager.update("TRUNCATE TABLE cm_user_collection CASCADE");
@@ -110,17 +115,38 @@ public class CollectionManager implements Serializable {
         this.databaseManager.update("TRUNCATE TABLE cm_collection_album CASCADE");
     }
 
-    public MusicBand getElementById(Long id) {
+    public MusicBand getElementById(Long id) throws SQLException {
 
-        return this.collection.stream()
-                .filter(row -> row.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        if (id == null) {
+            return null;
+        }
+
+        return this.databaseManager.executeQuerySingle(
+                "SELECT c.id, c.name, c.number_of_participants, c.singles_count, c.genre, c.created, " +
+                        "cc.x AS coord_x, cc.y AS coord_y, " +
+                        "ca.name AS album_name, ca.tracks AS album_tracks " +
+                        "FROM cm_collection c " +
+                        "JOIN cm_collection_coordinates cc ON c.coordinates_id = cc.id " +
+                        "JOIN cm_collection_album ca ON c.best_album_id = ca.id " +
+                        "WHERE c.id = ?",
+                        this::mapResultSetToMusicBand,
+                    id
+                    ).orElse(null);
     }
 
-    public void removeElementById(Long id) throws NoSuchElementException {
-        if (!collection.removeIf(musicBand -> musicBand.getId().equals(id)))
+    public void removeElementById(Long id) throws SQLException, NoSuchElementException {
+        if (id == null) {
+            throw new NoSuchElementException("Element id cannot be null");
+        }
+
+        int affectedRows = this.databaseManager.update(
+                "DELETE FROM cm_collection WHERE id = ?",
+                id
+        );
+
+        if (affectedRows == 0) {
             throw new NoSuchElementException(String.format("Element with id=%d does not exist", id));
+        }
     }
 
     public int getSize() throws SQLException {
@@ -145,28 +171,7 @@ public class CollectionManager implements Serializable {
                         "JOIN cm_collection_album ca ON c.best_album_id = ca.id " +
                         "ORDER BY c.number_of_participants ASC, c.id ASC " +
                         "LIMIT 1 OFFSET ?",
-                rs -> {
-                    LocalDateWrapper musicBand = new LocalDateWrapper(new MusicBand());
-                    musicBand.setId(rs.getLong("id"));
-                    musicBand.setName(rs.getString("name"));
-                    musicBand.setNumberOfParticipants(rs.getLong("number_of_participants"));
-                    musicBand.setSinglesCount(rs.getInt("singles_count"));
-                    musicBand.setGenre(MusicGenre.valueOf(rs.getString("genre")));
-
-                    musicBand.setCreationDate(rs.getTimestamp("created").toLocalDateTime().toLocalDate());
-
-                    Coordinates coordinates = new Coordinates();
-                    coordinates.setX(rs.getLong("coord_x"));
-                    coordinates.setY(rs.getInt("coord_y"));
-                    musicBand.setCoordinates(coordinates);
-
-                    Album album = new Album();
-                    album.setName(rs.getString("album_name"));
-                    album.setTracks(rs.getLong("album_tracks"));
-                    musicBand.setBestAlbum(album);
-
-                    return musicBand;
-                },
+                this::mapResultSetToMusicBand,
                 n
         ).orElseThrow(() -> new SQLException("Failed to get nth lowest element"));
     }
@@ -191,6 +196,28 @@ public class CollectionManager implements Serializable {
         // Удаляем все элементы из основной коллекции
         collection.removeAll(lowerElements);
         return count;
+    }
+
+    private MusicBand mapResultSetToMusicBand(ResultSet rs) throws SQLException {
+        LocalDateWrapper musicBand = new LocalDateWrapper(new MusicBand());
+        musicBand.setId(rs.getLong("id"));
+        musicBand.setName(rs.getString("name"));
+        musicBand.setNumberOfParticipants(rs.getLong("number_of_participants"));
+        musicBand.setSinglesCount(rs.getInt("singles_count"));
+        musicBand.setGenre(MusicGenre.valueOf(rs.getString("genre")));
+        musicBand.setCreationDate(rs.getTimestamp("created").toLocalDateTime().toLocalDate());
+
+        Coordinates coordinates = new Coordinates();
+        coordinates.setX(rs.getLong("coord_x"));
+        coordinates.setY(rs.getInt("coord_y"));
+        musicBand.setCoordinates(coordinates);
+
+        Album album = new Album();
+        album.setName(rs.getString("album_name"));
+        album.setTracks(rs.getLong("album_tracks"));
+        musicBand.setBestAlbum(album);
+
+        return musicBand;
     }
 
     @Override

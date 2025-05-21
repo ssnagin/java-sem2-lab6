@@ -21,6 +21,7 @@ import lombok.ToString;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.NoSuchElementException;
 
 /**
  * @author developer
@@ -67,7 +68,7 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandAdd("add", "add an object to collection", networking, scriptManager));
         this.commandManager.register(new CommandShow("show", "show collection's elements", networking));
         this.commandManager.register(new CommandClear("clear", "clear collection elements", networking));
-        // this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", networking, scriptManager));
+        this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", networking, scriptManager));
         // this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", networking));
         // this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", scriptManager, networking));
         this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
@@ -95,7 +96,7 @@ public class Core extends AbstractCore {
         // After it, parse given arguments with ArgumentParser
 
         ParsedString parsedString;
-
+        String inputLine = "";
         while (true) {
 
             Console.print(Console.getShellArrow());
@@ -106,7 +107,11 @@ public class Core extends AbstractCore {
 //                    ? this.scriptManager.getCurrentScanner().nextLine()
 //                    : "";
 
-            String inputLine = this.scriptManager.getCurrentScanner().nextLine();
+            try {
+                inputLine = this.scriptManager.getCurrentScanner().nextLine();
+            } catch (NoSuchElementException e) {
+                onExit();
+            }
 
             if (inputLine.contains("\u0004")) {
                 onExit();

@@ -61,7 +61,12 @@ public class CommandUpdate extends ServerCollectionCommand {
 
         Long id = (Long) clientRequest.getData();
 
-        MusicBand musicBand = this.collectionManager.getElementById(id);
+        MusicBand musicBand = null;
+        try {
+            musicBand = this.collectionManager.getElementById(id);
+        } catch (SQLException e) {
+            serverResponse.error(e.getMessage());
+        }
 
         if (musicBand == null) {
             serverResponse.appendMessage("Collection does not exist");
@@ -81,7 +86,13 @@ public class CommandUpdate extends ServerCollectionCommand {
         MusicBand musicBand = (MusicBand) clientRequest.getData();
         Long musicBandId = musicBand.getId();
 
-        this.collectionManager.removeElementById(musicBandId);
+        try {
+            this.collectionManager.removeElementById(musicBandId);
+        } catch (SQLException e) {
+            serverResponse.error(e.getMessage());
+        }
+
+
         try {
             this.collectionManager.addElement(
                     musicBand,

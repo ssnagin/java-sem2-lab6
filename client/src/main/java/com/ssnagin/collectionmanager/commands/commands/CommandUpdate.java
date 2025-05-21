@@ -15,6 +15,7 @@ import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
+import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
 import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 
@@ -63,10 +64,14 @@ public class CommandUpdate extends UserNetworkCommand {
 
         try {
             ServerResponse serverResponse = this.networking.sendClientRequest(
-                    new ClientRequest(
-                            parsedString,
-                            id,
-                            1
+
+                    new SessionClientRequest(
+                            new ClientRequest(
+                                    parsedString,
+                                    id,
+                                    1
+                            ),
+                            sessionKeyManager.getSessionKey()
                     )
             );
 
@@ -89,15 +94,17 @@ public class CommandUpdate extends UserNetworkCommand {
             result.setId(id);
 
             serverResponse = this.networking.sendClientRequest(
-                new ClientRequest(
-                        parsedString,
-                        result,
-                        stage
+                new SessionClientRequest(
+                        new ClientRequest(
+                                parsedString,
+                                result,
+                                stage
+                        ),
+                        sessionKeyManager.getSessionKey()
                 )
             );
 
             Console.separatePrint(serverResponse.getMessage(), serverResponse.getResponseStatus().toString());
-
 
         } catch (IndexOutOfBoundsException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException | IOException | ClassNotFoundException ex) {
