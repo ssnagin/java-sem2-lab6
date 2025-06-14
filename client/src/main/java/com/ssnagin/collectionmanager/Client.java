@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class Client {
     public static void main(String[] args) {
-        Core.getInstance().start(args);
+        Core core = new Core(args);
+        core.start();
     }
 }

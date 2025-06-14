@@ -15,6 +15,7 @@ import lombok.ToString;
 @ToString
 public class Server {
     public static void main(String[] args) {
-        Core.getInstance().start(args);
+        Core core = new Core(args);
+        core.start();
     }
 }

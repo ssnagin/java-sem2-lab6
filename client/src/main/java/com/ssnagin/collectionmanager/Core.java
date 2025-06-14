@@ -30,9 +30,6 @@ import java.util.NoSuchElementException;
 public class Core extends AbstractCore {
 
     @Getter
-    private static Core instance = new Core();
-
-    @Getter
     protected ApplicationStatus applicationStatus;
 
     public static final String LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
@@ -43,8 +40,8 @@ public class Core extends AbstractCore {
             "                                                                   ▝▀▜▌          \n" +
             "  ver. %s | github.com/ssnagin/java-sem2-lab6.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
-    public Core() {
-        super();
+    public Core(String[] args) {
+        super(args);
 
         // Singletone pattern
         this.commandManager = CommandManager.getInstance();
@@ -84,8 +81,8 @@ public class Core extends AbstractCore {
     }
 
     @Override
-    public void start(String[] args) {
-        super.start(args);
+    public void start() {
+        super.start();
 
         // Step-by-step description of the algorithm.
 

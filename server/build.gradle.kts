@@ -32,6 +32,8 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.17.0")
 
     implementation("org.postgresql:postgresql:42.7.3")
+
+    implementation("commons-cli:commons-cli:1.5.0")
 }
 
 application {

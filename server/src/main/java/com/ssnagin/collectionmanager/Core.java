@@ -6,6 +6,7 @@ import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
+import com.ssnagin.collectionmanager.database.DatabaseCredentials;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
@@ -30,8 +31,6 @@ import java.util.concurrent.TimeUnit;
 
 @ToString
 public class Core extends AbstractCore {
-    @Getter
-    private static Core instance = new Core();
 
     private static final Logger logger = LoggerFactory.getLogger(Core.class);
 
@@ -47,11 +46,14 @@ public class Core extends AbstractCore {
     private ForkJoinPool responseSenderPool; // ForkJoinPool для отправки ответов
 
     @SneakyThrows
-    public Core() {
-        super();
+    public Core(String[] args) {
+        super(args);
 
         this.sessionManager = SessionManager.getInstance();
 
+        DatabaseManager.getInstance().init(
+                new DatabaseCredentials(args)
+        );
         this.databaseManager = DatabaseManager.getInstance();
 
         this.collectionManager = CollectionManager.getInstance();
@@ -84,8 +86,8 @@ public class Core extends AbstractCore {
     }
 
     @Override
-    public void start(String[] args) {
-        super.start(args);
+    public void start() {
+        super.start();
 
         logger.info(LOGO);
 

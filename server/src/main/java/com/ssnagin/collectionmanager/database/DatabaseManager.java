@@ -15,13 +15,7 @@ public class DatabaseManager {
     private Connection connection = null;
     private DatabaseCredentials credentials;
 
-    // TEMP solution, I need to remake argparser in order to set f
-
-    public DatabaseManager() throws SQLException {
-        init(
-            new DatabaseCredentials("postgres", "12345", "127.0.0.1", 5432, "collection")
-        );
-    }
+    public DatabaseManager() {}
 
     public DatabaseManager(DatabaseCredentials credentials) throws SQLException {
         init(credentials);
@@ -57,7 +51,7 @@ public class DatabaseManager {
         return connection;
     }
 
-    public void closeConnection() throws SQLException {
+    public synchronized void closeConnection() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
         }
