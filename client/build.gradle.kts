@@ -4,6 +4,7 @@ plugins {
     java
     application
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 repositories {
@@ -19,6 +20,14 @@ dependencies {
 
     testCompileOnly("org.projectlombok:lombok:1.18.36")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
+
+
+}
+
+javafx {
+    version = "17" // Версия JavaFX
+    modules = listOf("javafx.controls", "javafx.fxml")
+    // "javafx.base", "javafx.graphics", "javafx.media", "javafx.web", "javafx.swing"
 }
 
 java {

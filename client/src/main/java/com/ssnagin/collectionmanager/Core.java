@@ -11,16 +11,18 @@ import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.gui.ClientGUI;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
+import javafx.stage.Stage;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.SneakyThrows;
 import lombok.ToString;
 
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.NoSuchElementException;
 
 /**
@@ -28,6 +30,10 @@ import java.util.NoSuchElementException;
  */
 @ToString
 public class Core extends AbstractCore {
+
+    @Getter
+    @Setter
+    protected ClientGUI clientGUI;
 
     @Getter
     protected ApplicationStatus applicationStatus;
@@ -40,6 +46,7 @@ public class Core extends AbstractCore {
             "                                                                   ▝▀▜▌          \n" +
             "  ver. %s | github.com/ssnagin/java-sem2-lab6.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
+    @SneakyThrows
     public Core(String[] args) {
         super(args);
 
@@ -47,13 +54,13 @@ public class Core extends AbstractCore {
         this.commandManager = CommandManager.getInstance();
         this.scriptManager = ScriptManager.getInstance();
 
-        try {
-            this.networking = new Networking("192.168.10.80", Config.Networking.PORT);
-        } catch (UnknownHostException | SocketException e) {
-            throw new RuntimeException(e);
-        }
+//        this.networking = new Networking("192.168.10.80", Config.Networking.PORT);
+        this.networking = new Networking("localhost", Config.Networking.PORT);
 
         registerCommands();
+
+        // init GUI
+        clientGUI = new ClientGUI();
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -81,8 +88,12 @@ public class Core extends AbstractCore {
     }
 
     @Override
+    @SneakyThrows
     public void start() {
         super.start();
+
+        // Start GUI
+        ClientGUI.launchGUI();
 
         // Step-by-step description of the algorithm.
 
