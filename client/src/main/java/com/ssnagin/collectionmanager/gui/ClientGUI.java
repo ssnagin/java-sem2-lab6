@@ -2,14 +2,18 @@ package com.ssnagin.collectionmanager.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -40,7 +44,7 @@ public class ClientGUI extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
 
         if (isRunning.get()) {
             Platform.runLater(() -> {
@@ -63,7 +67,6 @@ public class ClientGUI extends Application {
             new Thread(() -> Application.launch(ClientGUI.class)).start();
             return;
         }
-        showGUI();
     }
 
     public void showGUI() {
@@ -100,20 +103,24 @@ public class ClientGUI extends Application {
         super.stop();
     }
 
+    @SneakyThrows
     private void initGUI() {
-        root = new BorderPane();
+
+        primaryStage.setMinHeight(720);
+        primaryStage.setMinWidth(1280);
+        primaryStage.setTitle("CollectionManager ver. lab 8");
+
+        root = FXMLLoader.load(getClass().getResource("/com/ssnagin/collectionmanager/fxml/main.fxml"));
         root.getStyleClass().add("root");
 
         scene = new Scene(root);
-
         scene.getStylesheets().add(
                 Objects.requireNonNull(getClass().getResource("/com/ssnagin/collectionmanager/css/style.css")).toExternalForm()
         );
 
-        primaryStage.setMinHeight(720);
-        primaryStage.setMinWidth(1280);
-
-        primaryStage.setTitle("CollectionManager ver. lab 8");
+        Pane navbar = new Pane();
+        root.setTop(navbar);
+        navbar.getStyleClass().add("navbar");
 
         primaryStage.setScene(scene);
         primaryStage.show();

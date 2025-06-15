@@ -1,4 +1,22 @@
 .root {
     -fx-background-color: lightyellow;
+    -fx-min-width:1280px;
+    -fx-min-height:720px;
 }
 
+.navbar {
+    -fx-width: 100%;
+    -fx-height: 200px;
+    -fx-display: flex;
+    -fx-background-color: grey;
+
+    -fx-flex-wrap: nowrap;
+    -fx-justify-content: flex-start;
+    padding: 10px;
+
+}
+
+.navbar > * {
+    -fx-margin-right: 10px;
+
+}

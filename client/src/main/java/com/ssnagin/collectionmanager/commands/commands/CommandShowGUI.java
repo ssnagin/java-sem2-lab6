@@ -50,6 +50,10 @@ public class CommandShowGUI extends UserCommand {
                 return ApplicationStatus.RUNNING;
             }
         } catch (IndexOutOfBoundsException e) {return showUsage(parsedString);}
+        catch (Exception e) {
+            Console.error(e.getMessage());
+            return ApplicationStatus.RUNNING;
+        }
 
         return showUsage(parsedString);
     }
