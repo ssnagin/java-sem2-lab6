@@ -11,12 +11,9 @@ import com.ssnagin.collectionmanager.reflection.Reflections;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import com.ssnagin.collectionmanager.session.SessionKey;
 import com.ssnagin.collectionmanager.user.objects.InternalUser;
-import com.ssnagin.collectionmanager.user.objects.User;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 public class CommandLogin extends UserNetworkCommand {

@@ -21,12 +21,13 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:1.18.36")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 
-
+    implementation("org.openjfx:javafx-controls:17.0.2")
+    implementation("org.openjfx:javafx-fxml:17.0.2")
 }
 
 javafx {
-    version = "17" // Версия JavaFX
-    modules = listOf("javafx.controls", "javafx.fxml")
+    version = "17"
+    modules = listOf("javafx.controls", "javafx.fxml", "javafx.graphics", "javafx.base")
     // "javafx.base", "javafx.graphics", "javafx.media", "javafx.web", "javafx.swing"
 }
 
@@ -38,6 +39,11 @@ java {
 
 application {
     mainClass.set("com.ssnagin.collectionmanager.Client")
+
+    applicationDefaultJvmArgs = listOf(
+        "-Djdk.gtk.verbose=false",
+        "-Djdk.gtk.version=3"
+    )
 }
 
 tasks.jar {
@@ -50,4 +56,5 @@ tasks.named<Test>("test") {
 
 tasks.named<ShadowJar>("shadowJar") {
     archiveFileName.set("collectionManager.jar")
+    mergeServiceFiles()
 }

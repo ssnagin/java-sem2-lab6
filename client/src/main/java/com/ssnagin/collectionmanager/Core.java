@@ -17,9 +17,7 @@ import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.scripts.ScriptManager;
-import javafx.stage.Stage;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.ToString;
 
@@ -32,11 +30,9 @@ import java.util.NoSuchElementException;
 public class Core extends AbstractCore {
 
     @Getter
-    @Setter
-    protected ClientGUI clientGUI;
-
-    @Getter
     protected ApplicationStatus applicationStatus;
+
+    protected ScriptManager scriptManager;
 
     public static final String LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
@@ -60,7 +56,6 @@ public class Core extends AbstractCore {
         registerCommands();
 
         // init GUI
-        clientGUI = new ClientGUI();
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -82,6 +77,8 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandLogin("login", "Log in into the system", networking, scriptManager));
         this.commandManager.register(new CommandRegister("register", "Register in the system", networking, scriptManager));
 
+        this.commandManager.register(new CommandShowGUI("gui", "show / hide gui", ClientGUI.getInstance()));
+
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         // this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
@@ -91,9 +88,6 @@ public class Core extends AbstractCore {
     @SneakyThrows
     public void start() {
         super.start();
-
-        // Start GUI
-        ClientGUI.launchGUI();
 
         // Step-by-step description of the algorithm.
 

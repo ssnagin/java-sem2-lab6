@@ -2,7 +2,6 @@ package com.ssnagin.collectionmanager;
 
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.networking.Networking;
-import com.ssnagin.collectionmanager.scripts.ScriptManager;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +15,6 @@ public abstract class AbstractCore {
     @Getter
     String[] args;
 
-    protected ScriptManager scriptManager;
     protected CommandManager commandManager;
 
     protected Networking networking;
@@ -25,7 +23,6 @@ public abstract class AbstractCore {
         setArgs(args);
 
         commandManager = CommandManager.getInstance();
-        scriptManager = ScriptManager.getInstance();
     }
 
     public void start() {
