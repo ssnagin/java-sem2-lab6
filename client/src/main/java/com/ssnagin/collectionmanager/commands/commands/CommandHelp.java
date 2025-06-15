@@ -20,7 +20,7 @@ import java.util.Collections;
  */
 public class CommandHelp extends UserCommand {
 
-    private CommandManager commandManager;
+    protected CommandManager commandManager;
 
     private String temporaryCreatedHeadMessage = "CollectionManager is a nice tool though.\nHere are available commands:\n";
 
@@ -38,7 +38,7 @@ public class CommandHelp extends UserCommand {
 
         Console.println(temporaryCreatedHeadMessage);
 
-        ArrayList<String> sortedKeys = new ArrayList<String>(this.commandManager.getCommands().keySet());
+        ArrayList<String> sortedKeys = new ArrayList<>(this.commandManager.getCommands().keySet());
         Collections.sort(sortedKeys);
 
         UserCommand selectedCommand;

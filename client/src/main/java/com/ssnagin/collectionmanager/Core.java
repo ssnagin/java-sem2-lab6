@@ -12,6 +12,7 @@ import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.gui.ClientGUI;
+import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -34,6 +35,8 @@ public class Core extends AbstractCore {
 
     protected ScriptManager scriptManager;
 
+    protected ClientGUI clientGUI;
+
     public static final String LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
             "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
@@ -54,8 +57,6 @@ public class Core extends AbstractCore {
         this.networking = new Networking("localhost", Config.Networking.PORT);
 
         registerCommands();
-
-        // init GUI
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -83,6 +84,10 @@ public class Core extends AbstractCore {
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         // this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
     }
+//
+//    private void registerGUICommands() {
+//        this.commandManager.register(new GUICommandHelp("help", "display help on available commands", commandManager));
+//    }
 
     @Override
     @SneakyThrows

@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.gui;
 
+import com.ssnagin.collectionmanager.commands.CommandManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -34,17 +35,17 @@ public class ClientGUI extends Application {
     private static Stage primaryStage;
 
     private static final AtomicBoolean isRunning = new AtomicBoolean(false);
-
+    @Getter
     protected Scene scene;
+
     protected BorderPane root;
 
-    @Override
-    public void init() {
+    public void registerCommands() {
 
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         if (isRunning.get()) {
             Platform.runLater(() -> {
@@ -111,16 +112,11 @@ public class ClientGUI extends Application {
         primaryStage.setTitle("CollectionManager ver. lab 8");
 
         root = FXMLLoader.load(getClass().getResource("/com/ssnagin/collectionmanager/fxml/main.fxml"));
-        root.getStyleClass().add("root");
 
         scene = new Scene(root);
         scene.getStylesheets().add(
                 Objects.requireNonNull(getClass().getResource("/com/ssnagin/collectionmanager/css/style.css")).toExternalForm()
         );
-
-        Pane navbar = new Pane();
-        root.setTop(navbar);
-        navbar.getStyleClass().add("navbar");
 
         primaryStage.setScene(scene);
         primaryStage.show();
