@@ -25,6 +25,10 @@ public abstract class AbstractCore {
         commandManager = CommandManager.getInstance();
     }
 
+    public AbstractCore() {
+        this(new String[0]);
+    }
+
     public void start() {
         Signal.handle(new Signal("INT"), new SignalHandler() {  // Ctrl+C
             @Override

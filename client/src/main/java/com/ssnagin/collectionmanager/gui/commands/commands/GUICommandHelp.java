@@ -1,49 +1,42 @@
 package com.ssnagin.collectionmanager.gui.commands.commands;
 
+import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
 import com.ssnagin.collectionmanager.gui.managers.AlertManager;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 
-public class GUICommandHelp extends GUICommand {
+import java.util.ArrayList;
+import java.util.Collections;
 
-    private Scene scene;
+public class GUICommandHelp extends GUICommand {
 
     StringBuilder preparedCommandList;
 
-    public GUICommandHelp(String name) {
+    CommandManager commandManager;
+
+    public GUICommandHelp(String name, CommandManager commandManager) {
         super(name);
 
+        this.commandManager = commandManager;
         preparedCommandList = new StringBuilder();
-//        scene = clientGUI.getScene();
 
         initGUI();
     }
 
     public void initGUI() {
-//        ArrayList<String> sortedKeys = new ArrayList<>(this.commandManager.getCommands().keySet());
-//        Collections.sort(sortedKeys);
-//
-//        UserCommand selectedCommand;
-//
-//        for (String command : sortedKeys) {
-//            selectedCommand = (UserCommand) this.commandManager.get(command);
-//            preparedCommandList.append(selectedCommand.getName() + " | " + selectedCommand.getDescription() + "\n");
-//        }
+        ArrayList<String> sortedKeys = new ArrayList<>(this.commandManager.getCommands().keySet());
+        Collections.sort(sortedKeys);
 
-//        helpCommandButton = (ImageView) scene.getRoot().lookup("#command_help");
+        GUICommand selectedCommand;
 
-//        helpCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//            AlertManager.showInfoAlert("test", "This is a test2", "This is a test3");
-//        });
+        for (String command : sortedKeys) {
+            selectedCommand = (GUICommand) this.commandManager.get(command);
+            preparedCommandList.append(selectedCommand.getName() + " | " + selectedCommand.getDescription() + "\n");
+        }
     }
 
-//    @FXML
-//    public void onMouseClicked(MouseEvent event) {
-//
-//    }
-
     public void executeCommand(MouseEvent event) {
-        AlertManager.showInfoAlert("Help", "test 2", this.preparedCommandList.toString());
+        AlertManager.showInfoAlert("Help", "Возможные команды", this.preparedCommandList.toString());
     }
 }

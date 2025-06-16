@@ -12,10 +12,14 @@ public abstract class GUICommand extends Command {
     String name;
     String description;
 
-    public GUICommand(String name) {
+    public GUICommand(String name, String description) {
         super(name);
-
-        setDescription("");
+        setDescription(description);
     }
+
+    public GUICommand(String name) {
+        this(name, "");
+    }
+
     public abstract void executeCommand(MouseEvent event);
 }

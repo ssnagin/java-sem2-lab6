@@ -31,6 +31,9 @@ import java.util.NoSuchElementException;
 public class Core extends AbstractCore {
 
     @Getter
+    protected static Core instance = new Core();
+
+    @Getter
     protected ApplicationStatus applicationStatus;
 
     protected ScriptManager scriptManager;
@@ -46,8 +49,8 @@ public class Core extends AbstractCore {
             "  ver. %s | github.com/ssnagin/java-sem2-lab6.git              ▐▙▄▞▘        \n\n", Config.Core.VERSION);
 
     @SneakyThrows
-    public Core(String[] args) {
-        super(args);
+    public Core() {
+        super();
 
         // Singletone pattern
         this.commandManager = CommandManager.getInstance();
