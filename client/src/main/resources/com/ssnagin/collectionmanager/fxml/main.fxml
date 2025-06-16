@@ -12,7 +12,7 @@
    <top>
       <HBox prefHeight="70.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView commandName="test" fx:id="helpCommandButton" fitHeight="60.0" fitWidth="300.0" onMouseClicked="#initialize" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="helpCommandButton" fitHeight="60.0" fitWidth="300.0" onMouseClicked="#initialize" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_help.png" />
                </image>
@@ -72,12 +72,12 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="523.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="historyCommandButton" fitHeight="60.0" fitWidth="200.0" layoutX="523.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_history.png" />
                </image>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
             <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="605.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">

@@ -1,7 +1,6 @@
-package com.ssnagin.collectionmanager.gui.managers;
+package com.ssnagin.collectionmanager.gui.alert;
 
 import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class AlertManager {

@@ -1,16 +1,12 @@
 package com.ssnagin.collectionmanager.gui.commands.commands;
 
+import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
-import com.ssnagin.collectionmanager.gui.managers.AlertManager;
+import com.ssnagin.collectionmanager.gui.alert.AlertManager;
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class GUICommandHistory extends GUICommand {
-
-    StringBuilder preparedCommandList;
 
     CommandManager commandManager;
 
@@ -18,7 +14,6 @@ public class GUICommandHistory extends GUICommand {
         super(name);
 
         this.commandManager = commandManager;
-        preparedCommandList = new StringBuilder();
 
         initGUI();
     }
@@ -28,6 +23,17 @@ public class GUICommandHistory extends GUICommand {
     }
 
     public void executeCommand(MouseEvent event) {
-        AlertManager.showInfoAlert("History", "Пусто", "");
+
+        StringBuilder prepared = new StringBuilder();
+
+        if (this.commandManager.getCommandHistory().isEmpty()) {
+            AlertManager.showInfoAlert("History", "Пусто", "");
+            return;
+        }
+
+        for (Command command : this.commandManager.getCommandHistory()) {
+            prepared.append(command.getName()).append("\n");
+        }
+        AlertManager.showInfoAlert("History", "Недавние команды", prepared.toString());
     }
 }
