@@ -10,6 +10,7 @@ import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.model.MusicGenre;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
+import com.ssnagin.collectionmanager.commands.interfaces.Manageable;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
 import com.sun.source.tree.Tree;
 import lombok.Getter;

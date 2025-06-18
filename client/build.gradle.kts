@@ -42,7 +42,8 @@ application {
 
     applicationDefaultJvmArgs = listOf(
         "-Djdk.gtk.verbose=false",
-        "-Djdk.gtk.version=3"
+        "-Dprism.verbose=false",
+        "-Djavafx.version=2"
     )
 }
 

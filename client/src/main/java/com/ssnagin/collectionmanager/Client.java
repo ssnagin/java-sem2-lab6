@@ -5,6 +5,9 @@ package com.ssnagin.collectionmanager;/*
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 /**
  * Entry script for running Application
  *
@@ -13,7 +16,15 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Client {
+
+    private static class NullOutputStream extends OutputStream {
+        @Override public void write(int b) { }
+    }
+
     public static void main(String[] args) {
+
+//        System.setErr(new PrintStream(new NullOutputStream())); // убрать в релизе
+
         Core core = Core.getInstance();
         core.setArgs(args);
         core.start();

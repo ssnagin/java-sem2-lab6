@@ -47,10 +47,4 @@ public abstract class UserCommand extends Command {
 
         return ApplicationStatus.RUNNING;
     }
-
-    public int compareTo(UserCommand otherCommand) {
-        int result = super.compareTo(otherCommand);
-        if (result == 0) result = description.compareTo(otherCommand.getDescription());
-        return result;
-    }
 }

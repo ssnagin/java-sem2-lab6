@@ -14,11 +14,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @NoArgsConstructor
+@Deprecated
+// ПЕРЕДЕЛАТЬ В ЛОГИКУ Window
 public class ClientGUI extends Application {
 
     private static ClientGUI instance = new ClientGUI();
@@ -39,10 +40,6 @@ public class ClientGUI extends Application {
     protected Scene scene;
 
     protected BorderPane root;
-
-    public void registerCommands() {
-
-    }
 
     @Override
     public void start(Stage stage) {
@@ -66,7 +63,6 @@ public class ClientGUI extends Application {
     public void launchGUI() { // Сделать реализацию открытия gui по команде; cli не убирать
         if (!isRunning.get()) {
             new Thread(() -> Application.launch(ClientGUI.class)).start();
-            return;
         }
     }
 
@@ -86,7 +82,6 @@ public class ClientGUI extends Application {
             }
             primaryStage.show();
         });
-
      }
 
     public void hideGUI() {
@@ -119,6 +114,5 @@ public class ClientGUI extends Application {
         );
 
         primaryStage.setScene(scene);
-        primaryStage.show();
     }
 }

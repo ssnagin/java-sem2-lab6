@@ -7,8 +7,12 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.console.Console;
-import com.ssnagin.collectionmanager.gui.ClientGUI;
+import com.ssnagin.collectionmanager.gui.window.Window;
+import com.ssnagin.collectionmanager.gui.window.WindowManager;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
+
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
@@ -17,14 +21,14 @@ import com.ssnagin.collectionmanager.inputparser.ParsedString;
  */
 public class CommandShowGUI extends UserCommand {
 
-    private ClientGUI clientGUI;
+    private WindowManager windowManager;
 
-    private String USAGE = "gui <argument>\n\nshow  | show gui\nhide  | hide gui";
+    private String USAGE = "gui <argument>\n\nshow  | shows graphics for CollectionManager\nhide  | hides it";
 
-    public CommandShowGUI(String name, String description, ClientGUI clientGUI) {
-
+    public CommandShowGUI(String name, String description, WindowManager windowManager) {
         super(name, description);
-        this.clientGUI = clientGUI;
+
+        this.windowManager = windowManager;
     }
 
     @Override
@@ -34,26 +38,52 @@ public class CommandShowGUI extends UserCommand {
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
         try {
-            if (parsedString.getArguments().get(0).equalsIgnoreCase("show")) {
+            String action = parsedString.getArguments().get(0);
 
-                if (clientGUI.isGUIRunning()) {
-                    clientGUI.showGUI();
-                    return ApplicationStatus.RUNNING;
-                }
+            Window mainWindow = this.windowManager.get("main");
+            if (mainWindow == null) throw new NoSuchElementException("GUI Window have not been initiated | Internal error");
 
-                clientGUI.launchGUI();
-                return ApplicationStatus.RUNNING;
+            switch (action.toLowerCase()) {
+                case "show":
+                    mainWindow.show();
+                    break;
+                case "hide":
+                    mainWindow.hide();
+                    break;
+                default:
+                    return showUsage(parsedString);
             }
 
-            if (parsedString.getArguments().get(0).equalsIgnoreCase("hide")) {
-                clientGUI.hideGUI();
-                return ApplicationStatus.RUNNING;
-            }
-        } catch (IndexOutOfBoundsException e) {return showUsage(parsedString);}
-        catch (Exception e) {
-            Console.error(e.getMessage());
+        } catch (NoSuchElementException e) {
+            Console.error(e);
             return ApplicationStatus.RUNNING;
+        } catch (IndexOutOfBoundsException e) {
+            return showUsage(parsedString);
+        } catch (Exception e) {
+            Console.error("UNCHECKED ERROR: " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
         }
+
+//        try {
+//            if (parsedString.getArguments().get(0).equalsIgnoreCase("show")) {
+//
+//                if (clientGUI.isGUIRunning()) {
+//                    clientGUI.showGUI();
+//                    return ApplicationStatus.RUNNING;
+//                }
+//
+//                clientGUI.launchGUI();
+//                return ApplicationStatus.RUNNING;
+//            }
+//
+//            if (parsedString.getArguments().get(0).equalsIgnoreCase("hide")) {
+//                clientGUI.hideGUI();
+//                return ApplicationStatus.RUNNING;
+//            }
+//        } catch (IndexOutOfBoundsException e) {return showUsage(parsedString);}
+//        catch (Exception e) {
+//            Console.error(e.getMessage());
+//            return ApplicationStatus.RUNNING;
+//        }
 
         return showUsage(parsedString);
     }

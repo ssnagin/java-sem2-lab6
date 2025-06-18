@@ -12,7 +12,11 @@ import com.ssnagin.collectionmanager.commands.commands.*;
 import com.ssnagin.collectionmanager.config.Config;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.gui.ClientGUI;
+import com.ssnagin.collectionmanager.gui.ToolkitInitializer;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
+import com.ssnagin.collectionmanager.gui.window.Window;
+import com.ssnagin.collectionmanager.gui.window.WindowManager;
+import com.ssnagin.collectionmanager.gui.window.WindowParameters;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -38,7 +42,9 @@ public class Core extends AbstractCore {
 
     protected ScriptManager scriptManager;
 
-    protected ClientGUI clientGUI;
+//    protected ClientGUI clientGUI;
+
+    protected WindowManager windowManager;
 
     public static final String LOGO = String.format(" ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
@@ -52,14 +58,22 @@ public class Core extends AbstractCore {
     public Core() {
         super();
 
+        // Init JAVAFX toolkit
+        ToolkitInitializer.start();
+
         // Singletone pattern
         this.commandManager = CommandManager.getInstance();
         this.scriptManager = ScriptManager.getInstance();
+        this.windowManager = WindowManager.getInstance();
 
 //        this.networking = new Networking("192.168.10.80", Config.Networking.PORT);
         this.networking = new Networking("localhost", Config.Networking.PORT);
 
+        // init CLI commands
         registerCommands();
+
+        // init GUI Windows
+        registerGUIWindows();
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -81,16 +95,26 @@ public class Core extends AbstractCore {
         this.commandManager.register(new CommandLogin("login", "Log in into the system", networking, scriptManager));
         this.commandManager.register(new CommandRegister("register", "Register in the system", networking, scriptManager));
 
-        this.commandManager.register(new CommandShowGUI("gui", "show / hide gui", ClientGUI.getInstance()));
+        this.commandManager.register(new CommandShowGUI("gui", "show / hide gui", windowManager));
 
         // this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scriptManager));
         // this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         // this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
     }
-//
-//    private void registerGUICommands() {
-//        this.commandManager.register(new GUICommandHelp("help", "display help on available commands", commandManager));
-//    }
+
+    private void registerGUIWindows() {
+        this.windowManager.register(new Window(
+                "main",
+                new WindowParameters(
+                    1080,
+                    720,
+                    "Collection Manager ver. 1.3",
+                        "/com/ssnagin/collectionmanager/fxml/main.fxml",
+                        "/com/ssnagin/collectionmanager/css/style.css"
+                ),
+                true
+        ));
+    }
 
     @Override
     @SneakyThrows
