@@ -1,6 +1,5 @@
 package com.ssnagin.collectionmanager.commands.commands;
 
-import com.ssnagin.collectionmanager.commands.ServerCollectionCommand;
 import com.ssnagin.collectionmanager.commands.ServerCommand;
 import com.ssnagin.collectionmanager.crypto.generators.CryptoSHA1Generator;
 import com.ssnagin.collectionmanager.database.DatabaseManager;
@@ -35,6 +34,7 @@ public class CommandLogin extends ServerCommand {
         ServerResponse serverResponse = new ServerResponse(ResponseStatus.OK);
 
         try {
+
             User user = (User) clientRequest.getData();
             logger.debug(CryptoSHA1Generator.getInstance().getSHA1(user.getPassword()));
             List<User> response = this.databaseManager.executeQuery("SELECT * FROM cm_user WHERE username = ? AND password = ? LIMIT 1",
