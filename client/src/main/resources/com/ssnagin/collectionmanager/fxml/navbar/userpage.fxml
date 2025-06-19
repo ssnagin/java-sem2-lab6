@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ssnagin.collectionmanager.fxml.navbar.Userpage">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700" minWidth="500" prefHeight="700" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <DialogPane />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <MediaView fitHeight="200.0" fitWidth="200.0" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
