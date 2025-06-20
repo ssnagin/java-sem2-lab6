@@ -115,6 +115,16 @@ public class Core extends AbstractCore {
                 ),
                 true
         ));
+        this.windowManager.register(new Window(
+                "auth",
+                new WindowParameters(
+                        1080,
+                        720,
+                        "Auth page",
+                        "/com/ssnagin/collectionmanager/fxml/subwindows/auth.fxml",
+                        "/com/ssnagin/collectionmanager/css/style.css"
+                )
+        ));
     }
 
     @Override

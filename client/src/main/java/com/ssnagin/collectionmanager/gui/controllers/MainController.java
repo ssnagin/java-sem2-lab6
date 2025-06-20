@@ -3,8 +3,10 @@ package com.ssnagin.collectionmanager.gui.controllers;
 import com.ssnagin.collectionmanager.Core;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
+import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandAuth;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHistory;
+import com.ssnagin.collectionmanager.gui.window.WindowManager;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +20,7 @@ public class MainController {
     private Core core = Core.getInstance();
 
     private final CommandManager localCommandManager = new CommandManager();
+    private WindowManager windowManager;
     private boolean isInitialized = false;
 
     @FXML
@@ -25,6 +28,13 @@ public class MainController {
 
     @FXML
     private ImageView historyCommandButton;
+
+    @FXML
+    private ImageView loginCommandButton;
+
+    public MainController() {
+        windowManager = WindowManager.getInstance();
+    }
 
     @FXML
     private void initialize() {
@@ -40,10 +50,16 @@ public class MainController {
         historyCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ((GUICommand) localCommandManager.get("gui_history")).executeCommand(event);
         });
+
+        loginCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_auth")).executeCommand(event);
+        });
     }
 
     private void initGUICommands() {
         localCommandManager.register(new GUICommandHelp("gui_help", localCommandManager));
         localCommandManager.register(new GUICommandHistory("gui_history", localCommandManager));
+
+        localCommandManager.register(new GUICommandAuth("gui_auth", windowManager));
     }
 }

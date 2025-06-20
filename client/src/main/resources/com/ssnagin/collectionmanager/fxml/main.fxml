@@ -90,12 +90,12 @@
             </ImageView>
             <HBox alignment="TOP_RIGHT" prefHeight="71.0" prefWidth="673.0" spacing="50.0">
                <children>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="loginCommandButton" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/command_login.png" />
                      </image>
                      <cursor>
-                        <Cursor fx:constant="DEFAULT" />
+                        <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
                         <Insets left="50.0" />
