@@ -43,16 +43,12 @@ public class CommandShowGUI extends UserCommand {
             Window mainWindow = this.windowManager.get("main");
             if (mainWindow == null) throw new NoSuchElementException("GUI Window have not been initiated | Internal error");
 
-            switch (action.toLowerCase()) {
-                case "show":
-                    mainWindow.show();
-                    break;
-                case "hide":
-                    mainWindow.hide();
-                    break;
-                default:
-                    return showUsage(parsedString);
+            if (action.toLowerCase().equals("hide")) {
+                mainWindow.hide();
+                return applicationStatus;
             }
+            mainWindow.show();
+            return applicationStatus;
 
         } catch (NoSuchElementException e) {
             Console.error(e);
@@ -61,6 +57,7 @@ public class CommandShowGUI extends UserCommand {
             return showUsage(parsedString);
         } catch (Exception e) {
             Console.error("UNCHECKED ERROR: " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
+            return applicationStatus;
         }
 
 //        try {
@@ -84,8 +81,6 @@ public class CommandShowGUI extends UserCommand {
 //            Console.error(e.getMessage());
 //            return ApplicationStatus.RUNNING;
 //        }
-
-        return showUsage(parsedString);
     }
 
     @Override

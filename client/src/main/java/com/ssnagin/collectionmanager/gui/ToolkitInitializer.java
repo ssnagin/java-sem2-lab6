@@ -11,6 +11,7 @@ public class ToolkitInitializer {
 
     public static void start() {
         if (!initialized) {
+            Platform.setImplicitExit(false);
             new Thread(() -> Application.launch(JavaFXApp.class)).start();
             initialized = true;
         }

@@ -1,27 +1,15 @@
-package com.ssnagin.collectionmanager.gui.controllers;
+package com.ssnagin.collectionmanager.gui.controllers.controllers;
 
-import com.ssnagin.collectionmanager.Core;
-import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandAuth;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHistory;
-import com.ssnagin.collectionmanager.gui.window.WindowManager;
+import com.ssnagin.collectionmanager.gui.controllers.GUIController;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import lombok.Getter;
-import lombok.Setter;
 
-public class MainController {
-
-    @Getter
-    @Setter
-    private Core core = Core.getInstance();
-
-    private final CommandManager localCommandManager = new CommandManager();
-    private WindowManager windowManager;
-    private boolean isInitialized = false;
+public class MainGUIController extends GUIController {
 
     @FXML
     private ImageView helpCommandButton;
@@ -32,14 +20,9 @@ public class MainController {
     @FXML
     private ImageView loginCommandButton;
 
-    public MainController() {
-        windowManager = WindowManager.getInstance();
-    }
-
     @FXML
-    private void initialize() {
-        if (isInitialized) return;
-        isInitialized = true;
+    protected void initialize() {
+        super.initialize();
 
         initGUICommands();
 
