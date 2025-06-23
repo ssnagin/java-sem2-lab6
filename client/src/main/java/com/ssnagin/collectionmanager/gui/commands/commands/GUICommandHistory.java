@@ -13,11 +13,7 @@ public class GUICommandHistory extends GUICommand {
     public GUICommandHistory(String name, CommandManager commandManager) {
         super(name);
 
-        initGUI();
-    }
-
-    public void initGUI() {
-
+        this.commandManager = commandManager;
     }
 
     public void executeCommand(MouseEvent event) {

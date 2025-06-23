@@ -123,7 +123,26 @@
       </HBox>
    </top>
    <center>
-      <TableView id="content-table" prefHeight="529.0" prefWidth="1039.0" BorderPane.alignment="CENTER" />
+      <TableView fx:id="mainTableView" prefHeight="529.0" prefWidth="1039.0" BorderPane.alignment="CENTER">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
+<!--            <TableColumn fx:id="ownedUsernameColumn" prefWidth="100.0" text="Owned username" />-->
+
+            <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
+
+            <TableColumn fx:id="coordXColumn" prefWidth="100.0" text="Coord X" />
+            <TableColumn fx:id="coordYColumn" prefWidth="100.0" text="Coord Y" />
+
+            <TableColumn fx:id="participantsColumn" prefWidth="150.0" text="Participants" />
+            <TableColumn fx:id="singlesColumn" prefWidth="100.0" text="Singles" />
+
+<!--            <TableColumn fx:id="bestAlbumIdColumn" prefWidth="100.0" text="Best Album ID" />-->
+            <TableColumn fx:id="bestAlbumNameColumn" prefWidth="100.0" text="Best Album Name" />
+            <TableColumn fx:id="bestAlbumTracksColumn" prefWidth="100.0" text="Best Album Tracks" />
+
+            <TableColumn fx:id="genreColumn" prefWidth="150.0" text="Genre" />
+         </columns>
+      </TableView>
    </center>
    <bottom>
       <HBox id="animation" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">

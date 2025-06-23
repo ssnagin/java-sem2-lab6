@@ -2,7 +2,9 @@ package com.ssnagin.collectionmanager.gui.commands;
 
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.events.EventManager;
+import com.ssnagin.collectionmanager.gui.logger.GUITextLogger;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
@@ -32,7 +34,9 @@ public abstract class GUICommand extends Command {
         this(name, "");
     }
 
-    public abstract void executeCommand(MouseEvent event);
+    public void executeCommand(MouseEvent event) {
+        ClientConsole.println("Usage still not yet implemented :/ ");
+    }
 
     public void out(Object... objects) {
         if (outputText != null) {
