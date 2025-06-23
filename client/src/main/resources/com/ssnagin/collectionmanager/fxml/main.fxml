@@ -159,6 +159,6 @@
          </padding></HBox>
    </bottom>
    <left>
-      <TextArea prefHeight="200.0" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="leftTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Some text will be placed here..." BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

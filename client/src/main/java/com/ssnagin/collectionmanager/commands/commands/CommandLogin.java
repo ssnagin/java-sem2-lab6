@@ -3,6 +3,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
@@ -53,7 +54,7 @@ public class CommandLogin extends UserNetworkCommand {
                     String.valueOf(serverResponse.getResponseStatus())
             );
 
-            // Бросаю callback "UserAuthenticated"
+            eventManager.publish(EventType.USER_LOGGED_IN.toString(), user);
 
         } catch (IOException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             Console.error(e);

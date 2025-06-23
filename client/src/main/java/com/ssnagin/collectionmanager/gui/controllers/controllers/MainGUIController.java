@@ -1,24 +1,31 @@
 package com.ssnagin.collectionmanager.gui.controllers.controllers;
 
+import com.ssnagin.collectionmanager.events.EventListener;
+import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandAuth;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHistory;
 import com.ssnagin.collectionmanager.gui.controllers.GUIController;
+import com.ssnagin.collectionmanager.user.objects.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class MainGUIController extends GUIController {
 
     @FXML
-    private ImageView helpCommandButton;
+    public ImageView helpCommandButton;
 
     @FXML
-    private ImageView historyCommandButton;
+    public ImageView historyCommandButton;
 
     @FXML
-    private ImageView loginCommandButton;
+    public ImageView loginCommandButton;
+
+    @FXML
+    public TextArea leftTextArea;
 
     @FXML
     protected void initialize() {
@@ -46,7 +53,15 @@ public class MainGUIController extends GUIController {
         localCommandManager.register(new GUICommandAuth("gui_auth", networking, windowManager));
     }
 
-    void userLoggedIn() {
-        // Обработка callback
+    @Override
+    protected void initEventListeners() {
+        eventManager.subscribe(EventType.USER_LOGGED_IN.toString(),
+                this::handleUserLoggedIn);
+
+
+    }
+
+    private void handleUserLoggedIn(User user) {
+        leftTextArea.setText("Ахаха азаза я залогинился и это event");
     }
 }

@@ -1,6 +1,7 @@
 package com.ssnagin.collectionmanager.gui.commands.commands;
 
 import com.ssnagin.collectionmanager.commands.commands.CommandLogin;
+import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.form.GUIForm;
 import com.ssnagin.collectionmanager.form.GUIFormWithLogs;
 import com.ssnagin.collectionmanager.gui.commands.GUINetworkCommand;
@@ -74,7 +75,7 @@ public class GUICommandAuth extends GUINetworkCommand {
 
             out(serverResponse.getMessage());
 
-            // Бросаю User Authenticated
+            eventManager.publish(EventType.USER_LOGGED_IN.toString(), user);
         } catch (IOException | ClassNotFoundException e) {
             out(e.getMessage());
         }
