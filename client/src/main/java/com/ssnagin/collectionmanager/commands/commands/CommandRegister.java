@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -33,7 +34,7 @@ public class CommandRegister extends UserNetworkCommand {
 
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
-        Console.separatePrint("Please, fill in registration form:", this.getName().toUpperCase());
+        ClientConsole.separatePrint("Please, fill in registration form:", this.getName().toUpperCase());
 
         try {
 
@@ -43,12 +44,12 @@ public class CommandRegister extends UserNetworkCommand {
             ServerResponse response = this.networking.sendClientRequest(
                     new ClientRequest(parsedString, user)
             );
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
-            Console.error(ex.toString());
+            ClientConsole.error(ex.toString());
         }
 
         return ApplicationStatus.RUNNING;

@@ -8,6 +8,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -55,7 +56,7 @@ public class CommandUpdate extends UserNetworkCommand {
                     parsedString.getArguments().get(0)
             );
         } catch (NumberFormatException ex) {
-            Console.log("Неверный формат числа");
+            ClientConsole.log("Неверный формат числа");
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException e) {
             return showUsage(parsedString);
@@ -76,7 +77,7 @@ public class CommandUpdate extends UserNetworkCommand {
             );
 
             if (serverResponse.getResponseStatus() != ResponseStatus.OK) {
-                Console.separatePrint(
+                ClientConsole.separatePrint(
                         serverResponse.getMessage(),
                         String.valueOf(serverResponse.getResponseStatus()
                         )
@@ -85,7 +86,7 @@ public class CommandUpdate extends UserNetworkCommand {
             }
 
             stage = serverResponse.getStage();
-            Console.separatePrint("Please, fill in the form with your values:", "SERVER");
+            ClientConsole.separatePrint("Please, fill in the form with your values:", "SERVER");
 
             LocalDateWrapper result = new LocalDateWrapper(
                     Reflections.parseModel(MusicBand.class, scanner)
@@ -104,11 +105,11 @@ public class CommandUpdate extends UserNetworkCommand {
                 )
             );
 
-            Console.separatePrint(serverResponse.getMessage(), serverResponse.getResponseStatus().toString());
+            ClientConsole.separatePrint(serverResponse.getMessage(), serverResponse.getResponseStatus().toString());
 
         } catch (IndexOutOfBoundsException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException | IOException | ClassNotFoundException ex) {
-            Console.error(ex.toString());
+            ClientConsole.error(ex.toString());
             return ApplicationStatus.RUNNING;
         }
 
@@ -123,7 +124,7 @@ public class CommandUpdate extends UserNetworkCommand {
         stringBuilder.append("usage: update <id> <field> <value>\n").append("things that can be updated:\n");
         stringBuilder.append(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
 
-        Console.println(stringBuilder);
+        ClientConsole.println(stringBuilder);
 
         return ApplicationStatus.RUNNING;
     }

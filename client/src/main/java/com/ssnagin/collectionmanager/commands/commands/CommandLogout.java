@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -33,7 +34,7 @@ public class CommandLogout extends UserNetworkCommand {
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
         // Доработать и сделать logout на сервере
         sessionKeyManager.setSessionKey(null);
-        Console.log("Logged out");
+        ClientConsole.log("Logged out");
 
         return ApplicationStatus.RUNNING;
     }

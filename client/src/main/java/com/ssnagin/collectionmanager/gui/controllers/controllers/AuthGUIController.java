@@ -1,8 +1,6 @@
 package com.ssnagin.collectionmanager.gui.controllers.controllers;
 
-import com.ssnagin.collectionmanager.form.GUIForm;
-import com.ssnagin.collectionmanager.form.GUIFormWithLogs;
-import com.ssnagin.collectionmanager.gui.commands.GUICommand;
+import com.ssnagin.collectionmanager.gui.form.GUIFormWithLogs;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandAuth;
 import com.ssnagin.collectionmanager.gui.controllers.GUIController;
 import javafx.fxml.FXML;

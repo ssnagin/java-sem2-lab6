@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -33,16 +34,16 @@ public class CommandRandom extends UserNetworkCommand {
                     new SessionClientRequest(new ClientRequest(parsedString, id), sessionKeyManager.getSessionKey())
             );
 
-            Console.separatePrint(response.getResponseStatus(), "SERVER");
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getResponseStatus(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
         } catch (NumberFormatException ex) {
-            Console.log("Wrong number format");
+            ClientConsole.log("Wrong number format");
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException ex) {
             return this.showUsage(parsedString);
         } catch (IOException | ClassNotFoundException e) {
-            Console.error(e.toString());
+            ClientConsole.error(e.toString());
         }
 
         return ApplicationStatus.RUNNING;

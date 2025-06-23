@@ -4,9 +4,11 @@
  */
 package com.ssnagin.collectionmanager.commands.commands;
 
+import com.ssnagin.collectionmanager.Client;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
@@ -36,7 +38,7 @@ public class CommandHelp extends UserCommand {
         ApplicationStatus applicationStatus = super.executeCommand(parsedString);
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
-        Console.println(temporaryCreatedHeadMessage);
+        ClientConsole.println(temporaryCreatedHeadMessage);
 
         ArrayList<String> sortedKeys = new ArrayList<>(this.commandManager.getCommands().keySet());
         Collections.sort(sortedKeys);
@@ -47,7 +49,7 @@ public class CommandHelp extends UserCommand {
 
             selectedCommand = (UserCommand) this.commandManager.get(command);
 
-            Console.println(selectedCommand.getName() + "   " + selectedCommand.getDescription());
+            ClientConsole.println(selectedCommand.getName() + "   " + selectedCommand.getDescription());
         }
 
         return ApplicationStatus.RUNNING;

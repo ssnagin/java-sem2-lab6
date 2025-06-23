@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -49,7 +50,7 @@ public class CommandLogin extends UserNetworkCommand {
 
             sessionKeyManager.setSessionKey(sessionKey);
             
-            Console.separatePrint(
+            ClientConsole.separatePrint(
                     serverResponse.getMessage(),
                     String.valueOf(serverResponse.getResponseStatus())
             );
@@ -57,7 +58,7 @@ public class CommandLogin extends UserNetworkCommand {
             eventManager.publish(EventType.USER_LOGGED_IN.toString(), user);
 
         } catch (IOException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-            Console.error(e);
+            ClientConsole.error(e);
         }
 
         return ApplicationStatus.RUNNING;

@@ -4,6 +4,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -37,7 +38,7 @@ public class CommandAdd extends UserNetworkCommand {
 
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
-        Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
+        ClientConsole.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
 
         try {
 
@@ -47,12 +48,12 @@ public class CommandAdd extends UserNetworkCommand {
             ServerResponse response = this.networking.sendClientRequest(
                     new SessionClientRequest(new ClientRequest(parsedString, result), this.sessionKeyManager.getSessionKey())
             );
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
-            Console.error(ex.toString());
+            ClientConsole.error(ex.toString());
         }
 
         return ApplicationStatus.RUNNING;
@@ -60,8 +61,8 @@ public class CommandAdd extends UserNetworkCommand {
 
     @Override
     public ApplicationStatus showUsage(ParsedString parsedString) {
-        Console.println("Usage: add\nСписок того, что надо ввести:");
-        Console.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
+        ClientConsole.println("Usage: add\nСписок того, что надо ввести:");
+        ClientConsole.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
 
         return ApplicationStatus.RUNNING;
     }

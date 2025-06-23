@@ -7,11 +7,13 @@ import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandAuth;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHistory;
 import com.ssnagin.collectionmanager.gui.controllers.GUIController;
+import com.ssnagin.collectionmanager.gui.logger.GUITextLogger;
 import com.ssnagin.collectionmanager.user.objects.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lombok.Getter;
 
 public class MainGUIController extends GUIController {
 
@@ -26,6 +28,9 @@ public class MainGUIController extends GUIController {
 
     @FXML
     public TextArea leftTextArea;
+
+    @Getter
+    private GUITextLogger textLogger;
 
     @FXML
     protected void initialize() {
@@ -58,7 +63,7 @@ public class MainGUIController extends GUIController {
         eventManager.subscribe(EventType.USER_LOGGED_IN.toString(),
                 this::handleUserLoggedIn);
 
-
+        textLogger = new GUITextLogger(eventManager, leftTextArea);
     }
 
     private void handleUserLoggedIn(User user) {

@@ -8,6 +8,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -44,7 +45,7 @@ public class CommandAddIfMin extends UserNetworkCommand {
 
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
-        Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
+        ClientConsole.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
 
         try {
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
@@ -61,14 +62,14 @@ public class CommandAddIfMin extends UserNetworkCommand {
                     )
             );
 
-            Console.separatePrint(response.getResponseStatus(), "SERVER");
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getResponseStatus(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
 
         } catch (ClassNotFoundException | IOException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |
                  InvocationTargetException ex) {
-            Console.error(ex.toString());
+            ClientConsole.error(ex.toString());
         }
 
         return ApplicationStatus.RUNNING;

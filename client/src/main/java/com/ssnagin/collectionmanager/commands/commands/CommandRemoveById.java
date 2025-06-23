@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -32,7 +33,7 @@ public class CommandRemoveById extends UserNetworkCommand {
                     parsedString.getArguments().get(0)
             );
         } catch (NumberFormatException ex) {
-            Console.log("Неверный формат числа");
+            ClientConsole.log("Неверный формат числа");
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException e) {
             return showUsage(parsedString);
@@ -45,9 +46,9 @@ public class CommandRemoveById extends UserNetworkCommand {
                             sessionKeyManager.getSessionKey()
                     )
             );
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
         } catch (IndexOutOfBoundsException | IOException | ClassNotFoundException e) {
-            Console.error(e.toString());
+            ClientConsole.error(e.toString());
         }
 
         return ApplicationStatus.RUNNING;

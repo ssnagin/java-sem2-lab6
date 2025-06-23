@@ -8,6 +8,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
@@ -30,7 +31,7 @@ public class CommandHistory extends UserCommand {
         super.executeCommand(parsedString);
 
         if (this.commandManager.getCommandHistory().isEmpty()) {
-            Console.log("There were no commands!");
+            ClientConsole.log("There were no commands!");
             return ApplicationStatus.RUNNING;
         }
 

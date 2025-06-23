@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.gui.window.Window;
 import com.ssnagin.collectionmanager.gui.window.WindowManager;
@@ -51,12 +52,12 @@ public class CommandShowGUI extends UserCommand {
             return applicationStatus;
 
         } catch (NoSuchElementException e) {
-            Console.error(e);
+            ClientConsole.error(e);
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException e) {
             return showUsage(parsedString);
         } catch (Exception e) {
-            Console.error("UNCHECKED ERROR: " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
+            ClientConsole.error("UNCHECKED ERROR: " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
             return applicationStatus;
         }
 
@@ -78,14 +79,14 @@ public class CommandShowGUI extends UserCommand {
 //            }
 //        } catch (IndexOutOfBoundsException e) {return showUsage(parsedString);}
 //        catch (Exception e) {
-//            Console.error(e.getMessage());
+//            ClientConsole.error(e.getMessage());
 //            return ApplicationStatus.RUNNING;
 //        }
     }
 
     @Override
     public ApplicationStatus showUsage(ParsedString parsedString) {
-        Console.println(USAGE);
+        ClientConsole.println(USAGE);
         return ApplicationStatus.RUNNING;
     }
 }

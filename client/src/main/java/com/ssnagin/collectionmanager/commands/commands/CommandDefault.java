@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 
@@ -30,7 +31,7 @@ public class CommandDefault extends UserCommand {
         ApplicationStatus applicationStatus = super.executeCommand(parsedString);
         if (applicationStatus != ApplicationStatus.RUNNING) return applicationStatus;
 
-        Console.println(temporaryCreatedHeadMessage);
+        ClientConsole.println(temporaryCreatedHeadMessage);
         return ApplicationStatus.RUNNING;
     }
 }

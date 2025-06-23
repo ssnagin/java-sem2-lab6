@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.commands.UserCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.InputParser;
 import com.ssnagin.collectionmanager.inputparser.ParseMode;
@@ -61,21 +62,21 @@ public class CommandExecuteScript extends UserCommand {
                 if (status != ApplicationStatus.RUNNING) return status;
             }
         } catch (IOException e) {
-            Console.error("Script file not found: " + e.getMessage());
+            ClientConsole.error("Script file not found: " + e.getMessage());
 
         } catch (ScriptRecursionException e) {
-            Console.error("Recursion detected! " + e.getMessage());
+            ClientConsole.error("Recursion detected! " + e.getMessage());
             this.scriptManager.clearActiveScripts();
             this.scriptManager.removeScanners();
             return ApplicationStatus.RUNNING;
         } catch (Exception e) {
-            Console.error("Un");
+            ClientConsole.error("Un");
         }
         //finally {
         try {
             this.scriptManager.popScanner(file);
         } catch (IOException e) {
-            Console.error("Error while accessing to File, stop all executables...");
+            ClientConsole.error("Error while accessing to File, stop all executables...");
         }
         //}
 

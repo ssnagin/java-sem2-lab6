@@ -6,6 +6,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -37,9 +38,9 @@ public class CommandClear extends UserNetworkCommand {
                     new SessionClientRequest(new ClientRequest(parsedString), sessionKeyManager.getSessionKey())
             );
 
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
         } catch (IOException | ClassNotFoundException e) {
-            Console.error(e.toString());
+            ClientConsole.error(e.toString());
         }
 
         return ApplicationStatus.RUNNING;

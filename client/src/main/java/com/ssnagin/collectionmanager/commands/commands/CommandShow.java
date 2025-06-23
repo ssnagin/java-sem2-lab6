@@ -7,6 +7,7 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
+import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -49,7 +50,7 @@ public class CommandShow extends UserNetworkCommand {
             if (page <= 0) throw new NumberFormatException();
 
         } catch (NumberFormatException ex) {
-            Console.error("Неверный формат числа");
+            ClientConsole.error("Неверный формат числа");
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException e) {
             page = 1L;
@@ -63,7 +64,7 @@ public class CommandShow extends UserNetworkCommand {
             );
 
             response = this.networking.sendClientRequest(clientRequest);
-            Console.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
             clientRequest.setStage(100);
             do {
@@ -71,7 +72,7 @@ public class CommandShow extends UserNetworkCommand {
                 clientRequest.setStage(response.getStage());
 
                 if (response.getResponseStatus() != ResponseStatus.OK) {
-                    Console.separatePrint(response.getMessage(), "SERVER");
+                    ClientConsole.separatePrint(response.getMessage(), "SERVER");
                     break;
                 }
 
@@ -80,14 +81,14 @@ public class CommandShow extends UserNetworkCommand {
 
                 var data = (MusicBand) response.getData();
 
-                Console.println(
+                ClientConsole.println(
                         data.getDescription()
                 );
 
             } while (response.getStage() != 99 || response.getResponseStatus() == ResponseStatus.OK);
 
         } catch (IOException | ClassNotFoundException e) {
-            Console.error(e.toString());
+            ClientConsole.error(e.toString());
         }
 
         return ApplicationStatus.RUNNING;
