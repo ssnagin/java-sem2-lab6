@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.gui.commands;
 
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.events.EventManager;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,8 @@ public abstract class GUICommand extends Command {
     protected String description;
 
     protected TextArea outputText = new TextArea();
+
+    protected EventManager eventManager = EventManager.getInstance();
 
     public GUICommand(String name, String description) {
         super(name);

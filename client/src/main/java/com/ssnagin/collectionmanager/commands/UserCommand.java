@@ -2,6 +2,7 @@ package com.ssnagin.collectionmanager.commands;
 
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.events.EventManager;
 import com.ssnagin.collectionmanager.gui.ClientGUI;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import javafx.scene.Scene;
@@ -13,6 +14,8 @@ import lombok.Setter;
 public abstract class UserCommand extends Command {
 
     protected String description;
+
+    protected EventManager eventManager = EventManager.getInstance();
 
     public UserCommand(String name, String description) {
 
