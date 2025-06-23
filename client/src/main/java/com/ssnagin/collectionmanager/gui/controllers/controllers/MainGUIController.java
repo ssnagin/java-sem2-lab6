@@ -1,8 +1,6 @@
 package com.ssnagin.collectionmanager.gui.controllers.controllers;
 
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
-import com.ssnagin.collectionmanager.console.ClientConsole;
-import com.ssnagin.collectionmanager.events.EventListener;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandAuth;
@@ -10,8 +8,8 @@ import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHelp;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandHistory;
 import com.ssnagin.collectionmanager.gui.commands.commands.GUICommandShow;
 import com.ssnagin.collectionmanager.gui.controllers.GUIController;
-import com.ssnagin.collectionmanager.gui.logger.GUITextLogger;
-import com.ssnagin.collectionmanager.gui.table.main.GUITableMain;
+import com.ssnagin.collectionmanager.gui.nodes.logger.GUITextLogger;
+import com.ssnagin.collectionmanager.gui.nodes.table.main.GUITableMain;
 import com.ssnagin.collectionmanager.user.objects.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -126,10 +124,6 @@ public class MainGUIController extends GUIController {
     }
 
     private void handleUserLoggedIn(User user) {
-        leftTextArea.setText("Ахаха азаза я залогинился и это event");
-
-        ClientConsole.println(guiTableMain.toString());
-
         ((GUICommandShow) localCommandManager.get("gui_show")).executeCommand(guiTableMain);
     }
 }

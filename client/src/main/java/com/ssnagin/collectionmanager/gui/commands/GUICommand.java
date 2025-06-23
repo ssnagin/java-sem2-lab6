@@ -1,14 +1,10 @@
 package com.ssnagin.collectionmanager.gui.commands;
 
 import com.ssnagin.collectionmanager.commands.Command;
-import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.events.EventManager;
-import com.ssnagin.collectionmanager.gui.logger.GUITextLogger;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 

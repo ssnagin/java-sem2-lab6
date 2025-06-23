@@ -1,13 +1,11 @@
-package com.ssnagin.collectionmanager.gui.table.main;
+package com.ssnagin.collectionmanager.gui.nodes.table.main;
 
 
-import com.ssnagin.collectionmanager.collection.model.Coordinates;
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.model.MusicGenre;
-import com.ssnagin.collectionmanager.gui.table.GUITable;
+import com.ssnagin.collectionmanager.gui.nodes.table.GUITable;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;

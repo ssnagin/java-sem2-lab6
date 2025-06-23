@@ -1,8 +1,8 @@
 package com.ssnagin.collectionmanager.gui.commands.commands;
 
 import com.ssnagin.collectionmanager.events.EventType;
-import com.ssnagin.collectionmanager.gui.form.GUIForm;
-import com.ssnagin.collectionmanager.gui.form.GUIFormWithLogs;
+import com.ssnagin.collectionmanager.gui.nodes.form.GUIForm;
+import com.ssnagin.collectionmanager.gui.nodes.form.GUIFormWithLogs;
 import com.ssnagin.collectionmanager.gui.commands.GUINetworkCommand;
 import com.ssnagin.collectionmanager.gui.window.WindowManager;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;

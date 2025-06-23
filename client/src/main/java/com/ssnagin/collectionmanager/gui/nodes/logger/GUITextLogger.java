@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.gui.logger;
+package com.ssnagin.collectionmanager.gui.nodes.logger;
 
 import com.ssnagin.collectionmanager.events.EventManager;
 import com.ssnagin.collectionmanager.events.EventType;

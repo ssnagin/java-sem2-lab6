@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.gui.table;
+package com.ssnagin.collectionmanager.gui.nodes.table;
 
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import javafx.scene.control.TableColumn;

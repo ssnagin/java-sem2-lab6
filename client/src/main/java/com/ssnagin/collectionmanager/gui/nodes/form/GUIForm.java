@@ -1,4 +1,4 @@
-package com.ssnagin.collectionmanager.gui.form;
+package com.ssnagin.collectionmanager.gui.nodes.form;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

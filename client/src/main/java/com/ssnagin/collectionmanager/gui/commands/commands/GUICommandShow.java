@@ -4,8 +4,7 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.gui.commands.GUINetworkCommand;
-import com.ssnagin.collectionmanager.gui.table.GUITable;
-import com.ssnagin.collectionmanager.gui.table.main.GUITableMain;
+import com.ssnagin.collectionmanager.gui.nodes.table.main.GUITableMain;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
@@ -17,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.input.MouseEvent;
 
-import javax.swing.text.TableView;
 import java.io.IOException;
 
 public class GUICommandShow extends GUINetworkCommand {
