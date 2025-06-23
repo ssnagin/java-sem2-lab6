@@ -1,16 +1,24 @@
 package com.ssnagin.collectionmanager.gui.commands;
 
 import com.ssnagin.collectionmanager.commands.Command;
+import com.ssnagin.collectionmanager.commands.CommandManager;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Arrays;
 
 @Getter
 @Setter
 public abstract class GUICommand extends Command {
 
-    String name;
-    String description;
+    protected String name;
+    protected String description;
+
+    protected TextArea outputText = new TextArea();
 
     public GUICommand(String name, String description) {
         super(name);
@@ -22,4 +30,10 @@ public abstract class GUICommand extends Command {
     }
 
     public abstract void executeCommand(MouseEvent event);
+
+    public void out(Object... objects) {
+        if (outputText != null) {
+            outputText.setText(outputText.getText() + Arrays.toString(objects));
+        }
+    }
 }

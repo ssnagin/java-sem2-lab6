@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.gui.commands.commands;
 
+import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
 import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
@@ -15,13 +16,13 @@ public class GUICommandHelp extends GUICommand {
     StringBuilder preparedCommandList;
     private final AtomicBoolean areCommandsInitialized = new AtomicBoolean();
 
-    CommandManager commandManager;
+    protected CommandManager commandManager;
 
     public GUICommandHelp(String name, CommandManager commandManager) {
         super(name);
 
-        this.commandManager = commandManager;
         preparedCommandList = new StringBuilder();
+        this.commandManager = commandManager;
 
         initGUI();
     }
@@ -37,11 +38,11 @@ public class GUICommandHelp extends GUICommand {
         ArrayList<String> sortedKeys = new ArrayList<>(this.commandManager.getCommands().keySet());
         Collections.sort(sortedKeys);
 
-        GUICommand selectedCommand;
+        Command selectedCommand;
 
         for (String command : sortedKeys) {
-            selectedCommand = (GUICommand) this.commandManager.get(command);
-            preparedCommandList.append(selectedCommand.getName() + " | " + selectedCommand.getDescription() + "\n");
+            selectedCommand = (Command) this.commandManager.get(command);
+            preparedCommandList.append(selectedCommand.getName() + "\n");
         }
 
         areCommandsInitialized.set(true);

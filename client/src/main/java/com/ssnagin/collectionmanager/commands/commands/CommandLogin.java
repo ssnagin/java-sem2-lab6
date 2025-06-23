@@ -34,12 +34,7 @@ public class CommandLogin extends UserNetworkCommand {
 
         Scanner scanner = this.scriptManager.getCurrentScanner();
 
-//        User user = Reflections.parseModel(User.class, scanner);
-//
-//        Console.log(user.toString());
-
         try {
-
             InternalUser user = Reflections.parseModel(InternalUser.class, scanner);
             user.setIsBanned(0);
 
@@ -58,6 +53,8 @@ public class CommandLogin extends UserNetworkCommand {
                     String.valueOf(serverResponse.getResponseStatus())
             );
 
+            // Бросаю callback "UserAuthenticated"
+
         } catch (IOException | ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             Console.error(e);
         }
@@ -65,3 +62,4 @@ public class CommandLogin extends UserNetworkCommand {
         return ApplicationStatus.RUNNING;
     }
 }
+

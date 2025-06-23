@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 public class InternalUser extends User {
 
-
     @Description(name="", description = "")
     private User user;
 
@@ -20,9 +19,7 @@ public class InternalUser extends User {
     @Description(name = "password", description = "Введите пароль")
     protected String unsafePassword = null;
 
-    public void setUnsafePassword(String unsafePassword) {
-        super.setPassword(unsafePassword.toCharArray());
-    }
+    public void setUnsafePassword(String unsafePassword) { super.setPassword(unsafePassword.toCharArray());}
 
     public InternalUser(User user) {
         super.setId(user.getId());

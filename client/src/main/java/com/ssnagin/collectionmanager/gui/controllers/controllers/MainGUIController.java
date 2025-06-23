@@ -43,6 +43,10 @@ public class MainGUIController extends GUIController {
         localCommandManager.register(new GUICommandHelp("gui_help", localCommandManager));
         localCommandManager.register(new GUICommandHistory("gui_history", localCommandManager));
 
-        localCommandManager.register(new GUICommandAuth("gui_auth", windowManager));
+        localCommandManager.register(new GUICommandAuth("gui_auth", networking, windowManager));
+    }
+
+    void userLoggedIn() {
+        // Обработка callback
     }
 }

@@ -8,12 +8,10 @@ import javafx.scene.input.MouseEvent;
 
 public class GUICommandHistory extends GUICommand {
 
-    CommandManager commandManager;
+    protected CommandManager commandManager;
 
     public GUICommandHistory(String name, CommandManager commandManager) {
         super(name);
-
-        this.commandManager = commandManager;
 
         initGUI();
     }

@@ -17,6 +17,7 @@ public abstract class AbstractCore {
 
     protected CommandManager commandManager;
 
+    @Getter
     protected Networking networking;
 
     public AbstractCore(String[] args) {

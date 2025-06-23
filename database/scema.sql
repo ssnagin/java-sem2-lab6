@@ -64,7 +64,8 @@ CREATE TABLE cm_collection (
     singles_count INTEGER NOT NULL DEFAULT 0,
     coordinates_id INTEGER NOT NULL REFERENCES cm_collection_coordinates(id) ON DELETE CASCADE,
 
-    -- Специально не выносил значения, чтобы не возиться с enum'om и его обработкой. Небольшой костыль
+	-- smol kostyl (no enum)
+
     genre TEXT NOT NULL,
     best_album_id INTEGER REFERENCES cm_collection_album(id) ON DELETE CASCADE,
 
