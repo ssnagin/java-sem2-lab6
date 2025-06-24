@@ -65,6 +65,16 @@ public class MainGUIController extends GUIController {
     public TableColumn<MusicBand, Long> bestAlbumTracksColumn;
     @FXML
     public TableColumn<MusicBand, String> genreColumn;
+
+    @FXML
+    public Button languageRussianButton;
+    @FXML
+    public Button languageEnglishButton;
+    @FXML
+    public Button languageBulgarianButton;
+    @FXML
+    public Button languageGermanButton;
+
 //    @FXML
 //    public TableColumn<Integer, Integer> localIdColumn;
 

@@ -179,6 +179,17 @@
          </padding></HBox>
    </bottom>
    <left>
-      <TextArea fx:id="leftTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Some text will be placed here..." BorderPane.alignment="CENTER" />
+      <VBox minHeight="100.0" minWidth="-Infinity" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+         <Label text="Языки" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="23.0" />
+            </font></Label>
+         <Button fx:id="languageRussianButton" text="Русский" />
+         <Button fx:id="languageEnglishButton" text="English (Ireland)" />
+         <Button fx:id="languageGermanButton" text="Deutsch" />
+         <Button fx:id="languageBulgarianButton" text="Болгарский" />
+         <TextArea fx:id="leftTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Some text will be placed here..." />
+
+      </VBox>
    </left>
 </BorderPane>
