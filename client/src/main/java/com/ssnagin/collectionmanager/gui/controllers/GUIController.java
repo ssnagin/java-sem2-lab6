@@ -21,14 +21,9 @@ public abstract class GUIController {
     protected final WindowManager windowManager = WindowManager.getInstance();
     protected final Networking networking = core.getNetworking();
 
-    private boolean isInitialized = false;
+    protected boolean isInitialized = false;
 
-    protected void initialize() {
-        if (isInitialized) return;
-        isInitialized = true;
-
-        initEventListeners();
-    }
+    protected abstract void initialize();
 
     protected void initEventListeners() {}
 }

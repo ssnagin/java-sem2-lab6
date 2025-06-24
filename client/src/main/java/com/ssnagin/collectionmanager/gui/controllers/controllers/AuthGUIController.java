@@ -39,7 +39,10 @@ public class AuthGUIController extends GUIController {
     @FXML
     protected void initialize() {
 
-        super.initialize();
+        if (isInitialized) return;
+        isInitialized = true;
+
+        initEventListeners();
 
         authSubmit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ((GUICommandAuth) localCommandManager.get("gui_auth")).executeCommand(
