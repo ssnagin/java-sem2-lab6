@@ -6,6 +6,7 @@ import com.ssnagin.collectionmanager.collection.model.MusicGenre;
 import com.ssnagin.collectionmanager.gui.nodes.table.GUITable;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +18,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class GUITableMain extends GUITable<MusicBand> {
+
+    private Integer currentLocalId = 1;
+    protected TableColumn<Integer, Integer> localIdColumn;
 
     protected TableColumn<MusicBand, Long> idColumn;
     
@@ -44,6 +48,13 @@ public class GUITableMain extends GUITable<MusicBand> {
 
     @Override
     public void setProperties() {
+
+//        localIdColumn.setCellValueFactory(cellData ->
+//                new SimpleObjectProperty<>(currentLocalId++));
+//
+//        tableView.getItems().addListener((ListChangeListener<MusicBand>) change -> {
+//            currentLocalId = 1;
+//        });
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

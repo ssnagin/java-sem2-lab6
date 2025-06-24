@@ -13,6 +13,7 @@ import com.ssnagin.collectionmanager.session.SessionKey;
 import com.ssnagin.collectionmanager.user.objects.User;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -81,6 +82,27 @@ public class GUICommandAuth extends GUINetworkCommand {
     }
 
     protected void registerUser(ParsedString parsedString, GUIForm form) {
+        if (form instanceof GUIFormWithLogs) {
+            setOutputText(((GUIFormWithLogs) form).getLogArea());
+        }
 
+        TextField loginField = form.getFields().get(0);
+        TextField passwordField = form.getFields().get(1);
+
+        User user = new User();
+        user.setUsername(loginField.getText());
+        user.setPassword(passwordField.getText().toCharArray());
+        user.setId(0L);
+        user.setIsBanned(0);
+
+        try {
+            ServerResponse response = this.networking.sendClientRequest(
+                    new ClientRequest(parsedString, user)
+            );
+
+            out(response.getMessage());
+        } catch (IOException | ClassNotFoundException e) {
+            out(e.getMessage());
+        }
     }
 }

@@ -65,6 +65,8 @@ public class MainGUIController extends GUIController {
     public TableColumn<MusicBand, Long> bestAlbumTracksColumn;
     @FXML
     public TableColumn<MusicBand, String> genreColumn;
+//    @FXML
+//    public TableColumn<Integer, Integer> localIdColumn;
 
 
     private GUITableMain guiTableMain;
@@ -138,6 +140,8 @@ public class MainGUIController extends GUIController {
 
         guiTableMain.setGenreColumn(genreColumn);
 
+//        guiTableMain.setLocalIdColumn(localIdColumn);
+
         guiTableMain.setProperties();
     }
 
@@ -148,6 +152,9 @@ public class MainGUIController extends GUIController {
 
         eventManager.subscribe(EventType.USER_LOGGED_OUT.toString(),
                 this::handleUserLoggedOut);
+
+        eventManager.subscribe(EventType.TABLE_CONTENT_REFRESH.toString(),
+                this::handleTableContentRefresh);
 
         textLogger = new GUITextLogger(eventManager, leftTextArea);
     }
@@ -160,5 +167,9 @@ public class MainGUIController extends GUIController {
 
     private void handleUserLoggedOut(Object emptyObject) {
         loginBar.showLogin();
+    }
+
+    private void handleTableContentRefresh(Object emptyObject) {
+        ((GUICommandShow) localCommandManager.get("gui_show")).executeCommand(guiTableMain);
     }
 }

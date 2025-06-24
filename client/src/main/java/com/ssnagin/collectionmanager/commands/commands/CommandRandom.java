@@ -4,6 +4,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
@@ -37,6 +38,7 @@ public class CommandRandom extends UserNetworkCommand {
             ClientConsole.separatePrint(response.getResponseStatus(), "SERVER");
             ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
+            eventManager.publish(EventType.TABLE_CONTENT_REFRESH.toString(), null);
         } catch (NumberFormatException ex) {
             ClientConsole.log("Wrong number format");
             return ApplicationStatus.RUNNING;

@@ -51,7 +51,7 @@ public class CommandRegister extends UserNetworkCommand {
                  InvocationTargetException ex) {
             ClientConsole.error(ex.toString());
         }
-
+        
         return ApplicationStatus.RUNNING;
     }
 }
