@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.gui.nodes.form;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import lombok.*;
@@ -17,12 +18,13 @@ public class GUIForm {
 
     protected Button submitButton;
 
-    protected List<TextField> fields = new LinkedList<>();
+    protected List<Node> fields = new LinkedList<>();
 
-    public GUIForm(String name, Button submitButton, TextField... fields) {
+    public GUIForm(String name, Button submitButton, Node... fields) {
         this.name = name;
-
+        
         this.submitButton = submitButton;
         this.fields.addAll(Arrays.asList(fields));
+
     }
 }

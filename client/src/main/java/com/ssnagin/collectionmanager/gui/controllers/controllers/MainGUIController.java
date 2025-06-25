@@ -37,6 +37,12 @@ public class MainGUIController extends GUIController {
     public Button logoutCommandButton;
 
     @FXML
+    public ImageView addCommandButton;
+
+    @FXML
+    public ImageView addIfMinCommandButton;
+
+    @FXML
     public TextArea leftTextArea;
 
     // TABLE COLUMNS
@@ -121,6 +127,18 @@ public class MainGUIController extends GUIController {
         logoutCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ((GUICommand) localCommandManager.get("gui_logout")).executeCommand(event);
         });
+
+        addCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_add")).executeCommand(event);
+        });
+
+        addIfMinCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_add")).executeCommand(event); // Комбинировал тк по факту используется одно и то же окно и одна и та же логика
+        });
+
+        // В самом конце -- бросим GUI_CONTENT_LOADED
+
+        eventManager.publish(EventType.GUI_CONTENT_LOADED.toString(), null);
     }
 
     private void initGUICommands() {
@@ -131,6 +149,8 @@ public class MainGUIController extends GUIController {
         localCommandManager.register(new GUICommandLogout("gui_logout", networking));
 
         localCommandManager.register(new GUICommandShow("gui_show", networking));
+
+        localCommandManager.register(new GUICommandAdd("gui_add", networking, windowManager));
     }
 
     private void initTable() {
@@ -166,6 +186,11 @@ public class MainGUIController extends GUIController {
         eventManager.subscribe(EventType.TABLE_CONTENT_REFRESH.toString(),
                 this::handleTableContentRefresh);
 
+        // GUI CONTENT LOADED
+
+        eventManager.subscribe(EventType.GUI_CONTENT_LOADED.toString(),
+                this::handleGUIContentLoaded);
+
         textLogger = new GUITextLogger(eventManager, leftTextArea);
     }
 
@@ -181,5 +206,9 @@ public class MainGUIController extends GUIController {
 
     private void handleTableContentRefresh(Object emptyObject) {
         ((GUICommandShow) localCommandManager.get("gui_show")).executeCommand(guiTableMain);
+    }
+
+    private void handleGUIContentLoaded(Object emptyObject) {
+        if (sessionKeyManager.getSessionKey() != null) this.handleUserLoggedIn(null);
     }
 }

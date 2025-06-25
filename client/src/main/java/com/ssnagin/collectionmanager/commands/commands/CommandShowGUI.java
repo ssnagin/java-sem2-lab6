@@ -45,9 +45,12 @@ public class CommandShowGUI extends UserCommand {
             if (mainWindow == null) throw new NoSuchElementException("GUI Window have not been initiated | Internal error");
 
             if (action.toLowerCase().equals("hide")) {
-                mainWindow.hide();
+
+                for (Window window : windowManager.getAll()) window.hide();
+
                 return applicationStatus;
             }
+
             mainWindow.show();
             return applicationStatus;
 

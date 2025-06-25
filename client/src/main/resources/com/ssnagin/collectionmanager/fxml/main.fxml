@@ -20,20 +20,20 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="addCommandButton" fitHeight="60.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_add.png" />
                </image>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="210.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="addIfMinCommandButton" fitHeight="60.0" fitWidth="200.0" layoutX="210.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_add_if_min.png" />
                </image>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
             <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="200.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">

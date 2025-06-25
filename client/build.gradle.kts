@@ -21,8 +21,8 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:1.18.36")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 
-    implementation("org.openjfx:javafx-controls:17.0.2")
-    implementation("org.openjfx:javafx-fxml:17.0.2")
+    implementation("org.openjfx:javafx-controls:17.0.12")
+    implementation("org.openjfx:javafx-fxml:17.0.12")
 }
 
 javafx {

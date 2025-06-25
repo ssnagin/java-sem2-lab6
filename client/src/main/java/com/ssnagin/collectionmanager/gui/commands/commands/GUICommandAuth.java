@@ -51,8 +51,8 @@ public class GUICommandAuth extends GUINetworkCommand {
             setOutputText(((GUIFormWithLogs) form).getLogArea());
         }
 
-        TextField loginField = form.getFields().get(0);
-        TextField passwordField = form.getFields().get(1);
+        TextField loginField = (TextField) form.getFields().get(0);
+        TextField passwordField = (TextField) form.getFields().get(1);
 
         User user = new User();
         user.setUsername(loginField.getText());
@@ -86,8 +86,8 @@ public class GUICommandAuth extends GUINetworkCommand {
             setOutputText(((GUIFormWithLogs) form).getLogArea());
         }
 
-        TextField loginField = form.getFields().get(0);
-        TextField passwordField = form.getFields().get(1);
+        TextField loginField = (TextField) form.getFields().get(0);
+        TextField passwordField = (TextField) form.getFields().get(1);
 
         User user = new User();
         user.setUsername(loginField.getText());

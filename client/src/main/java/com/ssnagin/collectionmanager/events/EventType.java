@@ -8,5 +8,7 @@ public enum EventType {
     TABLE_CONTENT_LOADED,
     TABLE_CONTENT_REFRESH,
 
+    GUI_CONTENT_LOADED,
+
     TEXT_THROWN
 }

@@ -36,7 +36,7 @@ public abstract class GUICommand extends Command {
 
     public void out(Object... objects) {
         if (outputText != null) {
-            outputText.setText(outputText.getText() + Arrays.toString(objects));
+            outputText.setText(outputText.getText() + Arrays.toString(objects) + "\n");
         }
     }
 }

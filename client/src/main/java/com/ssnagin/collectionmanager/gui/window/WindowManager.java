@@ -3,6 +3,7 @@ package com.ssnagin.collectionmanager.gui.window;
 import com.ssnagin.collectionmanager.commands.interfaces.Manageable;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.TreeSet;
 
@@ -28,6 +29,10 @@ public class WindowManager implements Manageable<Window> {
                 .filter(w -> w.getName().equalsIgnoreCase(name))
                 .findFirst();
         return window.orElse(null);
+    }
+
+    public TreeSet<Window> getAll() {
+        return this.windows;
     }
 
     public void hide(String windowName) {
