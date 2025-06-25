@@ -1,6 +1,8 @@
 package com.ssnagin.collectionmanager.gui.controllers.controllers;
 
 import com.ssnagin.collectionmanager.collection.model.MusicBand;
+import com.ssnagin.collectionmanager.commands.CommandManager;
+import com.ssnagin.collectionmanager.commands.UserCommand;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
 import com.ssnagin.collectionmanager.gui.commands.commands.*;
@@ -20,6 +22,8 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 public class MainGUIController extends GUIController {
+
+    private CommandManager globalCommandManager;
 
     @FXML
     public ImageView helpCommandButton;
@@ -56,6 +60,9 @@ public class MainGUIController extends GUIController {
 
     @FXML
     public ImageView removeByIdCommand;
+
+    @FXML
+    public ImageView executeScriptCommandButton;
 
     // TABLE COLUMNS
 
@@ -94,6 +101,7 @@ public class MainGUIController extends GUIController {
     public Button languageGermanButton;
 
 
+
 //    @FXML
 //    public TableColumn<Integer, Integer> localIdColumn;
 
@@ -117,6 +125,8 @@ public class MainGUIController extends GUIController {
         isInitialized = true;
 
         initEventListeners();
+
+        globalCommandManager = CommandManager.getInstance();
 
 
         loginBar = new LoginBar(loginCommandButton, logoutBarPane);
@@ -167,6 +177,10 @@ public class MainGUIController extends GUIController {
             ((GUICommand) localCommandManager.get("gui_remove")).executeCommand(event);
         });
 
+        executeScriptCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_execute_script")).executeCommand(event);
+        });
+
         // В самом конце -- бросим GUI_CONTENT_LOADED
 
         eventManager.publish(EventType.GUI_CONTENT_LOADED.toString(), null);
@@ -187,6 +201,8 @@ public class MainGUIController extends GUIController {
 
         localCommandManager.register(new GUICommandCountMembersById("gui_count_members_by_id", networking, leftTextArea));
         localCommandManager.register(new GUICommandClear("gui_clear", networking, leftTextArea));
+
+        localCommandManager.register(new GUICommandExecuteScript("gui_execute_script", (UserCommand) globalCommandManager.get("execute_script")));
     }
 
     private void initTable() {
@@ -222,6 +238,11 @@ public class MainGUIController extends GUIController {
         eventManager.subscribe(EventType.COLLECTION_DATA_CHANGED.toString(),
                 this::handleTableContentRefresh);
 
+        // EXECUTE_SCRIPT ended
+
+        eventManager.subscribe(EventType.SCRIPTS_HAVE_BEEN_EXECUTED.toString(),
+                this::handleScriptsHaveBeenExecuted);
+
         // GUI CONTENT LOADED
 
         eventManager.subscribe(EventType.GUI_CONTENT_LOADED.toString(),
@@ -245,6 +266,10 @@ public class MainGUIController extends GUIController {
     }
 
     private void handleGUIContentLoaded(Object emptyObject) {
+        if (sessionKeyManager.getSessionKey() != null) this.handleUserLoggedIn(null);
+    }
+
+    private void handleScriptsHaveBeenExecuted(Object emptyObject) {
         if (sessionKeyManager.getSessionKey() != null) this.handleUserLoggedIn(null);
     }
 }

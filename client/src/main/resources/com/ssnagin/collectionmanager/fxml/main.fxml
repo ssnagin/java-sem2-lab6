@@ -72,12 +72,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="496.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="executeScriptCommandButton" fitHeight="60.0" fitWidth="200.0" layoutX="496.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_execute_script.png" />
                </image>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
             <ImageView fx:id="historyCommandButton" fitHeight="60.0" fitWidth="200.0" layoutX="523.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
