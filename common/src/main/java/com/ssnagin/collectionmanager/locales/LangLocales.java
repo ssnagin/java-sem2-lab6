@@ -14,7 +14,7 @@ public class LangLocales {
 
     public static void setLocale(Locale locale) {
         currentLocale = locale;
-        bundle = ResourceBundle.getBundle("localization/messages", locale);
+        bundle = ResourceBundle.getBundle("com.ssnagin.collectionmanager.locales.lc", locale);
     }
 
     public static String getMessage(String key) {

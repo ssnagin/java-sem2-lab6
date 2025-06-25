@@ -30,17 +30,6 @@ public class AnimationGUIController extends GUIController {
 
     @FXML
     protected void initEventListeners() {
-//        eventManager.subscribe(EventType.COLLECTION_DATA_LOADED.toString(),
-//            eventData -> {
-//
-//                ClientConsole.println(eventData.toString());
-//
-//                if (eventData instanceof ObservableList) {
-//                    ObservableList<MusicBand> bands = (ObservableList<MusicBand>) eventData;
-//                    animationElement.updateBands(bands);
-//                }
-//            });
-
         eventManager.subscribe(EventType.COLLECTION_DATA_LOADED.toString(),
                 eventData -> {
 //                    ClientConsole.println("Received data: " + eventData);

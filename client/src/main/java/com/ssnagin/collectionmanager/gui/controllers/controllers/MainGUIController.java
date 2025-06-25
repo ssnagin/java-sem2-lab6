@@ -10,19 +10,22 @@ import com.ssnagin.collectionmanager.gui.controllers.GUIController;
 import com.ssnagin.collectionmanager.gui.nodes.logger.GUITextLogger;
 import com.ssnagin.collectionmanager.gui.nodes.loginbar.LoginBar;
 import com.ssnagin.collectionmanager.gui.nodes.table.main.GUITableMain;
+import com.ssnagin.collectionmanager.locales.LangLocalesAdapter;
 import com.ssnagin.collectionmanager.user.objects.User;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 
+import java.util.Locale;
+
 public class MainGUIController extends GUIController {
+
+    @FXML
+    public Label welcomeLabel;
 
     private CommandManager globalCommandManager;
 
@@ -190,6 +193,8 @@ public class MainGUIController extends GUIController {
             ((GUICommandShow) localCommandManager.get("gui_show")).executeCommand(guiTableMain);
         });
 
+        initLanguageButtons();
+
         // В самом конце -- бросим GUI_CONTENT_LOADED
 
         eventManager.publish(EventType.GUI_CONTENT_LOADED.toString(), null);
@@ -263,6 +268,16 @@ public class MainGUIController extends GUIController {
     private void handleUserLoggedIn(User user) {
         loginBar.showLogout();
 
+        if (user != null) {
+            welcomeLabel.textProperty().bind(
+                    LangLocalesAdapter.createBinding("user.welcome", user.getUsername())
+            );
+        } else {
+            welcomeLabel.textProperty().bind(
+                    LangLocalesAdapter.createBinding("user.welcome.generic")
+            );
+        }
+
         ((GUICommandShow) localCommandManager.get("gui_show")).executeCommand(guiTableMain);
     }
 
@@ -280,5 +295,17 @@ public class MainGUIController extends GUIController {
 
     private void handleScriptsHaveBeenExecuted(Object emptyObject) {
         if (sessionKeyManager.getSessionKey() != null) this.handleUserLoggedIn(null);
+    }
+
+    private void initLanguageButtons() {
+        languageRussianButton.setOnAction(event -> setLanguage("ru"));
+        languageEnglishButton.setOnAction(event -> setLanguage("en"));
+        languageBulgarianButton.setOnAction(event -> setLanguage("bg"));
+        languageGermanButton.setOnAction(event -> setLanguage("de"));
+    }
+
+    private void setLanguage(String language) {
+        LangLocalesAdapter.setLocale(new Locale(language));
+        eventManager.publish(EventType.LANGUAGE_CHANGED.toString(), language);
     }
 }

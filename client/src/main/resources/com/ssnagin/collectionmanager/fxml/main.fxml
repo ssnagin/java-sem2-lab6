@@ -111,7 +111,7 @@
                   </ImageView>
                   <VBox fx:id="logoutBarPane" prefHeight="71.0" prefWidth="415.0">
                      <children>
-                        <Label prefHeight="34.0" prefWidth="179.0" text="Здравствуйте, %USERNAME%" textFill="WHITE">
+                        <Label fx:id="welcomeLabel" prefHeight="34.0" prefWidth="179.0" text="" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>

@@ -12,5 +12,7 @@ public enum EventType {
 
     GUI_CONTENT_LOADED,
 
-    TEXT_THROWN
+    TEXT_THROWN,
+
+    LANGUAGE_CHANGED
 }

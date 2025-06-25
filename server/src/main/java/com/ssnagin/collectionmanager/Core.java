@@ -156,7 +156,7 @@ public class Core extends AbstractCore {
     protected ServerResponse runCommand(ClientRequest clientRequest) {
         logger.debug(clientRequest.toString());
 
-        logger.debug(sessionManager.getActiveSessions().toString());
+//        logger.debug(sessionManager.getActiveSessions());
 
         ServerResponse result = new ServerResponse();
 
