@@ -37,6 +37,10 @@ public class ParsedString implements Serializable {
         this.addArguments(arguments);
     }
 
+    public ParsedString(String pureString, String command, String... arguments) {
+        this(pureString, command, new ArrayList<>(List.of(arguments)));
+    }
+
     public ParsedString(String pureString, String command) {
         this(pureString, command, new ArrayList<>());
     }

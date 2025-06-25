@@ -25,7 +25,7 @@ public class CommandManager implements Manageable<Command> {
     private Map<String, Command> commands = new HashMap<>();
 
     private Deque<Command> commandHistory = new ArrayDeque<>();
-    private final int MAX_HISTORY_SIZE = 9;
+    private final int MAX_HISTORY_SIZE = 20;
 
     @Override
     public void register(Command command) {

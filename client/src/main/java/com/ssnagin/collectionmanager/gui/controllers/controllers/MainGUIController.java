@@ -48,6 +48,9 @@ public class MainGUIController extends GUIController {
     @FXML
     public TextArea leftTextArea;
 
+    @FXML
+    public ImageView randomCommandButton;
+
     // TABLE COLUMNS
 
     @FXML
@@ -146,6 +149,10 @@ public class MainGUIController extends GUIController {
             ((GUICommand) localCommandManager.get("gui_count_members_by_id")).executeCommand(event);
         });
 
+        randomCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_random")).executeCommand(event);
+        });
+
         // В самом конце -- бросим GUI_CONTENT_LOADED
 
         eventManager.publish(EventType.GUI_CONTENT_LOADED.toString(), null);
@@ -161,6 +168,7 @@ public class MainGUIController extends GUIController {
         localCommandManager.register(new GUICommandShow("gui_show", networking));
 
         localCommandManager.register(new GUICommandAdd("gui_add", networking, windowManager));
+        localCommandManager.register(new GUICommandRandom("gui_random", networking, leftTextArea));
 
         localCommandManager.register(new GUICommandCountMembersById("gui_count_members_by_id", networking, leftTextArea));
     }
