@@ -1,5 +1,6 @@
 package com.ssnagin.collectionmanager.gui.alert;
 
+import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -8,19 +9,23 @@ import java.util.Optional;
 
 public class InfoAlert {
 
-    public static void showErrorAlert(String title, String header, String content) {
-        showAlert(Alert.AlertType.ERROR, title, header, content);
+    public static void showErrorAlert(String title, String header, String content, boolean uiThread) {
+        showAlert(Alert.AlertType.ERROR, title, header, content, uiThread);
     }
 
-    public static void showWarningAlert(String title, String header, String content) {
-        showAlert(Alert.AlertType.WARNING, title, header, content);
+    public static void showWarningAlert(String title, String header, String content, boolean uiThread) {
+        showAlert(Alert.AlertType.WARNING, title, header, content, uiThread);
     }
 
     public static void showInfoAlert(String title, String header, String content) {
-        showAlert(Alert.AlertType.INFORMATION, title, header, content);
+        showAlert(Alert.AlertType.INFORMATION, title, header, content, false);
     }
 
-    private static void showAlert(Alert.AlertType type, String title, String header, String content) {
+    public static void showInfoAlert(String title, String header, String content, boolean uiThread) {
+        showAlert(Alert.AlertType.INFORMATION, title, header, content, uiThread);
+    }
+
+    private static void showAlert(Alert.AlertType type, String title, String header, String content, boolean uiThread) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(header);
@@ -37,6 +42,11 @@ public class InfoAlert {
             case ERROR:
                 // stage.getIcons().add(new Image("/path/to/error_icon.png"));
                 break;
+        }
+
+        if (uiThread) {
+            Platform.runLater(alert::showAndWait);
+            return;
         }
 
         alert.showAndWait();

@@ -107,6 +107,7 @@ public class Core extends AbstractCore {
         this.windowManager.register(new Window(
                 "main",
                 new WindowParameters(
+                    true,
                     1080,
                     720,
                     "Collection Manager ver. 1.3",
@@ -118,21 +119,34 @@ public class Core extends AbstractCore {
         this.windowManager.register(new Window(
                 "auth",
                 new WindowParameters(
+                        true,
                         500,
                         720,
                         "Auth page",
                         "/com/ssnagin/collectionmanager/fxml/subwindows/auth.fxml",
-                        "/com/ssnagin/collectionmanager/css/style.css"
+                        "/com/ssnagin/collectionmanager/css/animation.css"
                 )
         ));
         this.windowManager.register(new Window(
                 "add",
                 new WindowParameters(
+                    true,
                     420,
                     610,
                     "Add page",
                     "/com/ssnagin/collectionmanager/fxml/subwindows/add.fxml",
                     "/com/ssnagin/collectionmanager/css/style.css"
+                )
+        ));
+        this.windowManager.register(new Window(
+                "animation",
+                new WindowParameters(
+                        true,
+                        1080,
+                        720,
+                        "Animation",
+                        "/com/ssnagin/collectionmanager/fxml/subwindows/animation.fxml",
+                        "/com/ssnagin/collectionmanager/css/animation.css"
                 )
         ));
     }

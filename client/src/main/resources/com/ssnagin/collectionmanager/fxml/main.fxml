@@ -154,7 +154,7 @@
       </TableView>
    </center>
    <bottom>
-      <HBox id="animation" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox id="animation" fx:id="animationArea" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView id="animation" fitHeight="70.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>

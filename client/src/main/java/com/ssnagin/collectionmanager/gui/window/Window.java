@@ -55,6 +55,8 @@ public class Window implements Comparable<Window> {
         stage.setTitle(windowParameters.getTitle());
         stage.setMinWidth(windowParameters.getMinWidth());
         stage.setMinHeight(windowParameters.getMinHeight());
+
+        stage.setResizable(windowParameters.isResizeable());
     }
 
     public void initGUI() throws IOException {
@@ -115,6 +117,10 @@ public class Window implements Comparable<Window> {
 
     public boolean isShowing() {
         return stage != null && stage.isShowing();
+    }
+
+    public void setResizeable(boolean value) {
+        stage.setResizable(value);
     }
 
     @Override

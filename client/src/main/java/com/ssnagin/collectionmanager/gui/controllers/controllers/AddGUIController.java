@@ -42,6 +42,7 @@ public class AddGUIController extends GUIController {
     public TextArea logArea;
 
     @FXML
+    @Override
     protected void initialize() {
 
         if (isInitialized) return;

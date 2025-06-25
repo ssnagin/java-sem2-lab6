@@ -9,6 +9,9 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class WindowParameters {
+
+    protected boolean isResizeable = true;
+
     protected Integer minWidth = 1080;
     protected Integer minHeight = 720;
 
@@ -16,4 +19,6 @@ public class WindowParameters {
 
     protected String pageUri = "/com/ssnagin/collectionmanager/fxml/"; // /com/ssnagin/collectionmanager/fxml/test.fxml
     protected String stylesUri = "/com/ssnagin/collectionmanager/css/"; // /com/ssnagin/collectionmanager/css/style.css
+
+
 }

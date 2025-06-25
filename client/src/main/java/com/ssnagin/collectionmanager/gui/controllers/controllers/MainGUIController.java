@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 
@@ -27,6 +28,9 @@ public class MainGUIController extends GUIController {
 
     @FXML
     public ImageView helpCommandButton;
+
+    @FXML
+    public HBox animationArea;
 
     @FXML
     public ImageView historyCommandButton;
@@ -179,6 +183,11 @@ public class MainGUIController extends GUIController {
 
         executeScriptCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ((GUICommand) localCommandManager.get("gui_execute_script")).executeCommand(event);
+        });
+
+        animationArea.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            windowManager.get("animation").show();
+            ((GUICommandShow) localCommandManager.get("gui_show")).executeCommand(guiTableMain);
         });
 
         // В самом конце -- бросим GUI_CONTENT_LOADED
