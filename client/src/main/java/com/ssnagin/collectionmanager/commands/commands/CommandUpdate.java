@@ -9,8 +9,8 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.ClientConsole;
-import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
+import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.ResponseStatus;
@@ -112,6 +112,8 @@ public class CommandUpdate extends UserNetworkCommand {
             ClientConsole.error(ex.toString());
             return ApplicationStatus.RUNNING;
         }
+
+        eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
 
         return ApplicationStatus.RUNNING;
     }

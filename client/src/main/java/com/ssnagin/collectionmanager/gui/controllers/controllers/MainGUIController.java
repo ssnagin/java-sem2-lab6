@@ -5,7 +5,6 @@ import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
 import com.ssnagin.collectionmanager.gui.commands.commands.*;
 import com.ssnagin.collectionmanager.gui.controllers.GUIController;
-import com.ssnagin.collectionmanager.gui.nodes.form.GUIFormWithLogs;
 import com.ssnagin.collectionmanager.gui.nodes.logger.GUITextLogger;
 import com.ssnagin.collectionmanager.gui.nodes.loginbar.LoginBar;
 import com.ssnagin.collectionmanager.gui.nodes.table.main.GUITableMain;
@@ -17,8 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 
@@ -37,10 +34,16 @@ public class MainGUIController extends GUIController {
     public Button logoutCommandButton;
 
     @FXML
+    public ImageView countByNumberOfParticipantsButton;
+
+    @FXML
     public ImageView addCommandButton;
 
     @FXML
     public ImageView addIfMinCommandButton;
+
+    @FXML
+    public ImageView updateCommandButton;
 
     @FXML
     public TextArea leftTextArea;
@@ -81,9 +84,9 @@ public class MainGUIController extends GUIController {
     @FXML
     public Button languageGermanButton;
 
+
 //    @FXML
 //    public TableColumn<Integer, Integer> localIdColumn;
-
 
     private GUITableMain guiTableMain;
 
@@ -135,6 +138,13 @@ public class MainGUIController extends GUIController {
         addIfMinCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             ((GUICommand) localCommandManager.get("gui_add")).executeCommand(event); // Комбинировал тк по факту используется одно и то же окно и одна и та же логика
         });
+        updateCommandButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_add")).executeCommand(event); // Комбинировал тк по факту используется одно и то же окно и одна и та же логика
+        });
+
+        countByNumberOfParticipantsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            ((GUICommand) localCommandManager.get("gui_count_members_by_id")).executeCommand(event);
+        });
 
         // В самом конце -- бросим GUI_CONTENT_LOADED
 
@@ -151,6 +161,8 @@ public class MainGUIController extends GUIController {
         localCommandManager.register(new GUICommandShow("gui_show", networking));
 
         localCommandManager.register(new GUICommandAdd("gui_add", networking, windowManager));
+
+        localCommandManager.register(new GUICommandCountMembersById("gui_count_members_by_id", networking, leftTextArea));
     }
 
     private void initTable() {
@@ -183,7 +195,7 @@ public class MainGUIController extends GUIController {
         eventManager.subscribe(EventType.USER_LOGGED_OUT.toString(),
                 this::handleUserLoggedOut);
 
-        eventManager.subscribe(EventType.TABLE_CONTENT_REFRESH.toString(),
+        eventManager.subscribe(EventType.COLLECTION_DATA_CHANGED.toString(),
                 this::handleTableContentRefresh);
 
         // GUI CONTENT LOADED

@@ -34,6 +34,10 @@ public class AddGUIController extends GUIController {
     public Button buttonAddCommand; // 8
     @FXML
     public Button buttonAddIfMinCommand; // 9
+
+    @FXML
+    public Button buttonUpdateCommand;
+
     @FXML
     public TextArea logArea;
 
@@ -53,6 +57,7 @@ public class AddGUIController extends GUIController {
     protected void initEventListeners() {
         buttonAddCommand.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> buttonSubmitHandler(event, "add"));
         buttonAddIfMinCommand.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> buttonSubmitHandler(event, "add_if_min"));
+        buttonUpdateCommand.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> buttonSubmitHandler(event, "update"));
     }
 
     private void buttonSubmitHandler(MouseEvent event, String type) {

@@ -61,7 +61,7 @@ public class GUICommandShow extends GUINetworkCommand {
 
             Platform.runLater(() -> {
                 table.getTableView().setItems(musicBands);
-                eventManager.publish(EventType.TABLE_CONTENT_LOADED.toString(), musicBands);
+                eventManager.publish(EventType.COLLECTION_DATA_LOADED.toString(), musicBands);
             });
         } catch (IOException | ClassNotFoundException e) {
             ClientConsole.println("[ERROR] " + e.getMessage());

@@ -4,6 +4,7 @@ import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.console.Console;
+import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
@@ -45,6 +46,8 @@ public class CommandRegister extends UserNetworkCommand {
                     new ClientRequest(parsedString, user)
             );
             ClientConsole.separatePrint(response.getMessage(), "SERVER");
+
+            eventManager.publish(EventType.USER_REGISTERED.toString(), user);
 
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |

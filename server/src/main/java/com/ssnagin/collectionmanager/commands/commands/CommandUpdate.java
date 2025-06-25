@@ -109,8 +109,7 @@ public class CommandUpdate extends ServerCollectionCommand {
         try {
             this.collectionManager.addElement(
                     musicBand,
-                    sessionManager.getUserId(clientRequest.getSessionKey()
-                    )
+                    sessionManager.getUserId(clientRequest.getSessionKey())
             );
         } catch (SQLException e) {
             throw new RuntimeException(e);

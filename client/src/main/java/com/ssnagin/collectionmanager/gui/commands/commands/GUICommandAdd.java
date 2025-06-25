@@ -6,17 +6,17 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.model.MusicGenre;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.events.EventType;
-import com.ssnagin.collectionmanager.gui.commands.GUICommand;
+import com.ssnagin.collectionmanager.gui.alert.InfoAlert;
 import com.ssnagin.collectionmanager.gui.commands.GUINetworkCommand;
 import com.ssnagin.collectionmanager.gui.nodes.form.GUIForm;
 import com.ssnagin.collectionmanager.gui.nodes.form.GUIFormWithLogs;
 import com.ssnagin.collectionmanager.gui.window.WindowManager;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
+import com.ssnagin.collectionmanager.networking.ResponseStatus;
 import com.ssnagin.collectionmanager.networking.data.client.ClientRequest;
 import com.ssnagin.collectionmanager.networking.data.server.ServerResponse;
 import com.ssnagin.collectionmanager.networking.wrappers.SessionClientRequest;
-import com.ssnagin.collectionmanager.validation.ValidationManager;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -24,7 +24,6 @@ import javafx.scene.input.MouseEvent;
 
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.List;
 
 public class GUICommandAdd extends GUINetworkCommand {
@@ -82,6 +81,11 @@ public class GUICommandAdd extends GUINetworkCommand {
 
             musicBand = new LocalDateWrapper(musicBand);
 
+            if (parsedString.getCommand().equals("update")) {
+                executeUpdateCommand(parsedString, musicBand);
+                return;
+            }
+
             SessionClientRequest request = new SessionClientRequest(
                     new ClientRequest(
                         parsedString, musicBand
@@ -93,12 +97,60 @@ public class GUICommandAdd extends GUINetworkCommand {
 
             out(serverResponse.getMessage());
 
-            eventManager.publish(EventType.TABLE_CONTENT_REFRESH.toString(), null);
+            eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
 
         } catch (IllegalArgumentException | IOException | ClassNotFoundException e) {
             out(e.getMessage());
         }
+    }
 
+    private void executeUpdateCommand(ParsedString parsedString, MusicBand musicBand) {
+        Integer stage;
 
+        Long idToChange = InfoAlert.showAndWait(
+                "Введите число (Long)",
+                "Пожалуйста, введите целое число",
+                "Число для ввода:"
+        );
+        if (idToChange == null) return;
+        parsedString.addArgument(idToChange.toString());
+
+        musicBand.setId(idToChange);
+
+        try {
+            ServerResponse serverResponse = networking.sendClientRequest(
+                new SessionClientRequest(
+                    new ClientRequest(
+                            parsedString, idToChange, 1
+                    ),
+                    sessionKeyManager.getSessionKey()
+                )
+            );
+
+            if (serverResponse.getResponseStatus() != ResponseStatus.OK) {
+                out(serverResponse.getMessage());
+                return;
+            }
+
+            stage = serverResponse.getStage();
+
+            serverResponse = this.networking.sendClientRequest(
+                    new SessionClientRequest(
+                            new ClientRequest(
+                                    parsedString,
+                                    musicBand,
+                                    stage
+                            ),
+                            sessionKeyManager.getSessionKey()
+                    )
+            );
+
+            out(serverResponse.getMessage());
+
+            eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
+
+        } catch (IOException | ClassNotFoundException e) {
+            out(e.getMessage());
+        }
     }
 }

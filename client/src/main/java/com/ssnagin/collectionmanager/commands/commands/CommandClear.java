@@ -7,7 +7,6 @@ package com.ssnagin.collectionmanager.commands.commands;
 import com.ssnagin.collectionmanager.applicationstatus.ApplicationStatus;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.ClientConsole;
-import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
 import com.ssnagin.collectionmanager.networking.Networking;
@@ -42,7 +41,7 @@ public class CommandClear extends UserNetworkCommand {
             ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
             // Кидаем event на обновление данных таблицы
-            eventManager.publish(EventType.TABLE_CONTENT_REFRESH.toString(), null);
+            eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
 
         } catch (IOException | ClassNotFoundException e) {
             ClientConsole.error(e.toString());

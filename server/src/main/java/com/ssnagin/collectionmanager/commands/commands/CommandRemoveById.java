@@ -47,7 +47,7 @@ public class CommandRemoveById extends ServerCollectionCommand {
 
             if (result == null) throw new SQLException("Element with given id does not exist");
         } catch (SQLException e) {
-            return serverResponse.error("You don't have a permission to delete this object!");
+            return serverResponse.error("You don't have a permission to delete this object!" + e.getMessage());
         }
 
 

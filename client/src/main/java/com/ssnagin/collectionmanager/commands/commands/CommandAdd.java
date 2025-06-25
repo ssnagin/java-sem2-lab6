@@ -5,7 +5,6 @@ import com.ssnagin.collectionmanager.collection.model.MusicBand;
 import com.ssnagin.collectionmanager.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.collectionmanager.commands.UserNetworkCommand;
 import com.ssnagin.collectionmanager.console.ClientConsole;
-import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.description.DescriptionParser;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.inputparser.ParsedString;
@@ -52,7 +51,7 @@ public class CommandAdd extends UserNetworkCommand {
             ClientConsole.separatePrint(response.getMessage(), "SERVER");
 
             // Кидаем event на обновление данных таблицы
-            eventManager.publish(EventType.TABLE_CONTENT_REFRESH.toString(), null);
+            eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
 
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException | IllegalArgumentException |

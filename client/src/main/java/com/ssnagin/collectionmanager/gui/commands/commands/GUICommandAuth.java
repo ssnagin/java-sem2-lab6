@@ -101,6 +101,9 @@ public class GUICommandAuth extends GUINetworkCommand {
             );
 
             out(response.getMessage());
+
+            eventManager.publish(EventType.USER_REGISTERED.toString(), user);
+
         } catch (IOException | ClassNotFoundException e) {
             out(e.getMessage());
         }

@@ -2,9 +2,8 @@ package com.ssnagin.collectionmanager.gui.commands.commands;
 
 import com.ssnagin.collectionmanager.commands.Command;
 import com.ssnagin.collectionmanager.commands.CommandManager;
-import com.ssnagin.collectionmanager.console.Console;
 import com.ssnagin.collectionmanager.gui.commands.GUICommand;
-import com.ssnagin.collectionmanager.gui.alert.AlertManager;
+import com.ssnagin.collectionmanager.gui.alert.InfoAlert;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -52,6 +51,6 @@ public class GUICommandHelp extends GUICommand {
 
         initCommands();
 
-        AlertManager.showInfoAlert("Help", "Возможные команды", this.preparedCommandList.toString());
+        InfoAlert.showInfoAlert("Help", "Возможные команды", this.preparedCommandList.toString());
     }
 }

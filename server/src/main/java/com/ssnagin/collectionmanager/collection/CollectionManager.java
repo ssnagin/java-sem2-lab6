@@ -172,6 +172,8 @@ public class CollectionManager implements Serializable {
             throw new NoSuchElementException("Element id cannot be null");
         }
 
+        MusicBand toRemove = getElementById(id);//  похоже, что сначала надо сделать это
+
         // Удаляем связи пользователей с коллекцией
         this.databaseManager.update(
                 "DELETE FROM cm_user_collection WHERE collection_id = ?",
@@ -208,11 +210,15 @@ public class CollectionManager implements Serializable {
             );
         }
 
+//        MusicBand toRemove = getElementById(id);
+//        if (toRemove != null) {
+//            this.collection.remove(toRemove); // Че здесь написано, что я курил, когда это писал...
+//        }
 
-        MusicBand toRemove = getElementById(id);
         if (toRemove != null) {
-            this.collection.remove(toRemove);
+            this.collection.remove(toRemove); // а потом это
         }
+
     }
 
     public int getSize() throws SQLException {
