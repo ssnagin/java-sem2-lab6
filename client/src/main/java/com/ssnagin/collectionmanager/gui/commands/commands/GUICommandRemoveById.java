@@ -1,6 +1,5 @@
 package com.ssnagin.collectionmanager.gui.commands.commands;
 
-import com.ssnagin.collectionmanager.console.ClientConsole;
 import com.ssnagin.collectionmanager.events.EventType;
 import com.ssnagin.collectionmanager.gui.alert.InfoAlert;
 import com.ssnagin.collectionmanager.gui.commands.GUINetworkCommand;
@@ -14,40 +13,44 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-public class GUICommandClear extends GUINetworkCommand {
-    public GUICommandClear(String name, Networking networking, TextArea textArea) {
+public class GUICommandRemoveById extends GUINetworkCommand {
+
+    public GUICommandRemoveById(String name, Networking networking, TextArea textArea) {
         super(name, networking);
 
         setOutputText(textArea);
     }
 
-
+    @Override
     public void executeCommand(MouseEvent event) {
-        boolean execute = InfoAlert.showConfirmationAlert(
-                "Подтверждение",
-                "Вы уверены что хотите стереть всё с лица Земли? (отчистить коллекцию)",
-                "Это действие нельзя будет отменить."
+        Long idToRemove = InfoAlert.showAndWait(
+                "Удаление",
+                "Пожалуйста, введите целое число",
+                "Число для ввода:"
         );
+        if (idToRemove == null) return;
 
-        if (!execute) return;
+        ServerResponse serverResponse;
 
-        ServerResponse response = null;
         try {
-            response = this.networking.sendClientRequest(
+            serverResponse = this.networking.sendClientRequest(
                     new SessionClientRequest(
-                            new ClientRequest(new ParsedString("clear", "clear", "")),
+                            new ClientRequest(
+                                    new ParsedString("remove_by_id", "remove_by_id", idToRemove.toString()),
+                                    idToRemove
+                            ),
                             sessionKeyManager.getSessionKey()
                     )
             );
+
+            out(serverResponse.getMessage());
+
+            eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
+
         } catch (IOException | ClassNotFoundException e) {
             out(e.getMessage());
         }
 
-        if (response == null) return;
 
-        out(response.getData() + " " + response.getMessage());
-
-        // Кидаем event на обновление данных таблицы
-        eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
     }
 }

@@ -24,11 +24,15 @@ public class CommandClear extends ServerCollectionCommand {
         super(name, collectionManager);
     }
 
+    // Data -- the number of erased elements
+
     @Override
     public ServerResponse executeCommand(ClientRequest clientRequest) {
 
         ServerResponse serverResponse = super.executeCommand(clientRequest);
         if (serverResponse.getResponseStatus() != ResponseStatus.OK) return serverResponse;
+
+        Long removedElements = -1L;
 
         try {
             this.collectionManager.removeAllElements();
@@ -36,6 +40,7 @@ public class CommandClear extends ServerCollectionCommand {
             return serverResponse.error("Couldn't clear the collection");
         }
 
+        serverResponse.setData(removedElements);
         serverResponse.appendMessage("Collection was erased!");
 
         return serverResponse;

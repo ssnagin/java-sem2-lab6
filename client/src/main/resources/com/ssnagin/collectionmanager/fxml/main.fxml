@@ -44,21 +44,21 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="200.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="removeByIdCommand" fitHeight="60.0" fitWidth="200.0" layoutX="200.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_remove_by_id.png" />
                </image>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
             <Line endX="-100.0" endY="70.0" startX="-100.0" />
-            <ImageView fitHeight="60.0" fitWidth="200.0" layoutX="295.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="clearCommandButton" fitHeight="60.0" fitWidth="200.0" layoutX="295.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/command_clear.png" />
                </image>
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
                <HBox.margin>
                   <Insets />
@@ -196,7 +196,7 @@
          <Button fx:id="languageEnglishButton" text="English (Ireland)" />
          <Button fx:id="languageGermanButton" text="Deutsch" />
          <Button fx:id="languageBulgarianButton" text="Болгарский" />
-         <TextArea fx:id="leftTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Some text will be placed here..." />
+         <TextArea fx:id="leftTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Some text will be placed here..." />
 
       </VBox>
    </left>

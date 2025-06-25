@@ -136,7 +136,9 @@ public class CollectionManager implements Serializable {
     }
 
 
-    public void removeAllElements() throws SQLException {
+    public Long removeAllElements() throws SQLException {
+
+        Long removedElements = (long) collection.size();
 
         this.databaseManager.update("DELETE FROM cm_collection");
 
@@ -146,6 +148,8 @@ public class CollectionManager implements Serializable {
         this.databaseManager.update("TRUNCATE TABLE cm_collection_album CASCADE");
 
         this.collection.clear();
+
+        return removedElements;
     }
 
     public MusicBand getElementById(Long id) throws SQLException {

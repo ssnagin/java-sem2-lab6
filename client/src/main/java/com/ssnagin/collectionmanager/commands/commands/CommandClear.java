@@ -38,7 +38,7 @@ public class CommandClear extends UserNetworkCommand {
                     new SessionClientRequest(new ClientRequest(parsedString), sessionKeyManager.getSessionKey())
             );
 
-            ClientConsole.separatePrint(response.getMessage(), "SERVER");
+            ClientConsole.separatePrint(response.getData() + " " + response.getMessage(), "SERVER");
 
             // Кидаем event на обновление данных таблицы
             eventManager.publish(EventType.COLLECTION_DATA_CHANGED.toString(), null);
